@@ -14,15 +14,17 @@ namespace BugTracker.Entities
         public DbSet<Quest> Tasks { get; set; }
         public DbSet<Employee> Employees { get; set; }
 
+        public DbSet<Role> Roles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Required elements of Board table
+            // Required elements of Boards table
             modelBuilder.Entity<Board>()
                 .Property(b => b.Name)
                 .IsRequired()
                 .HasMaxLength(50);
 
-            // Required elements of Task table
+            // Required elements of Tasks table
             modelBuilder.Entity<Quest>()
                 .Property(t => t.Name)
                 .IsRequired()
@@ -44,7 +46,7 @@ namespace BugTracker.Entities
                 .HasForeignKey(t => t.AssigneeId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            // Required elements of Employee table
+            // Required elements of Employees table
             modelBuilder.Entity<Employee>()
                 .Property(e => e.FirstName)
                 .IsRequired()
@@ -52,6 +54,12 @@ namespace BugTracker.Entities
 
             modelBuilder.Entity<Employee>()
                 .Property(e => e.LastName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            // Required elements of Roles table
+            modelBuilder.Entity<Role>()
+                .Property(r => r.Name)
                 .IsRequired()
                 .HasMaxLength(50);
         }

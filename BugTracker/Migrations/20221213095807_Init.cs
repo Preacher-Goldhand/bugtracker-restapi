@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BugTracker.Migrations
 {
-    public partial class FirstDataSeeding : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,6 +24,19 @@ namespace BugTracker.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Employees",
                 columns: table => new
                 {
@@ -31,14 +44,22 @@ namespace BugTracker.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Department = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmployeeEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Department = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    EmployeeEmail = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    EmployeePasswordHash = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
                     EmployeePhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmployeeStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Employees_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,12 +70,12 @@ namespace BugTracker.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     DateOfCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PropsalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LoggedTime = table.Column<float>(type: "real", nullable: false),
                     Priority = table.Column<int>(type: "int", nullable: false),
-                    TaskStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaskStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     AssignerId = table.Column<int>(type: "int", nullable: false),
                     AssigneeId = table.Column<int>(type: "int", nullable: false),
                     BoardId = table.Column<int>(type: "int", nullable: false)
@@ -79,6 +100,11 @@ namespace BugTracker.Migrations
                         principalTable: "Employees",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_RoleId",
+                table: "Employees",
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tasks_AssigneeId",
@@ -106,6 +132,9 @@ namespace BugTracker.Migrations
 
             migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }

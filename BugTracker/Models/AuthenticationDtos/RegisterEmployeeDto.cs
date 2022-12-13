@@ -1,37 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BugTracker.Models.UpdateDtos
+namespace BugTracker.Models.AuthenticationDtos
 {
-    public class UpdateEmployeeDto
+    public class RegisterEmployeeDto
     {
+        public int Id { get; set; }
+
+        [Required]
         [MaxLength(50)]
         public string FirstName { get; set; }
 
+        [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
 
+        [Required]
         [MaxLength(30)]
         public string Department { get; set; }
 
+        [Required]
         [MaxLength(30)]
         public string EmployeeEmail { get; set; }
 
-        [MaxLength(20)]
+        [Required]
+        [MaxLength(50)]
         public string EmployeePasswordHash { get; set; }
 
-        public int RoleId { get; set; }
-
-        [MaxLength(30)]
-        public string RoleName { get; set; }
+        public int RoleId { get; set; } = 1;
 
         public string EmployeePhoneNumber { get; set; }
-
-        [MaxLength(20)]
         public string EmployeeStatus { get; set; }
     }
 }

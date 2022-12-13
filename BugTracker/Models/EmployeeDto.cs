@@ -17,18 +17,19 @@ namespace BugTracker.Models
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(30)]
         public string LastName { get; set; }
 
         [Required]
         [MaxLength(50)]
         public string Department { get; set; }
 
+        [Required]
+        [MaxLength(30)]
         public string EmployeeEmail { get; set; }
+
         public string EmployeePhoneNumber { get; set; }
 
-        [Required]
-        [MaxLength(50)]
         public string EmployeeStatus { get; set; }
 
         // Future features of the application

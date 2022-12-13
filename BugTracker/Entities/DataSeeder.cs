@@ -13,6 +13,12 @@
         {
             if (_dbContext.Database.CanConnect())
             {
+                if (!_dbContext.Roles.Any())
+                {
+                    var roles = GetRoles();
+                    _dbContext.Roles.AddRange(roles);
+                    _dbContext.SaveChanges();
+                }
                 if (!_dbContext.Boards.Any())
                 {
                     var boards = GetBoards();
@@ -20,6 +26,26 @@
                     _dbContext.SaveChanges();
                 }
             }
+        }
+
+        private IEnumerable<Role> GetRoles()
+        {
+            var roles = new List<Role>()
+            {
+                new Role()
+                {
+                    Name = "User"
+                },
+                new Role()
+                {
+                    Name = "Manager"
+                },
+                new Role()
+                {
+                    Name = "Admin"
+                }
+            };
+            return roles;
         }
 
         private IEnumerable<Board> GetBoards()
@@ -48,6 +74,8 @@
                                 LastName = "Snow",
                                 Department = "DevTool Department",
                                 EmployeeEmail = "jsnow@test.com",
+                                EmployeePasswordHash = "password",
+                                RoleId = 2,
                                 EmployeePhoneNumber = "753159852",
                                 EmployeeStatus = "Active",
                             },
@@ -57,6 +85,8 @@
                                 LastName = "Watson",
                                 Department = "DevTool Department",
                                 EmployeeEmail = "ewatson@test.com",
+                                EmployeePasswordHash = "password123",
+                                RoleId = 1,
                                 EmployeePhoneNumber = "700159002",
                                 EmployeeStatus = "Active"
                             },

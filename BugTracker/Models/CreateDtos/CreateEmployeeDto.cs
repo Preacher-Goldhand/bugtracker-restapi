@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BugTracker.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,17 +21,21 @@ namespace BugTracker.Models.CreateDtos
         public string LastName { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(30)]
         public string Department { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(30)]
         public string EmployeeEmail { get; set; }
-
-        public string EmployeePhoneNumber { get; set; }
 
         [Required]
         [MaxLength(50)]
+        public string EmployeePasswordHash { get; set; }
+
+        public int RoleId { get; set; } = 1;
+
+        public string EmployeePhoneNumber { get; set; }
+
         public string EmployeeStatus { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 using BugTracker.Entities;
 using BugTracker.Middleware;
 using BugTracker.Services;
+using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 
 /*
@@ -14,6 +15,8 @@ builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IBoardService, BoardService>();
 builder.Services.AddScoped<IQuestService, QuestService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IAcountService, AccountService>();
+builder.Services.AddScoped<IPasswordHasher<Employee>, PasswordHasher<Employee>>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<RequestTimeMiddleware>();
 builder.Services.AddEndpointsApiExplorer();
