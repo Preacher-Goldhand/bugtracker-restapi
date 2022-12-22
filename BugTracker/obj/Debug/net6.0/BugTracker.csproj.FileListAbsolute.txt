@@ -70,3 +70,6 @@ C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\obj\Debug\net6.0\static
 C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.BugTracker.props
 C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.BugTracker.props
 C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll

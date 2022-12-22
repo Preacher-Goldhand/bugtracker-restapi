@@ -1,6 +1,10 @@
 using BugTracker.Entities;
 using BugTracker.Middleware;
+using BugTracker.Models.AuthenticationDtos;
+using BugTracker.Models.Validators;
 using BugTracker.Services;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 
@@ -8,7 +12,7 @@ using System.Reflection;
     CONFIGURATION OF SERVICES IN THE CONTAINER
 */
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddDbContext<BugTrackerDbContext>();
 builder.Services.AddScoped<DataSeeder>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -17,6 +21,7 @@ builder.Services.AddScoped<IQuestService, QuestService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IAcountService, AccountService>();
 builder.Services.AddScoped<IPasswordHasher<Employee>, PasswordHasher<Employee>>();
+builder.Services.AddScoped<IValidator<RegisterEmployeeDto>, RegisterEmployeeDtoValidator>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<RequestTimeMiddleware>();
 builder.Services.AddEndpointsApiExplorer();

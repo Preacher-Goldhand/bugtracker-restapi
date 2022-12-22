@@ -21,13 +21,10 @@ namespace BugTracker.Models.UpdateDtos
         [MaxLength(30)]
         public string EmployeeEmail { get; set; }
 
-        [MaxLength(20)]
         public string EmployeePasswordHash { get; set; }
+        public string ConfirmEmployeePasswordHash { get; set; }
 
         public int RoleId { get; set; }
-
-        [MaxLength(30)]
-        public string RoleName { get; set; }
 
         public string EmployeePhoneNumber { get; set; }
 

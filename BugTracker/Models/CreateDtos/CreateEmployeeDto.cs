@@ -28,9 +28,8 @@ namespace BugTracker.Models.CreateDtos
         [MaxLength(30)]
         public string EmployeeEmail { get; set; }
 
-        [Required]
-        [MaxLength(50)]
         public string EmployeePasswordHash { get; set; }
+        public string ConfirmPasswordHash { get; set; }
 
         public int RoleId { get; set; } = 1;
 
