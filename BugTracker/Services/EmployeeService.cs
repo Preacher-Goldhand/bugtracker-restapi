@@ -9,8 +9,6 @@ namespace BugTracker.Services
 {
     public interface IEmployeeService
     {
-        int Create(CreateEmployeeDto dto);
-
         IEnumerable<EmployeeDto> GetAll();
 
         EmployeeDto GetById(int id);
@@ -29,21 +27,6 @@ namespace BugTracker.Services
         {
             _dbContext = dbContext;
             _mapper = mapper;
-        }
-
-        public int Create(CreateEmployeeDto dto)
-        {
-            if (_dbContext
-                .Employees
-                .Any(e => e.FirstName == dto.FirstName))
-            {
-                throw new AlreadyExistsException("Employee already exists");
-            }
-
-            var employee = _mapper.Map<Employee>(dto);
-            _dbContext.Employees.Add(employee);
-            _dbContext.SaveChanges();
-            return employee.Id;
         }
 
         public IEnumerable<EmployeeDto> GetAll()
@@ -83,6 +66,8 @@ namespace BugTracker.Services
             employee.Department = dto.Department;
             employee.EmployeeEmail = dto.EmployeeEmail;
             employee.EmployeePhoneNumber = dto.EmployeePhoneNumber;
+            employee.EmployeePasswordHash = dto.EmployeePasswordHash;
+            employee.RoleId = dto.RoleId;
             employee.EmployeeStatus = dto.EmployeeStatus;
 
             _dbContext.SaveChanges();

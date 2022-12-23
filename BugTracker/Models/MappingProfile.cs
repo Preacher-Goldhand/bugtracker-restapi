@@ -20,7 +20,7 @@ namespace BugTracker.Models
 
             CreateMap<CreateBoardDto, Board>();
 
-            CreateMap<CreateEmployeeDto, Employee>();
+            //  CreateMap<CreateEmployeeDto, Employee>();
 
             CreateMap<CreateQuestDto, Quest>();
 

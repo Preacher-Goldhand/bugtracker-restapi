@@ -73,3 +73,4 @@ C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\obj\Debug\net6.0\static
 C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\bin\Debug\net6.0\FluentValidation.dll
 C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
 C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\rench\Desktop\Programming\BugTracker\BugTracker\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -15,7 +15,7 @@ namespace BugTracker.Models.AuthenticationDtos
         public string EmployeeEmail { get; set; }
 
         public string EmployeePasswordHash { get; set; }
-        public string ConfirmEmployeePaswordHash { get; set; }
+        public string ConfirmEmployeePasswordHash { get; set; }
 
         public int RoleId { get; set; } = 1;
 

@@ -21,5 +21,12 @@ namespace BugTracker.Controllers
             _acountService.RegisterEmployee(dto);
             return Ok();
         }
+
+        [HttpPost("login")]
+        public ActionResult LoginEmployee([FromBody] LoginEmployeeDto dto)
+        {
+            string token = _acountService.GenerateJwt(dto);
+            return Ok(token);
+        }
     }
 }

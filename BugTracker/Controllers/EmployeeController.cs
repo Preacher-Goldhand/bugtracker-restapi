@@ -17,14 +17,6 @@ namespace BugTracker.Controllers
             _employeeService = employeeService;
         }
 
-        [HttpPost]
-        public ActionResult CreateEmployee([FromBody] CreateEmployeeDto dto)
-        {
-            var id = _employeeService.Create(dto);
-
-            return Created($"/bugtracker/employee/{id}", null);
-        }
-
         [HttpGet]
         public ActionResult<IEnumerable<EmployeeDto>> GetAllEmployees()
         {

@@ -1,4 +1,5 @@
-﻿using BugTracker.Middleware.CustomErrors;
+﻿using BugTracker.Middleware.Custom_Exceptions;
+using BugTracker.Middleware.CustomErrors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,11 @@ namespace BugTracker.Middleware
             try
             {
                 await next.Invoke(context);
+            }
+            catch (BadRequestException badRequestException)
+            {
+                context.Response.StatusCode = 400; // Bad request code for the client
+                await context.Response.WriteAsync(badRequestException.Message);
             }
             catch (NotFoundException notFoundException)
             {

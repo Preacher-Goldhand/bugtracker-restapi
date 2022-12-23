@@ -1,3 +1,4 @@
+using BugTracker;
 using BugTracker.Entities;
 using BugTracker.Middleware;
 using BugTracker.Models.AuthenticationDtos;
@@ -6,11 +7,14 @@ using BugTracker.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Text;
 
 /*
     CONFIGURATION OF SERVICES IN THE CONTAINER
 */
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddDbContext<BugTrackerDbContext>();
@@ -23,9 +27,28 @@ builder.Services.AddScoped<IAcountService, AccountService>();
 builder.Services.AddScoped<IPasswordHasher<Employee>, PasswordHasher<Employee>>();
 builder.Services.AddScoped<IValidator<RegisterEmployeeDto>, RegisterEmployeeDtoValidator>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
-builder.Services.AddScoped<RequestTimeMiddleware>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var authenticationSettings = new AuthenticationSettings();
+builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
+builder.Services.AddSingleton(authenticationSettings);
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = "Bearer";
+    option.DefaultScheme = "Bearer";
+    option.DefaultChallengeScheme = "Bearer";
+}).AddJwtBearer(cfg =>
+{
+    cfg.RequireHttpsMetadata = false;
+    cfg.SaveToken = true;
+    cfg.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = authenticationSettings.JwtIssuer,
+        ValidAudience = authenticationSettings.JwtIssuer,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
+    };
+});
 
 /*
    GENERAL CONFIGURATION
@@ -43,7 +66,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseMiddleware<ErrorHandlingMiddleware>();
-//app.UseMiddleware<RequestTimeMiddleware>();
+
+app.UseAuthentication();
 
 app.UseHttpsRedirection();
 

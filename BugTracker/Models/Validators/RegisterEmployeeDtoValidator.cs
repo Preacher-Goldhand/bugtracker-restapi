@@ -28,7 +28,7 @@ namespace BugTracker.Models.Validators
 
             RuleFor(x => x.EmployeePasswordHash).MinimumLength(6);
 
-            RuleFor(x => x.ConfirmEmployeePaswordHash).Equal(e => e.EmployeePasswordHash);
+            RuleFor(x => x.ConfirmEmployeePasswordHash).Equal(e => e.EmployeePasswordHash);
 
             RuleFor(x => x.EmployeeEmail)
                .Custom((value, context) =>
