@@ -10,13 +10,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 
 /*
     CONFIGURATION OF SERVICES IN THE CONTAINER
 */
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers().AddFluentValidation();
+builder.Services.AddControllers().AddJsonOptions(options =>
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddDbContext<BugTrackerDbContext>();
 builder.Services.AddScoped<DataSeeder>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

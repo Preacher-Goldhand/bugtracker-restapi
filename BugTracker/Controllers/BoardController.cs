@@ -2,12 +2,14 @@
 using BugTracker.Models.CreateDtos;
 using BugTracker.Models.UpdateDtos;
 using BugTracker.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BugTracker.Controllers
 {
     [ApiController]
     [Route("bugtracker/board")]
+    [Authorize]
     public class BoardController : ControllerBase
     {
         private readonly IBoardService _boardService;

@@ -2,12 +2,14 @@
 using BugTracker.Models.CreateDtos;
 using BugTracker.Models.UpdateDtos;
 using BugTracker.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BugTracker.Controllers
 {
     [ApiController]
     [Route("bugtracker/employee")]
+    [Authorize]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;

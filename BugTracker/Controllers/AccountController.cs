@@ -1,5 +1,6 @@
 ﻿using BugTracker.Models.AuthenticationDtos;
 using BugTracker.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BugTracker.Controllers
