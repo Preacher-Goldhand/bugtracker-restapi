@@ -34,6 +34,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult UpdateEmployee([FromBody] UpdateEmployeeDto dto, [FromRoute] int id)
         {
             _employeeService.Update(id, dto);
@@ -41,6 +42,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult DeleteEmployee([FromRoute] int id)
         {
             _employeeService.Delete(id);
