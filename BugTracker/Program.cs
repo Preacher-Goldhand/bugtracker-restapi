@@ -33,6 +33,14 @@ builder.Services.AddScoped<IValidator<RegisterEmployeeDto>, RegisterEmployeeDtoV
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontEndClient", policyBuilder =>
+        policyBuilder.AllowAnyMethod()
+        .AllowAnyHeader()
+        .WithOrigins(builder.Configuration["AllowedOrigins"]) // example domain for front-end
+        );
+});
 
 var authenticationSettings = new AuthenticationSettings();
 builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
@@ -62,6 +70,10 @@ var app = builder.Build();
 // Data seeder setup
 var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
+
+app.UseResponseCaching();
+app.UseStaticFiles();
+app.UseCors("FrontEndClient");
 
 seeder.Seed();
 if (app.Environment.IsDevelopment())

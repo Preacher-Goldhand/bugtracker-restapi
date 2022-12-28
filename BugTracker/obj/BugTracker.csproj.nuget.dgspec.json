@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[6.0.12, )"
             },
+            "Microsoft.AspNetCore.StaticFiles": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.9, )"
