@@ -37,7 +37,7 @@ namespace BugTracker.Controllers
             if (file != null && file.Length > 0)
             {
                 var rootPath = Directory.GetCurrentDirectory();
-                var fileName = file.Name;
+                var fileName = file.FileName;
                 var fullPath = $"{rootPath}/PrivateFiles/{fileName}";
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
