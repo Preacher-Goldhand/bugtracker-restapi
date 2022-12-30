@@ -12,7 +12,7 @@ namespace BugTracker.Services
     {
         int Create(CreateBoardDto dto);
 
-        IEnumerable<BoardDto> GetAll();
+        IEnumerable<BoardDto> GetAll(string searchPhrase);
 
         BoardDto GetById(int id);
 
@@ -47,11 +47,12 @@ namespace BugTracker.Services
             return board.Id;
         }
 
-        public IEnumerable<BoardDto> GetAll()
+        public IEnumerable<BoardDto> GetAll(string searchPhrase)
         {
             var boards = _dbContext
                .Boards
                .Include(b => b.BoardTasks)
+               .Where(b => searchPhrase == null || (b.Name.ToLower().Contains(searchPhrase.ToLower())))
                .ToList();
 
             var boardDtos = _mapper.Map<List<BoardDto>>(boards);

@@ -28,9 +28,9 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<BoardDto>> GetAllBoards()
+        public ActionResult<IEnumerable<BoardDto>> GetAllBoards([FromQuery] string? searchPhrase = null)
         {
-            var boardDtos = _boardService.GetAll();
+            var boardDtos = _boardService.GetAll(searchPhrase);
             return Ok(boardDtos);
         }
 
