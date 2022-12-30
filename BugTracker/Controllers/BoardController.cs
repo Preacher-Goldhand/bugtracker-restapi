@@ -1,5 +1,6 @@
 ﻿using BugTracker.Models;
 using BugTracker.Models.CreateDtos;
+using BugTracker.Models.QueryModels;
 using BugTracker.Models.UpdateDtos;
 using BugTracker.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -28,9 +29,9 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<BoardDto>> GetAllBoards([FromQuery] string? searchPhrase = null)
+        public ActionResult<IEnumerable<BoardDto>> GetAllBoards([FromQuery] BoardQuery boardQuery)
         {
-            var boardDtos = _boardService.GetAll(searchPhrase);
+            var boardDtos = _boardService.GetAll(boardQuery);
             return Ok(boardDtos);
         }
 

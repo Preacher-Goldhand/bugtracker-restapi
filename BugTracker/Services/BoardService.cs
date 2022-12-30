@@ -3,6 +3,7 @@ using BugTracker.Entities;
 using BugTracker.Middleware.CustomErrors;
 using BugTracker.Models;
 using BugTracker.Models.CreateDtos;
+using BugTracker.Models.QueryModels;
 using BugTracker.Models.UpdateDtos;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,7 @@ namespace BugTracker.Services
     {
         int Create(CreateBoardDto dto);
 
-        IEnumerable<BoardDto> GetAll(string searchPhrase);
+        PagedResult<BoardDto> GetAll(BoardQuery boardQuery);
 
         BoardDto GetById(int id);
 
@@ -47,16 +48,24 @@ namespace BugTracker.Services
             return board.Id;
         }
 
-        public IEnumerable<BoardDto> GetAll(string searchPhrase)
+        public PagedResult<BoardDto> GetAll(BoardQuery boardQuery)
         {
-            var boards = _dbContext
+            var baseQuery = _dbContext
                .Boards
                .Include(b => b.BoardTasks)
-               .Where(b => searchPhrase == null || (b.Name.ToLower().Contains(searchPhrase.ToLower())))
+               .Where(b => boardQuery.SearchPhrase == null || (b.Name.ToLower().Contains(boardQuery.SearchPhrase.ToLower())));
+
+            var boards = baseQuery
+               .Skip(boardQuery.PageSize * (boardQuery.PageNumber - 1))
+               .Take(boardQuery.PageSize)
                .ToList();
 
+            var totalItemsCount = baseQuery.Count();
+
             var boardDtos = _mapper.Map<List<BoardDto>>(boards);
-            return boardDtos;
+
+            var pagedResult = new PagedResult<BoardDto>(boardDtos, totalItemsCount, boardQuery.PageSize, boardQuery.PageNumber);
+            return pagedResult;
         }
 
         public BoardDto GetById(int id)
