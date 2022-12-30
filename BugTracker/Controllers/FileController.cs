@@ -24,9 +24,9 @@ namespace BugTracker.Controllers
             }
 
             var contentProvider = new FileExtensionContentTypeProvider();
-            contentProvider.TryGetContentType(filePath, out string contentType);
+            contentProvider.TryGetContentType(fileName, out string contentType);
 
-            var fileContent = System.IO.File.ReadAllText(filePath);
+            var fileContent = System.IO.File.ReadAllBytes(filePath);
 
             return File(fileContent, contentType, fileName);
         }
