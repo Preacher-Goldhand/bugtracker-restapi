@@ -6,6 +6,7 @@ using BugTracker.Models.CreateDtos;
 using BugTracker.Models.QueryModels;
 using BugTracker.Models.UpdateDtos;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace BugTracker.Services
 {
@@ -55,6 +56,20 @@ namespace BugTracker.Services
                .Include(b => b.BoardTasks)
                .Where(b => boardQuery.SearchPhrase == null || (b.Name.ToLower().Contains(boardQuery.SearchPhrase.ToLower())));
 
+            if (!string.IsNullOrEmpty(boardQuery.SortBy))
+            {
+                var columnsSelectors = new Dictionary<string, Expression<Func<Board, object>>>
+                {
+                    { nameof(Board.Name), b => b.Name },
+                    { nameof(Board.DateOfCreation), b => b.DateOfCreation },
+                };
+
+                var selectedColumn = columnsSelectors[boardQuery.SortBy];
+
+                baseQuery = boardQuery.SortOrder == SortDirection.ASC
+                            ? baseQuery.OrderBy(selectedColumn)
+                            : baseQuery.OrderByDescending(selectedColumn);
+            }
             var boards = baseQuery
                .Skip(boardQuery.PageSize * (boardQuery.PageNumber - 1))
                .Take(boardQuery.PageSize)
