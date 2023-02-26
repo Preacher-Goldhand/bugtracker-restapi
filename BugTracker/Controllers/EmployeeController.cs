@@ -1,5 +1,6 @@
 ﻿using BugTracker.Models;
 using BugTracker.Models.CreateDtos;
+using BugTracker.Models.Pagination;
 using BugTracker.Models.UpdateDtos;
 using BugTracker.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -20,17 +21,17 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<EmployeeDto>> GetAllEmployees()
+        public ActionResult<IEnumerable<EmployeeDto>> GetAllEmployees([FromQuery] PaginationQuery employeeQuery)
         {
-            var employeeDtos = _employeeService.GetAll();
-            return Ok();
+            var employeeDtos = _employeeService.GetAll(employeeQuery);
+            return Ok(employeeDtos);
         }
 
         [HttpGet("{id}")]
         public ActionResult<EmployeeDto> GetEmployeeById([FromRoute] int id)
         {
             EmployeeDto employeeDto = _employeeService.GetById(id);
-            return Ok();
+            return Ok(employeeDto);
         }
 
         [HttpPut("{id}")]

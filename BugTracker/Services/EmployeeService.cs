@@ -3,13 +3,16 @@ using BugTracker.Entities;
 using BugTracker.Middleware.CustomErrors;
 using BugTracker.Models;
 using BugTracker.Models.CreateDtos;
+using BugTracker.Models.Pagination;
 using BugTracker.Models.UpdateDtos;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace BugTracker.Services
 {
     public interface IEmployeeService
     {
-        IEnumerable<EmployeeDto> GetAll();
+        PagedResult<EmployeeDto> GetAll(PaginationQuery employeeQuery);
 
         EmployeeDto GetById(int id);
 
@@ -29,14 +32,39 @@ namespace BugTracker.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<EmployeeDto> GetAll()
+        public PagedResult<EmployeeDto> GetAll(PaginationQuery employeeQuery)
         {
-            var employees = _dbContext
+            var baseQuery = _dbContext
                .Employees
+               .Where(e => employeeQuery.SearchPhrase == null || (e.FirstName.ToLower().Contains(employeeQuery.SearchPhrase.ToLower()))
+               || (e.LastName.ToLower().Contains(employeeQuery.SearchPhrase.ToLower())) || (e.Department.ToLower().Contains(employeeQuery.SearchPhrase.ToLower())));
+
+            if (!string.IsNullOrEmpty(employeeQuery.SortBy))
+            {
+                var columnsSelectors = new Dictionary<string, Expression<Func<Employee, object>>>
+                {
+                    { nameof(Employee.FirstName), e => e.FirstName },
+                    { nameof(Employee.LastName), e => e.LastName },
+                    { nameof(Employee.Department), e => e.Department},
+                };
+
+                var selectedColumn = columnsSelectors[employeeQuery.SortBy];
+
+                baseQuery = employeeQuery.SortOrder == SortDirection.ASC
+                            ? baseQuery.OrderBy(selectedColumn)
+                            : baseQuery.OrderByDescending(selectedColumn);
+            }
+            var employees = baseQuery
+               .Skip(employeeQuery.PageSize * (employeeQuery.PageNumber - 1))
+               .Take(employeeQuery.PageSize)
                .ToList();
 
+            var totalItemsCount = baseQuery.Count();
+
             var employeeDtos = _mapper.Map<List<EmployeeDto>>(employees);
-            return employeeDtos;
+
+            var pagedResult = new PagedResult<EmployeeDto>(employeeDtos, totalItemsCount, employeeQuery.PageSize, employeeQuery.PageNumber);
+            return pagedResult;
         }
 
         public EmployeeDto GetById(int id)

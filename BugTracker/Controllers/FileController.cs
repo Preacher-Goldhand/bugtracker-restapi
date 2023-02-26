@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.StaticFiles;
 
 namespace BugTracker.Controllers
 {
-    [Route("file")]
     [ApiController]
     [Authorize]
+    [Route("file")]
     public class FileController : ControllerBase
     {
         [HttpGet]

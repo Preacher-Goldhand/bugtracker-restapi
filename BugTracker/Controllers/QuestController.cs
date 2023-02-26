@@ -4,17 +4,12 @@ using BugTracker.Models.UpdateDtos;
 using BugTracker.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugTracker.Controllers
 {
     [ApiController]
-    [Route("bugtracker/board/{boardId}/task")]
     [Authorize]
+    [Route("bugtracker/board/{boardId}/task")]
     public class QuestController : ControllerBase
     {
         private readonly IQuestService _questService;

@@ -1,4 +1,4 @@
-﻿namespace BugTracker.Models
+﻿namespace BugTracker.Models.Pagination
 {
     public enum SortDirection
     {

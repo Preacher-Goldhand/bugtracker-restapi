@@ -3,7 +3,7 @@ using BugTracker.Entities;
 using BugTracker.Middleware.CustomErrors;
 using BugTracker.Models;
 using BugTracker.Models.CreateDtos;
-using BugTracker.Models.QueryModels;
+using BugTracker.Models.Pagination;
 using BugTracker.Models.UpdateDtos;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -14,7 +14,7 @@ namespace BugTracker.Services
     {
         int Create(CreateBoardDto dto);
 
-        PagedResult<BoardDto> GetAll(BoardQuery boardQuery);
+        PagedResult<BoardDto> GetAll(PaginationQuery boardQuery);
 
         BoardDto GetById(int id);
 
@@ -49,7 +49,7 @@ namespace BugTracker.Services
             return board.Id;
         }
 
-        public PagedResult<BoardDto> GetAll(BoardQuery boardQuery)
+        public PagedResult<BoardDto> GetAll(PaginationQuery boardQuery)
         {
             var baseQuery = _dbContext
                .Boards

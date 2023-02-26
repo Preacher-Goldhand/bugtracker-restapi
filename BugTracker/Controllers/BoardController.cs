@@ -1,6 +1,6 @@
 ﻿using BugTracker.Models;
 using BugTracker.Models.CreateDtos;
-using BugTracker.Models.QueryModels;
+using BugTracker.Models.Pagination;
 using BugTracker.Models.UpdateDtos;
 using BugTracker.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace BugTracker.Controllers
 {
     [ApiController]
-    [Route("bugtracker/board")]
     [Authorize]
+    [Route("bugtracker/board")]
     public class BoardController : ControllerBase
     {
         private readonly IBoardService _boardService;
@@ -29,7 +29,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<BoardDto>> GetAllBoards([FromQuery] BoardQuery boardQuery)
+        public ActionResult<IEnumerable<BoardDto>> GetAllBoards([FromQuery] PaginationQuery boardQuery)
         {
             var boardDtos = _boardService.GetAll(boardQuery);
             return Ok(boardDtos);
