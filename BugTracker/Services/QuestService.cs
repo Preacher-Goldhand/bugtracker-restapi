@@ -98,12 +98,6 @@ namespace BugTracker.Services
             quest.LoggedTime = dto.LoggedTime;
             quest.Priority = dto.Priority;
             quest.TaskStatus = dto.TaskStatus;
-            quest.Assigner.FirstName = dto.AssignerFirstName;
-            quest.Assigner.LastName = dto.AssignerLastName;
-            quest.Assigner.Department = dto.AssignerDepartment;
-            quest.Assignee.FirstName = dto.AssigneeFirstName;
-            quest.Assignee.LastName = dto.AssigneeLastName;
-            quest.Assignee.Department = dto.AssigneeDepartment;
 
             _dbContext.SaveChanges();
         }
