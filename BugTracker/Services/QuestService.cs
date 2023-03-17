@@ -3,13 +3,10 @@ using BugTracker.Entities;
 using BugTracker.Middleware.CustomErrors;
 using BugTracker.Models;
 using BugTracker.Models.CreateDtos;
+using BugTracker.Models.Pagination;
 using BugTracker.Models.UpdateDtos;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace BugTracker.Services
 {
@@ -17,7 +14,7 @@ namespace BugTracker.Services
     {
         int Create(int boardId, CreateQuestDto dto);
 
-        IEnumerable<QuestDto> GetAll(int boardId);
+        PagedResult<QuestDto> GetAll(int boardId, PaginationQuery questQuery);
 
         QuestDto GetById(int boardId, int questId);
 
@@ -54,15 +51,28 @@ namespace BugTracker.Services
             return quest.Id;
         }
 
-        public IEnumerable<QuestDto> GetAll(int boardId)
+        public PagedResult<QuestDto> GetAll(int boardId, PaginationQuery questQuery)
         {
-            var quests = _dbContext
+            var baseQuery = _dbContext
               .Boards
               .Include(t => t.BoardTasks)
               .FirstOrDefault(b => b.Id == boardId);
 
-            var questDtos = _mapper.Map<List<QuestDto>>(quests.BoardTasks);
-            return questDtos;
+            var boardTasks = baseQuery.BoardTasks
+              .Where(b => questQuery.SearchPhrase == null || (b.Name.ToLower().Contains(questQuery.SearchPhrase.ToLower()))
+              || b.Category.ToLower().Contains(questQuery.SearchPhrase.ToLower()) || (b.Description.ToLower().Contains(questQuery.SearchPhrase.ToLower())));
+
+            var quests = boardTasks
+               .Skip(questQuery.PageSize * (questQuery.PageNumber - 1))
+               .Take(questQuery.PageSize)
+               .ToList();
+
+            var totalItemsCount = boardTasks.Count();
+
+            var questsDtos = _mapper.Map<List<QuestDto>>(quests);
+
+            var pagedResult = new PagedResult<QuestDto>(questsDtos, totalItemsCount, questQuery.PageSize, questQuery.PageNumber);
+            return pagedResult;
         }
 
         public QuestDto GetById(int boardId, int questId)

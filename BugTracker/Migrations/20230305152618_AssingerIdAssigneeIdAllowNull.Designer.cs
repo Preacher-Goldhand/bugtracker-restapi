@@ -4,6 +4,7 @@ using BugTracker.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BugTracker.Migrations
 {
     [DbContext(typeof(BugTrackerDbContext))]
-    partial class BugTrackerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230305152618_AssingerIdAssigneeIdAllowNull")]
+    partial class AssingerIdAssigneeIdAllowNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,9 +104,11 @@ namespace BugTracker.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("AssigneeId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("AssignerId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("BoardId")
@@ -184,12 +188,14 @@ namespace BugTracker.Migrations
             modelBuilder.Entity("BugTracker.Entities.Quest", b =>
                 {
                     b.HasOne("BugTracker.Entities.Employee", "Assignee")
-                        .WithMany()
-                        .HasForeignKey("AssigneeId");
+                        .WithMany("AssigneeTasks")
+                        .HasForeignKey("AssigneeId")
+                        .IsRequired();
 
                     b.HasOne("BugTracker.Entities.Employee", "Assigner")
-                        .WithMany()
-                        .HasForeignKey("AssignerId");
+                        .WithMany("AssignerTasks")
+                        .HasForeignKey("AssignerId")
+                        .IsRequired();
 
                     b.HasOne("BugTracker.Entities.Board", "Board")
                         .WithMany("BoardTasks")
@@ -207,6 +213,13 @@ namespace BugTracker.Migrations
             modelBuilder.Entity("BugTracker.Entities.Board", b =>
                 {
                     b.Navigation("BoardTasks");
+                });
+
+            modelBuilder.Entity("BugTracker.Entities.Employee", b =>
+                {
+                    b.Navigation("AssigneeTasks");
+
+                    b.Navigation("AssignerTasks");
                 });
 #pragma warning restore 612, 618
         }

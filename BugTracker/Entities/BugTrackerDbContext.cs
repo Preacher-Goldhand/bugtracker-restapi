@@ -34,17 +34,17 @@ namespace BugTracker.Entities
                 .Property(t => t.TaskStatus)
                 .IsRequired();
 
-            modelBuilder.Entity<Quest>()
-                .HasOne(t => t.Assigner)
-                .WithMany(t => t.AssignerTasks)
-                .HasForeignKey(t => t.AssignerId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+            //modelBuilder.Entity<Quest>()
+            //    .HasOne(t => t.Assigner)
+            //    .WithMany(t => t.AssignerTasks)
+            //    .HasForeignKey(t => t.AssignerId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull);
 
-            modelBuilder.Entity<Quest>()
-                .HasOne(t => t.Assignee)
-                .WithMany(t => t.AssigneeTasks)
-                .HasForeignKey(t => t.AssigneeId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+            //modelBuilder.Entity<Quest>()
+            //    .HasOne(t => t.Assignee)
+            //    .WithMany(t => t.AssigneeTasks)
+            //    .HasForeignKey(t => t.AssigneeId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull);
 
             // Required elements of Employees table
             modelBuilder.Entity<Employee>()

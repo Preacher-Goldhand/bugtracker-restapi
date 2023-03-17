@@ -1,5 +1,6 @@
 ﻿using BugTracker.Models;
 using BugTracker.Models.CreateDtos;
+using BugTracker.Models.Pagination;
 using BugTracker.Models.UpdateDtos;
 using BugTracker.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -28,9 +29,9 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<QuestDto>> GetAllQuests([FromRoute] int boardId)
+        public ActionResult<IEnumerable<QuestDto>> GetAllQuests(int boardId, [FromQuery] PaginationQuery questQuery)
         {
-            var questDtos = _questService.GetAll(boardId);
+            var questDtos = _questService.GetAll(boardId, questQuery);
             return Ok(questDtos);
         }
 

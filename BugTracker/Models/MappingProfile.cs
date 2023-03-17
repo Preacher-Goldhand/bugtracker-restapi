@@ -10,17 +10,9 @@ namespace BugTracker.Models
         {
             CreateMap<Board, BoardDto>();
 
-            CreateMap<Quest, QuestDto>()
-                .ForMember(m => m.AssignerFirstName, c => c.MapFrom(s => s.Assigner.FirstName))
-                .ForMember(m => m.AssignerLastName, c => c.MapFrom(s => s.Assigner.LastName))
-                .ForMember(m => m.AssignerDepartment, c => c.MapFrom(s => s.Assigner.Department))
-                .ForMember(m => m.AssigneeFirstName, c => c.MapFrom(s => s.Assignee.FirstName))
-                .ForMember(m => m.AssigneeLastName, c => c.MapFrom(s => s.Assignee.LastName))
-                .ForMember(m => m.AssigneeDepartment, c => c.MapFrom(s => s.Assignee.Department));
+            CreateMap<Quest, QuestDto>();
 
             CreateMap<CreateBoardDto, Board>();
-
-            //  CreateMap<CreateEmployeeDto, Employee>();
 
             CreateMap<CreateQuestDto, Quest>();
 

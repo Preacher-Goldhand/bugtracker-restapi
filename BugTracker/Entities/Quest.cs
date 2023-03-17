@@ -28,12 +28,10 @@ namespace BugTracker.Entities
 
         public int? AssignerId { get; set; }
 
-        [ForeignKey("AssignerId")]
         public virtual Employee Assigner { get; set; }
 
         public int? AssigneeId { get; set; }
 
-        [ForeignKey("AssigneeId")]
         public virtual Employee Assignee { get; set; }
 
         public int BoardId { get; set; }

@@ -15,7 +15,7 @@ namespace BugTracker.Controllers
         {
             var rootPath = Directory.GetCurrentDirectory();
 
-            var filePath = $"{rootPath}/PrivateFiles/{fileName}";
+            var filePath = $"{rootPath}/StaticFiles/{fileName}";
 
             var fileExists = System.IO.File.Exists(filePath);
             if (!fileExists)

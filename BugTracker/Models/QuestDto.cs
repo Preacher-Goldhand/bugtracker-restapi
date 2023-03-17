@@ -24,23 +24,5 @@ namespace BugTracker.Models
         [Required]
         [MaxLength(20)]
         public string TaskStatus { get; set; }
-
-        [MaxLength(50)]
-        public string AssignerFirstName { get; set; }
-
-        [MaxLength(50)]
-        public string AssignerLastName { get; set; }
-
-        [MaxLength(30)]
-        public string AssignerDepartment { get; set; }
-
-        [MaxLength(50)]
-        public string AssigneeFirstName { get; set; }
-
-        [MaxLength(50)]
-        public string AssigneeLastName { get; set; }
-
-        [MaxLength(30)]
-        public string AssigneeDepartment { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,8 +36,10 @@ namespace BugTracker.Entities
         public string EmployeeStatus { get; set; }
 
         // Must be, but needs improvements
+        [NotMapped]
         public virtual List<Quest> AssignerTasks { get; set; } = new List<Quest>();
 
+        [NotMapped]
         public virtual List<Quest> AssigneeTasks { get; set; } = new List<Quest>();
     }
 }
