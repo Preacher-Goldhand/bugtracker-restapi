@@ -21,6 +21,8 @@ namespace BugTracker.Services
         void Update(int boardId, int questId, UpdateQuestDto dto);
 
         void Delete(int boardId, int questId);
+
+        //void Assign(int boardId, int questId, AssignQuestDto dto);
     }
 
     public class QuestService : IQuestService
@@ -36,7 +38,7 @@ namespace BugTracker.Services
 
         public int Create(int boardId, CreateQuestDto dto)
         {
-            if (_dbContext
+            if (!_dbContext
                 .Tasks
                 .Any(t => t.Name == dto.Name))
             {
@@ -98,6 +100,22 @@ namespace BugTracker.Services
             quest.LoggedTime = dto.LoggedTime;
             quest.Priority = dto.Priority;
             quest.TaskStatus = dto.TaskStatus;
+
+            // Przypisanie pracownika, który przypisał zadanie
+            var assigner = _dbContext.Employees.FirstOrDefault(e => e.FirstName == dto.AssignerFirstName && e.LastName == dto.AssignerLastName);
+            if (assigner == null)
+            {
+                throw new NotFoundException("Assigner not found");
+            }
+            quest.AssignerId = assigner.Id;
+
+            // Przypisanie pracownika, który ma zadanie do wykonania
+            var assignee = _dbContext.Employees.FirstOrDefault(e => e.FirstName == dto.AssigneeFirstName && e.LastName == dto.AssigneeLastName);
+            if (assignee == null)
+            {
+                throw new NotFoundException("Assignee not found");
+            }
+            quest.AssigneeId = assignee.Id;
 
             _dbContext.SaveChanges();
         }

@@ -23,5 +23,12 @@ namespace BugTracker.Models.UpdateDtos
 
         [MaxLength(20)]
         public string TaskStatus { get; set; }
+
+        public int AssignerId { get; set; }
+        public string AssignerFirstName { get; set; }
+        public string AssignerLastName { get; set; }
+        public int AssigneeId { get; set; }
+        public string AssigneeFirstName { get; set; }
+        public string AssigneeLastName { get; set; }
     }
 }

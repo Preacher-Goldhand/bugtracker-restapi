@@ -34,6 +34,7 @@ namespace BugTracker.Entities
                 .Property(t => t.TaskStatus)
                 .IsRequired();
 
+            // Do wyrzucenia po testach
             //modelBuilder.Entity<Quest>()
             //    .HasOne(t => t.Assigner)
             //    .WithMany(t => t.AssignerTasks)
