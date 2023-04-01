@@ -25,6 +25,12 @@ namespace BugTracker.Models
                 .ForMember(m => m.EmployeeStatus, c => c.MapFrom(s => s.EmployeeStatus))
                 .ForMember(m => m.AssignerTasks, c => c.MapFrom(s => s.AssignerTasks))
                 .ForMember(m => m.AssigneeTasks, c => c.MapFrom(s => s.AssigneeTasks));
+
+            CreateMap<Quest, QuestDto>()
+                .ForMember(dest => dest.AssigneeFirstName, opt => opt.MapFrom(src => src.Assignee.FirstName))
+                .ForMember(dest => dest.AssigneeLastName, opt => opt.MapFrom(src => src.Assignee.LastName))
+                .ForMember(dest => dest.AssignerFirstName, opt => opt.MapFrom(src => src.Assigner.FirstName))
+                .ForMember(dest => dest.AssignerLastName, opt => opt.MapFrom(src => src.Assigner.LastName));
         }
     }
 }

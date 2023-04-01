@@ -15,6 +15,8 @@ namespace BugTracker.Services
         void RegisterEmployee(RegisterEmployeeDto dto);
 
         string GenerateJwt(LoginEmployeeDto dto);
+
+        void ChangePassword(ChangePasswordDto dto);
     }
 
     public class AccountService : IAcountService
@@ -83,6 +85,28 @@ namespace BugTracker.Services
 
             var tokenHandler = new JwtSecurityTokenHandler();
             return tokenHandler.WriteToken(token);
+        }
+
+        public void ChangePassword(ChangePasswordDto dto)
+        {
+            var employee = _dbContext.Employees
+                .FirstOrDefault(e => e.EmployeeEmail == dto.EmployeeEmail);
+
+            if (employee == null)
+            {
+                throw new BadRequestException("Employee not found");
+            }
+
+            var currentPasswordHash = _passwordHasher.VerifyHashedPassword(employee, employee.EmployeePasswordHash, dto.CurrentPasswordHash);
+            if (currentPasswordHash == PasswordVerificationResult.Failed)
+            {
+                throw new BadRequestException("Invalid password");
+            }
+
+            var newHashedPassword = _passwordHasher.HashPassword(employee, dto.NewPasswordHash);
+            employee.EmployeePasswordHash = newHashedPassword;
+
+            _dbContext.SaveChanges();
         }
     }
 }

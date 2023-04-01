@@ -29,5 +29,12 @@ namespace BugTracker.Controllers
             string token = _acountService.GenerateJwt(dto);
             return Ok(token);
         }
+
+        [HttpPost("changePassword")]
+        public ActionResult ChangePassword([FromBody] ChangePasswordDto dto)
+        {
+            _acountService.ChangePassword(dto);
+            return Ok();
+        }
     }
 }
