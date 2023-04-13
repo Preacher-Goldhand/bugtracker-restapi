@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "BugTracker.IntegrationTests": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:56894;http://localhost:56895"
+    }
+  }
+}

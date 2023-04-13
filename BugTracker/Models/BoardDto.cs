@@ -16,6 +16,6 @@ namespace BugTracker.Models
 
         public DateTime DateOfCreation { get; set; }
 
-        public List<QuestDto> BoardTasks { get; set; }
+        public List<MinimalQuestDto> BoardTasks { get; set; }
     }
 }
