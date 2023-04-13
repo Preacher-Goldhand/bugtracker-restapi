@@ -13,7 +13,7 @@ namespace BugTracker.Services
     {
         int Create(int boardId, CreateQuestDto dto);
 
-        PagedResult<QuestDto> GetAll(int boardId, PaginationQuery questQuery);
+        PagedResult<MinimalQuestDto> GetAll(int boardId, PaginationQuery questQuery);
 
         QuestDto GetById(int boardId, int questId);
 
@@ -53,7 +53,7 @@ namespace BugTracker.Services
             return quest.Id;
         }
 
-        public PagedResult<QuestDto> GetAll(int boardId, PaginationQuery questQuery)
+        public PagedResult<MinimalQuestDto> GetAll(int boardId, PaginationQuery questQuery)
         {
             var baseQuery = _dbContext
               .Boards
@@ -71,9 +71,9 @@ namespace BugTracker.Services
 
             var totalItemsCount = boardTasks.Count();
 
-            var questsDtos = _mapper.Map<List<QuestDto>>(quests);
+            var questsDtos = _mapper.Map<List<MinimalQuestDto>>(quests);
 
-            var pagedResult = new PagedResult<QuestDto>(questsDtos, totalItemsCount, questQuery.PageSize, questQuery.PageNumber);
+            var pagedResult = new PagedResult<MinimalQuestDto>(questsDtos, totalItemsCount, questQuery.PageSize, questQuery.PageNumber);
             return pagedResult;
         }
 

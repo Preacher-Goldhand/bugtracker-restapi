@@ -2,7 +2,7 @@
 
 namespace BugTracker.Models
 {
-    public class QuestDto
+    public class MinimalQuestDto
     {
         [Required]
         [MaxLength(50)]
@@ -16,16 +16,10 @@ namespace BugTracker.Models
 
         public DateTime DateOfCreation { get; set; }
         public DateTime PropsalDate { get; set; }
-        public float LoggedTime { get; set; }
         public int Priority { get; set; }
 
         [Required]
         [MaxLength(20)]
         public string TaskStatus { get; set; }
-
-        public string AssignerFirstName { get; set; }
-        public string AssignerLastName { get; set; }
-        public string AssigneeFirstName { get; set; }
-        public string AssigneeLastName { get; set; }
     }
 }

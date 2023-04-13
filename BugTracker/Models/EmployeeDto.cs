@@ -10,8 +10,6 @@ namespace BugTracker.Models
 {
     public class EmployeeDto
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(50)]
         public string FirstName { get; set; }
