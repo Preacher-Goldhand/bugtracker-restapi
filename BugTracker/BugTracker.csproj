@@ -21,9 +21,16 @@
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
-
+  <ItemGroup>
+    <InternalsVisibleTo Include="BugTracker.IntegrationTests" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="StaticFiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

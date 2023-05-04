@@ -9,9 +9,9 @@ namespace BugTracker.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IAcountService _acountService;
+        private readonly IAccountService _acountService;
 
-        public AccountController(IAcountService acountService)
+        public AccountController(IAccountService acountService)
         {
             _acountService = acountService;
         }

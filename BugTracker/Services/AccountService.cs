@@ -10,7 +10,7 @@ using System.Text;
 
 namespace BugTracker.Services
 {
-    public interface IAcountService
+    public interface IAccountService
     {
         void RegisterEmployee(RegisterEmployeeDto dto);
 
@@ -19,7 +19,7 @@ namespace BugTracker.Services
         void ChangePassword(ChangePasswordDto dto);
     }
 
-    public class AccountService : IAcountService
+    public class AccountService : IAccountService
     {
         private readonly BugTrackerDbContext _dbContext;
         private readonly IPasswordHasher<Employee> _passwordHasher;

@@ -1,15 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 
 namespace BugTracker.Entities
 {
     public class BugTrackerDbContext : DbContext
     {
+        public BugTrackerDbContext(DbContextOptions<BugTrackerDbContext> options) : base(options)
+        {
+        }
+
         public DbSet<Board> Boards { get; set; }
         public DbSet<Quest> Tasks { get; set; }
         public DbSet<Employee> Employees { get; set; }
@@ -33,19 +31,6 @@ namespace BugTracker.Entities
             modelBuilder.Entity<Quest>()
                 .Property(t => t.TaskStatus)
                 .IsRequired();
-
-            // Do wyrzucenia po testach
-            //modelBuilder.Entity<Quest>()
-            //    .HasOne(t => t.Assigner)
-            //    .WithMany(t => t.AssignerTasks)
-            //    .HasForeignKey(t => t.AssignerId)
-            //    .OnDelete(DeleteBehavior.ClientSetNull);
-
-            //modelBuilder.Entity<Quest>()
-            //    .HasOne(t => t.Assignee)
-            //    .WithMany(t => t.AssigneeTasks)
-            //    .HasForeignKey(t => t.AssigneeId)
-            //    .OnDelete(DeleteBehavior.ClientSetNull);
 
             // Required elements of Employees table
             modelBuilder.Entity<Employee>()
