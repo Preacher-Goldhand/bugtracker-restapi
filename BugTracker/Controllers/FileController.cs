@@ -38,7 +38,7 @@ namespace BugTracker.Controllers
             {
                 var rootPath = Directory.GetCurrentDirectory();
                 var fileName = file.FileName;
-                var fullPath = $"{rootPath}/PrivateFiles/{fileName}";
+                var fullPath = $"{rootPath}/StaticFiles/{fileName}";
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
@@ -46,6 +46,24 @@ namespace BugTracker.Controllers
                 return Ok();
             }
             return BadRequest();
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteFile([FromQuery] string fileName)
+        {
+            var rootPath = Directory.GetCurrentDirectory();
+
+            var filePath = $"{rootPath}/StaticFiles/{fileName}";
+
+            var fileExists = System.IO.File.Exists(filePath);
+            if (!fileExists)
+            {
+                return NotFound();
+            }
+
+            System.IO.File.Delete(filePath);
+
+            return Ok();
         }
     }
 }
