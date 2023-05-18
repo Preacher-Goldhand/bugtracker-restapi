@@ -1,6 +1,7 @@
 ﻿using BugTracker.Entities;
 using BugTracker.Middleware.Custom_Exceptions;
 using BugTracker.Models.AuthenticationDtos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,6 +17,8 @@ namespace BugTracker.Services
 
         string GenerateJwt(LoginEmployeeDto dto);
 
+        void Logout(string jwt);
+
         void ChangePassword(ChangePasswordDto dto);
     }
 
@@ -24,6 +27,7 @@ namespace BugTracker.Services
         private readonly BugTrackerDbContext _dbContext;
         private readonly IPasswordHasher<Employee> _passwordHasher;
         private readonly AuthenticationSettings _authenticationSettings;
+        private readonly HashSet<string> _activeJwtTokens = new HashSet<string>();
 
         public AccountService(BugTrackerDbContext dbContext, IPasswordHasher<Employee> passwordHasher, AuthenticationSettings authenticationSettings)
         {
@@ -84,7 +88,14 @@ namespace BugTracker.Services
                         expires: expires, signingCredentials: creds);
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            return tokenHandler.WriteToken(token);
+            var jwtToken = tokenHandler.WriteToken(token);
+            _activeJwtTokens.Add(jwtToken);
+            return jwtToken;
+        }
+
+        public void Logout(string jwt)
+        {
+            _activeJwtTokens.Remove(jwt);
         }
 
         public void ChangePassword(ChangePasswordDto dto)

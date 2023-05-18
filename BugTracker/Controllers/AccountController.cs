@@ -9,31 +9,38 @@ namespace BugTracker.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IAccountService _acountService;
+        private readonly IAccountService _accountService;
 
         public AccountController(IAccountService acountService)
         {
-            _acountService = acountService;
+            _accountService = acountService;
         }
 
         [HttpPost("register")]
         public ActionResult RegisterEmployee([FromBody] RegisterEmployeeDto dto)
         {
-            _acountService.RegisterEmployee(dto);
+            _accountService.RegisterEmployee(dto);
             return Ok();
         }
 
         [HttpPost("login")]
         public ActionResult LoginEmployee([FromBody] LoginEmployeeDto dto)
         {
-            string token = _acountService.GenerateJwt(dto);
+            string token = _accountService.GenerateJwt(dto);
             return Ok(token);
+        }
+
+        [HttpPost("logout")]
+        public IActionResult Logout([FromHeader(Name = "Authorization")] string jwt)
+        {
+            _accountService.Logout(jwt);
+            return Ok();
         }
 
         [HttpPost("changePassword")]
         public ActionResult ChangePassword([FromBody] ChangePasswordDto dto)
         {
-            _acountService.ChangePassword(dto);
+            _accountService.ChangePassword(dto);
             return Ok();
         }
     }

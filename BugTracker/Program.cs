@@ -40,6 +40,7 @@ builder.Services.AddScoped<IValidator<RegisterEmployeeDto>, RegisterEmployeeDtoV
 builder.Services.AddScoped<IValidator<PaginationQuery>, BoardPaginationQueryValidator>();
 builder.Services.AddScoped<IValidator<PaginationQuery>, EmployeePaginationQueryValidator>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
