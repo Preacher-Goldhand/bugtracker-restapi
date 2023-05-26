@@ -84,6 +84,21 @@ var seeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
 app.UseResponseCaching();
 app.UseStaticFiles();
 app.UseCors("FrontEndClient");
+app.Use((context, next) =>
+{
+    if (context.Request.Method == "OPTIONS")
+    {
+        context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+        context.Response.Headers.Add("Access-Control-Allow-Headers", "*");
+        context.Response.Headers.Add("Access-Control-Allow-Methods", "*");
+        context.Response.StatusCode = 200;
+        return Task.CompletedTask;
+    }
+    else
+    {
+        return next();
+    }
+});
 
 seeder.Seed();
 if (app.Environment.IsDevelopment())

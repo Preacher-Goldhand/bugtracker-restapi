@@ -5,8 +5,6 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugTracker", "BugTracker\BugTracker.csproj", "{23107A04-9F28-4E8B-8FC4-5178D9B022C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugTracker.IntegrationTests", "BugTracker.IntegrationTests\BugTracker.IntegrationTests.csproj", "{6ED6C918-A0AB-4082-B1A7-DA6F7699BD0F}"
-EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BugTracker.Client", "BugTracker.Client\BugTracker.Client.esproj", "{B2B4A8AC-4E9C-4A61-9B91-3C4D9B1C0AA6}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{23107A04-9F28-4E8B-8FC4-5178D9B022C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23107A04-9F28-4E8B-8FC4-5178D9B022C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23107A04-9F28-4E8B-8FC4-5178D9B022C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6ED6C918-A0AB-4082-B1A7-DA6F7699BD0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6ED6C918-A0AB-4082-B1A7-DA6F7699BD0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6ED6C918-A0AB-4082-B1A7-DA6F7699BD0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6ED6C918-A0AB-4082-B1A7-DA6F7699BD0F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B2B4A8AC-4E9C-4A61-9B91-3C4D9B1C0AA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B2B4A8AC-4E9C-4A61-9B91-3C4D9B1C0AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2B4A8AC-4E9C-4A61-9B91-3C4D9B1C0AA6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

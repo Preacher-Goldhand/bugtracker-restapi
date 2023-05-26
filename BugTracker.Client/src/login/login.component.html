@@ -1,0 +1,16 @@
+<h2 class="title">BUGTRACKER</h2>
+<br />
+<br />
+<br />
+<form class="login-form" (ngSubmit)="login()" #loginForm="ngForm">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input class="form-control" type="email" id="email" name="email" required [(ngModel)]="email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input class="form-control" type="password" id="password" name="password" required [(ngModel)]="password">
+  </div>
+  <button class="btn" type="submit" [disabled]="!loginForm.form.valid">Login</button>
+</form>
+
