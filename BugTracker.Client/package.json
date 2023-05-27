@@ -20,6 +20,9 @@
     "@angular/router": "^15.2.9",
     "@material-ui/icons": "^4.11.3",
     "jest-editor-support": "*",
+    "js-base64": "^3.7.5",
+    "jsonwebtoken": "^9.0.0",
+    "jwt-decode": "^3.1.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
@@ -29,6 +32,8 @@
     "@angular/cli": "~15.0.0",
     "@angular/compiler-cli": "^15.0.0",
     "@types/jasmine": "~4.3.0",
+    "@types/js-base64": "^3.3.1",
+    "@types/jsonwebtoken": "^9.0.2",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",

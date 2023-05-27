@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginData } from './login.model';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -15,26 +16,23 @@ export class LoginComponent {
 
   login() {
     const loginData: LoginData = {
-        EmployeeEmail: this.email,
-        EmployeePasswordHash: this.password   
+      EmployeeEmail: this.email,
+      EmployeePasswordHash: this.password
     };
 
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        //'Access-Control-Allow-Origin': '*',
-        //'Access-Control-Allow-Credentials': 'true',
-        //'Access-Control-Allow-Headers': 'Content-Type',
-        //'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
       })
     };
 
-    this.http.post('https://localhost:7126/bugtracker/account/login', loginData, httpOptions).subscribe(
+    this.http.post('https://localhost:7126/bugtracker/account/login', loginData).subscribe(
       (response) => {
         // Obsługa sukcesu logowania
         console.log('Zalogowano', response);
-        const token = typeof response === 'string' ? response : response as string;
-        httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
+        const encodedToken = typeof response === 'string' ? response : response as string;
+        const decodedToken = jwt_decode(encodedToken);
+        console.log('Dekodowany token:', decodedToken);
       },
       (error) => {
         // Obsługa błędu logowania
