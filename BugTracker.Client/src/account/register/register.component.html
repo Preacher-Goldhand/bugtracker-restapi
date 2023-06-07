@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="sidebar">
+    <div class="brand">
+      <p>BUGTRACKER</p>
+    </div>
+    <nav>
+      <a routerLink="/login">LOGIN</a>
+      <a routerLink="/register">REGISTER</a>
+      <a routerLink="/change-password">CHANGE PASSWORD</a>
+    </nav>
+  </div>
+  <form (ngSubmit)="registerUser()" #registerForm="ngForm">
+    <div>
+      <label for="FirstName">First Name</label>
+      <input type="text" id="FirstName" name="FirstName" required [(ngModel)]="registerData.FirstName" #firstName="ngModel">
+      <div *ngIf="firstName.errors?.['required'] && (firstName.dirty || firstName.touched)" class="error">
+        FirstName is required.
+      </div>
+    </div>
+
+    <div>
+      <label for="LastName">Last Name</label>
+      <input type="text" id="LastName" name="LastName" required [(ngModel)]="registerData.LastName" #lastName="ngModel">
+      <div *ngIf="lastName.errors?.['required'] && (lastName.dirty || lastName.touched)" class="error">
+        LastName is required.
+      </div>
+    </div>
+
+    <div>
+      <label for="Department">Departament</label>
+      <input type="text" id="Department" name="Department" required [(ngModel)]="registerData.Department" #department="ngModel">
+      <div *ngIf="department.errors?.['required'] && (department.dirty || department.touched)" class="error">
+        Department is required.
+      </div>
+    </div>
+
+    <div>
+      <label for="EmployeeEmail">Email</label>
+      <input type="email" id="EmployeeEmail" name="EmployeeEmail" required [(ngModel)]="registerData.EmployeeEmail" #email="ngModel">
+      <div *ngIf="email.errors?.['required'] && (email.dirty || email.touched)" class="error">
+        Email is required.
+      </div>
+      <div *ngIf="email.errors?.['email'] && (email.dirty || email.touched)" class="error">
+        Enter valid email.
+      </div>
+    </div>
+
+    <div>
+      <label for="EmployeePassword">Password</label>
+      <input type="password" id="EmployeePassword" name="EmployeePassword" required [(ngModel)]="registerData.EmployeePasswordHash" #password="ngModel">
+      <div *ngIf="password.errors?.['required'] && (password.dirty || password.touched)" class="error">
+        Password is required.
+      </div>
+    </div>
+
+    <div>
+      <label for="ConfirmEmployeePassword">Confirm Password</label>
+      <input type="password" id="ConfirmEmployeePassword" name="ConfirmEmployeePassword" required [(ngModel)]="registerData.ConfirmEmployeePasswordHash" #confirmPassword="ngModel">
+      <div *ngIf="confirmPassword.errors?.['required'] && (confirmPassword.dirty || confirmPassword.touched)" class="error">
+        Email confirmation is required.
+      </div>
+      <div *ngIf="passwordMismatch()" class="error">
+        Passwords are different.
+      </div>
+    </div>
+
+    <div>
+      <label for="EmployeePhoneNumber">Phone Number</label>
+      <input type="tel" id="EmployeePhoneNumber" name="EmployeePhoneNumber" required [(ngModel)]="registerData.EmployeePhoneNumber" #phoneNumber="ngModel">
+      <div *ngIf="phoneNumber.errors?.['required'] && (phoneNumber.dirty || phoneNumber.touched)" class="error">
+        Phone Number is required..
+      </div>
+    </div>
+
+    <div>
+      <label for="EmployeeStatus">Status</label>
+      <input type="text" id="EmployeeStatus" name="EmployeeStatus" required [(ngModel)]="registerData.EmployeeStatus" #status="ngModel">
+      <div *ngIf="status.errors?.['required'] && (status.dirty || status.touched)" class="error">
+        Status is required.
+      </div>
+    </div>
+
+    <button class="btn" type="submit" [disabled]="registerForm.invalid">Register</button>
+  </form>
+ </div>

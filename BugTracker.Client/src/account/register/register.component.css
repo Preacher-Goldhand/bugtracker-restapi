@@ -1,0 +1,91 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: #333;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  margin-right: 30vw;
+}
+
+nav a {
+  text-decoration: none;
+  color: whitesmoke;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  nav a:hover {
+    background-color: #ddd;
+  }
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  padding: 20px;
+}
+
+  .brand p {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 0;
+  }
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.form-container {
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  color: #192a56;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.input-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #192a56;
+  border-radius: 4px;
+  color: #192a56;
+}
+
+.btn {
+  background-color: #192a56;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginData } from './login.model';
-import jwt_decode from 'jwt-decode';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login',
@@ -31,8 +31,10 @@ export class LoginComponent {
         // Obsługa sukcesu logowania
         console.log('Zalogowano', response);
         const encodedToken = typeof response === 'string' ? response : response as string;
-        const decodedToken = jwt_decode(encodedToken);
+        const helper = new JwtHelperService();
+        const decodedToken = helper.decodeToken(encodedToken);
         console.log('Dekodowany token:', decodedToken);
+        return decodedToken;
       },
       (error) => {
         // Obsługa błędu logowania
