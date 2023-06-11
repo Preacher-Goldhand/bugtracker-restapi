@@ -10,4 +10,10 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\BugTracker.Client</BuildOutputFolder>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\dashboard\employees\" />
+    <Folder Include="src\dashboard\boards\" />
+    <Folder Include="src\dashboard\files\" />
+    <Folder Include="src\dashboard\quests\" />
+  </ItemGroup>
 </Project>

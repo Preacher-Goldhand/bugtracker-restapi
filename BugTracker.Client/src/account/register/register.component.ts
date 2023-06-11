@@ -1,7 +1,7 @@
-// importujemy moduł HttpClient
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RegisterData } from './register.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,19 +20,19 @@ export class RegisterComponent {
     EmployeeStatus: ''
   };
 
-  constructor(private http: HttpClient) { } // wstrzykujemy HttpClient w konstruktorze
+  constructor(private http: HttpClient, private router: Router) { }
 
   registerUser() {
-    // Przesyłamy dane do serwera
     this.http.post('https://localhost:7126/bugtracker/account/register', this.registerData)
       .subscribe(
         response => {
           console.log('Sukces:', response);
-          // Tutaj możesz obsłużyć odpowiedź serwera po udanej rejestracji
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/login']);
+          });
         },
         error => {
           console.log('Błąd:', error);
-          // Tutaj możesz obsłużyć błąd, jeśli rejestracja nie powiodła się
         }
       );
   }

@@ -27,7 +27,7 @@
     </div>
 
     <div>
-      <label for="Department">Departament</label>
+      <label for="Department">Department</label>
       <input type="text" id="Department" name="Department" required [(ngModel)]="registerData.Department" #department="ngModel">
       <div *ngIf="department.errors?.['required'] && (department.dirty || department.touched)" class="error">
         Department is required.
@@ -68,7 +68,7 @@
       <label for="EmployeePhoneNumber">Phone Number</label>
       <input type="tel" id="EmployeePhoneNumber" name="EmployeePhoneNumber" required [(ngModel)]="registerData.EmployeePhoneNumber" #phoneNumber="ngModel">
       <div *ngIf="phoneNumber.errors?.['required'] && (phoneNumber.dirty || phoneNumber.touched)" class="error">
-        Phone Number is required..
+        Phone Number is required.
       </div>
     </div>
 
@@ -82,4 +82,4 @@
 
     <button class="btn" type="submit" [disabled]="registerForm.invalid">Register</button>
   </form>
- </div>
+</div>
