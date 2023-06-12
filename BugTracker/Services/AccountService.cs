@@ -27,8 +27,7 @@ namespace BugTracker.Services
         private readonly BugTrackerDbContext _dbContext;
         private readonly IPasswordHasher<Employee> _passwordHasher;
         private readonly AuthenticationSettings _authenticationSettings;
-        //private readonly HashSet<string> _activeJwtTokens = new HashSet<string>();
-
+    
         public AccountService(BugTrackerDbContext dbContext, IPasswordHasher<Employee> passwordHasher, AuthenticationSettings authenticationSettings)
         {
             _dbContext = dbContext;
@@ -89,7 +88,6 @@ namespace BugTracker.Services
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var jwtToken = tokenHandler.WriteToken(token);
-            //_activeJwtTokens.Add(jwtToken);
             return jwtToken;
         }
 
