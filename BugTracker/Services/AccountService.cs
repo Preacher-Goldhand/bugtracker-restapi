@@ -17,7 +17,7 @@ namespace BugTracker.Services
 
         string GenerateJwt(LoginEmployeeDto dto);
 
-        void Logout(string jwt);
+        //void Logout(string jwt);
 
         void ChangePassword(ChangePasswordDto dto);
     }
@@ -27,7 +27,7 @@ namespace BugTracker.Services
         private readonly BugTrackerDbContext _dbContext;
         private readonly IPasswordHasher<Employee> _passwordHasher;
         private readonly AuthenticationSettings _authenticationSettings;
-        private readonly HashSet<string> _activeJwtTokens = new HashSet<string>();
+        //private readonly HashSet<string> _activeJwtTokens = new HashSet<string>();
 
         public AccountService(BugTrackerDbContext dbContext, IPasswordHasher<Employee> passwordHasher, AuthenticationSettings authenticationSettings)
         {
@@ -89,31 +89,32 @@ namespace BugTracker.Services
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var jwtToken = tokenHandler.WriteToken(token);
-            _activeJwtTokens.Add(jwtToken);
+            //_activeJwtTokens.Add(jwtToken);
             return jwtToken;
         }
 
-        public void Logout(string jwt)
-        {
-            _activeJwtTokens.Remove(jwt);
-        }
+        //public void Logout(string jwt)
+        //{
+        //    _activeJwtTokens.Remove(jwt);
+        //}
 
         public void ChangePassword(ChangePasswordDto dto)
         {
-            var employee = _dbContext.Employees
-                .FirstOrDefault(e => e.EmployeeEmail == dto.EmployeeEmail);
+            var employee = _dbContext.Employees.FirstOrDefault(e => e.EmployeeEmail == dto.EmployeeEmail);
 
             if (employee == null)
             {
                 throw new BadRequestException("Employee not found");
             }
 
-            var currentPasswordHash = _passwordHasher.VerifyHashedPassword(employee, employee.EmployeePasswordHash, dto.CurrentPasswordHash);
-            if (currentPasswordHash == PasswordVerificationResult.Failed)
+            var isCurrentPasswordValid = _passwordHasher.VerifyHashedPassword(employee, employee.EmployeePasswordHash, dto.CurrentPasswordHash);
+
+            if (isCurrentPasswordValid == PasswordVerificationResult.Failed)
             {
                 throw new BadRequestException("Invalid password");
             }
 
+            // Zmień hasło na nowe
             var newHashedPassword = _passwordHasher.HashPassword(employee, dto.NewPasswordHash);
             employee.EmployeePasswordHash = newHashedPassword;
 

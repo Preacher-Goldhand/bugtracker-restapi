@@ -26,13 +26,13 @@ export class RegisterComponent {
     this.http.post('https://localhost:7126/bugtracker/account/register', this.registerData)
       .subscribe(
         response => {
-          console.log('Sukces:', response);
+          console.log('Sucess:', response);
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
             this.router.navigate(['/login']);
           });
         },
         error => {
-          console.log('Błąd:', error);
+          console.log('Fail:', error);
         }
       );
   }

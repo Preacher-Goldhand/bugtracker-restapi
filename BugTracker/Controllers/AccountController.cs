@@ -30,12 +30,12 @@ namespace BugTracker.Controllers
             return Ok(token);
         }
 
-        [HttpPost("logout")]
-        public IActionResult Logout([FromHeader(Name = "Authorization")] string jwt)
-        {
-            _accountService.Logout(jwt);
-            return Ok();
-        }
+        //[HttpPost("logout")]
+        //public IActionResult Logout([FromHeader(Name = "Authorization")] string jwt)
+        //{
+        //    _accountService.Logout(jwt);
+        //    return Ok();
+        //}
 
         [HttpPost("changePassword")]
         public ActionResult ChangePassword([FromBody] ChangePasswordDto dto)

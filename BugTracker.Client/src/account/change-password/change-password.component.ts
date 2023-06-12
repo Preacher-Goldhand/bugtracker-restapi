@@ -21,13 +21,13 @@ export class ChangePasswordComponent {
     this.http.post('https://localhost:7126/bugtracker/account/changePassword', this.changePasswordData)
       .subscribe(
         response => {
-          console.log('Sukces:', response);
+          console.log('Success:', response);
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
             this.router.navigate(['/login']);
           });
         },
         error => {
-          console.log('Błąd:', error);
+          console.log('Fail:', error);
         }
       );
   }

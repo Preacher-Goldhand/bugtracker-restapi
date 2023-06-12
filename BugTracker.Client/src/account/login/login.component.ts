@@ -29,16 +29,16 @@ export class LoginComponent {
     this.http.post('https://localhost:7126/bugtracker/account/login', loginData).subscribe(
       (response) => {
         // Obsługa sukcesu logowania
-        console.log('Zalogowano', response);
+        console.log('Success:', response);
         const encodedToken = typeof response === 'string' ? response : response as string;
         const helper = new JwtHelperService();
         const decodedToken = helper.decodeToken(encodedToken);
-        console.log('Dekodowany token:', decodedToken);
+        console.log('Decoded token:', decodedToken);
         return decodedToken;
       },
       (error) => {
         // Obsługa błędu logowania
-        console.error('Błąd logowania', error.error);
+        console.error('Fail:', error.error);
       }
     );
   }
