@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginData } from './login.model';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ export class LoginComponent {
   email: string = "";
   password: string = "";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login() {
     const loginData: LoginData = {
@@ -26,20 +26,18 @@ export class LoginComponent {
       })
     };
 
-    this.http.post('https://localhost:7126/bugtracker/account/login', loginData).subscribe(
+    this.http.post('https://localhost:7126/bugtracker/account/login', loginData, { responseType: 'text' }).subscribe(
       (response) => {
         // Obsługa sukcesu logowania
         console.log('Success:', response);
-        const encodedToken = typeof response === 'string' ? response : response as string;
-        const helper = new JwtHelperService();
-        const decodedToken = helper.decodeToken(encodedToken);
-        console.log('Decoded token:', decodedToken);
-        return decodedToken;
-      },
-      (error) => {
-        // Obsługa błędu logowania
-        console.error('Fail:', error.error);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/register']);
+        });
+        },
+          (error) => {
+            // Obsługa błędu logowania
+            console.error('Fail:', error.error);
+          }
+        );
       }
-    );
-  }
 }
