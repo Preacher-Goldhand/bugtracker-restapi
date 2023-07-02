@@ -8,6 +8,8 @@ import { LoginComponent } from '../account/login/login.component'
 import { HomeComponent } from '../account/home/home.component'
 import { RegisterComponent } from '../account/register/register.component';
 import { ChangePasswordComponent } from '../account/change-password/change-password.component';
+import { BoardServiceComponent } from '../dashboard/boards/boardservice/boardservice.component';
+import { HomeDashboardComponent } from '../dashboard/home-dashboard/home-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { ChangePasswordComponent } from '../account/change-password/change-passw
     LoginComponent,
     RegisterComponent,
     ChangePasswordComponent,
+    HomeDashboardComponent,
+    BoardServiceComponent,
 
   ],
   imports: [

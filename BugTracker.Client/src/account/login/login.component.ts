@@ -31,13 +31,13 @@ export class LoginComponent {
         // Obsługa sukcesu logowania
         console.log('Success:', response);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/register']);
+          this.router.navigate(['dashboard']);
         });
-        },
-          (error) => {
-            // Obsługa błędu logowania
-            console.error('Fail:', error.error);
-          }
-        );
+      },
+      (error) => {
+        // Obsługa błędu logowania
+        console.error('Fail:', error.error);
       }
+    );
+  }
 }

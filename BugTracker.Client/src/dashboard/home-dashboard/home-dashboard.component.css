@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: #333;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: whitesmoke;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  nav a:hover {
+    background-color: #ddd;
+  }
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  padding: 20px;
+}
+
+  .brand p {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 0;
+  }
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  text-align: center;
+}

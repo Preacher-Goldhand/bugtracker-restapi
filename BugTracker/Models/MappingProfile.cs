@@ -8,6 +8,7 @@ namespace BugTracker.Models
     {
         public MappingProfile()
         {
+            CreateMap<Board, BoardWithoutQuestsDto>();
             CreateMap<Board, BoardDto>();
 
             CreateMap<Quest, QuestDto>();
