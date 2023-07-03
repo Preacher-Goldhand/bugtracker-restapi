@@ -30,6 +30,8 @@ export class LoginComponent {
       (response) => {
         // Obsługa sukcesu logowania
         console.log('Success:', response);
+        localStorage.setItem('loginData', JSON.stringify(loginData));
+        console.log(localStorage.getItem('loginData'));
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['dashboard']);
         });

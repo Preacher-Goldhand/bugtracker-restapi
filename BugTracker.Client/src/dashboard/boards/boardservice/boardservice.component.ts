@@ -3,19 +3,17 @@ import { Component } from '@angular/core';
 import { BoardData } from '../../models/board.model';
 import { PagedResult } from '../../models/paged-result.model';
 
-
 @Component({
   selector: 'app-boardservice',
   templateUrl: './boardservice.component.html',
   styleUrls: ['./boardservice.component.css']
 })
 export class BoardServiceComponent {
-  pboards: BoardData[] = [];
+  boards: BoardData[] = [];
   searchPhrase: string = '';
   pageNumber: number = 1;
   pageSize: number = 5;
   totalPages: number = 0;
-  boards: BoardData[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -37,7 +35,6 @@ export class BoardServiceComponent {
   }
 
   getBoards() {
-    console.log('getBoards clicked');
     this.pageNumber = 1;
     this.getData();
   }
