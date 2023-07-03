@@ -10,8 +10,33 @@
     </nav>
   </div>
   <div class="content">
-    <body>
-      Welcome to your dashboard! 
-    </body>
+    <div class="search">
+      <input type="text" placeholder="..." />
+      <button class="search-button" (click)="search()">Search</button>
+    </div>
+    <button class="get-boards" (click)="getBoards()">Get Boards</button>
+    <div class="board-list">
+      <!-- Lista boardów -->
+    </div>
+    <div class="pagination">
+      <button class="previous-page" (click)="previousPage()">Back</button>
+      <div class="page-dropdown">
+        <button class="current-page">1</button>
+        <div class="dropdown-content">
+          <a href="#">5</a>
+          <a href="#">10</a>
+          <a href="#">15</a>
+        </div>
+      </div>
+      <button class="next-page" (click)="nextPage()">Next</button>
+      <div class="records-per-page">
+        <label for="recordsPerPage">Records per page:</label>
+        <select id="recordsPerPage" (change)="onPageSizeChange($event)">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select>
+      </div>
+    </div>
   </div>
 </div>
