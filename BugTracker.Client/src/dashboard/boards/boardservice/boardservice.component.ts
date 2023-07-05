@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { BoardData } from '../../models/board.model';
 import { PagedResult } from '../../models/paged-result.model';
+import { JwtInterceptor } from '../../../app/interceptors/jwt.interceptor';
 
 @Component({
   selector: 'app-boardservice',
@@ -27,7 +28,14 @@ export class BoardServiceComponent {
       url += `&searchPhrase=${this.searchPhrase}`;
     }
 
-    this.http.get<PagedResult<BoardData>>(url)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` // Dodaj nagłówek Authorization z tokenem JWT
+      })
+    };
+
+    this.http.get<PagedResult<BoardData>>(url, httpOptions)
       .subscribe((result: PagedResult<BoardData>) => {
         this.boards = result.items;
         this.totalPages = result.totalPages;

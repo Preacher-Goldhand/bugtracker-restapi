@@ -27,7 +27,7 @@ namespace BugTracker.Services
         private readonly BugTrackerDbContext _dbContext;
         private readonly IPasswordHasher<Employee> _passwordHasher;
         private readonly AuthenticationSettings _authenticationSettings;
-    
+
         public AccountService(BugTrackerDbContext dbContext, IPasswordHasher<Employee> passwordHasher, AuthenticationSettings authenticationSettings)
         {
             _dbContext = dbContext;
