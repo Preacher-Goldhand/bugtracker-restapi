@@ -31,7 +31,13 @@ export class BoardServiceComponent implements OnInit {
     this.http.get<PagedResult<BoardData>>(url)
       .subscribe((result: PagedResult<BoardData>) => {
         this.boards = result.items;
-        this.totalPages = result.totalPages;     
+        this.totalPages = result.totalPages;
+
+        if (this.boards.length === 0 && this.searchPhrase) {
+          this.noResultsMessage = 'No results found for the entered search phrase';
+        } else {
+          this.noResultsMessage = '';
+        }
       });
   }
 
@@ -46,8 +52,14 @@ export class BoardServiceComponent implements OnInit {
     this.getData();
   }
 
-  showDetails(board: BoardData) {
-    // Logika wyświetlania szczegółów boardu
+  showDetails(boardId: number) {
+    const url = `https://localhost:7126/bugtracker/board/${boardId}`;
+
+    this.http.get<BoardData>(url)
+      .subscribe((response: BoardData) => {
+        // Tutaj możesz obsłużyć otrzymane dane boarda i wykonać odpowiednie działania
+        console.log(response);
+      });
   }
 
   editBoard(board: BoardData) {
@@ -59,7 +71,7 @@ export class BoardServiceComponent implements OnInit {
   }
 
   previousPage() {
-    if (this.pageNumber > 1) {
+    if (this.pageNumber > 1) { 
       this.pageNumber--;
       this.getData();
     }

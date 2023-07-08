@@ -15,7 +15,7 @@
       <button class="search-button" (click)="search()">Search</button>
     </div>
     <button class="reset-view" (click)="resetView()">Reset View</button>
-    <div class="board-list">
+    <div *ngIf="!noResultsMessage" class="board-list">
       <table class="board-table">
         <thead>
           <tr>
@@ -27,8 +27,8 @@
           <tr *ngFor="let board of boards">
             <td>{{ board.name }}</td>
             <td>{{ board.dateOfCreation | date:'dd/MM/yyyy' }}</td>
-            <td>
-              <button (click)="showDetails(board)">Details</button>
+            <td class="actions">
+              <button (click)="showDetails(board.id)">Details</button>
               <button (click)="editBoard(board)">Edit</button>
               <button (click)="removeBoard(board)">Remove</button>
             </td>
@@ -36,6 +36,7 @@
         </tbody>
       </table>
     </div>
+    <div *ngIf="noResultsMessage" class="error-message">{{ noResultsMessage }}</div>
     <div class="pagination" *ngIf="totalPages > 0">
       <button class="previous-page" (click)="previousPage()">&#171;&#171;</button>
       <div class="page-dropdown">
