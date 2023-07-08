@@ -1,20 +1,20 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { BoardData } from '../../models/board.model';
 import { PagedResult } from '../../models/paged-result.model';
-import { JwtInterceptor } from '../../../app/interceptors/jwt.interceptor';
 
 @Component({
   selector: 'app-boardservice',
   templateUrl: './boardservice.component.html',
   styleUrls: ['./boardservice.component.css']
 })
-export class BoardServiceComponent {
+export class BoardServiceComponent implements OnInit {
   boards: BoardData[] = [];
   searchPhrase: string = '';
   pageNumber: number = 1;
   pageSize: number = 5;
   totalPages: number = 0;
+  noResultsMessage: string = '';
 
   constructor(private http: HttpClient) { }
 
@@ -28,28 +28,34 @@ export class BoardServiceComponent {
       url += `&searchPhrase=${this.searchPhrase}`;
     }
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` // Dodaj nagłówek Authorization z tokenem JWT
-      })
-    };
-
-    this.http.get<PagedResult<BoardData>>(url, httpOptions)
+    this.http.get<PagedResult<BoardData>>(url)
       .subscribe((result: PagedResult<BoardData>) => {
         this.boards = result.items;
-        this.totalPages = result.totalPages;
+        this.totalPages = result.totalPages;     
       });
-  }
-
-  getBoards() {
-    this.pageNumber = 1;
-    this.getData();
   }
 
   search() {
     this.pageNumber = 1;
     this.getData();
+  }
+
+  resetView() {
+    this.searchPhrase = '';
+    this.pageNumber = 1;
+    this.getData();
+  }
+
+  showDetails(board: BoardData) {
+    // Logika wyświetlania szczegółów boardu
+  }
+
+  editBoard(board: BoardData) {
+    // Logika edycji boardu
+  }
+
+  removeBoard(board: BoardData) {
+    // Logika usuwania boardu
   }
 
   previousPage() {
@@ -69,6 +75,7 @@ export class BoardServiceComponent {
   onPageSizeChange(event: Event) {
     const pageSize = (event.target as HTMLSelectElement).value;
     this.pageSize = +pageSize;
+    this.pageNumber = 1;
     this.getData();
   }
 }

@@ -30,7 +30,7 @@ export class LoginComponent {
       (response) => {
         // Obsługa sukcesu logowania
         console.log('Success:', response);
-        sessionStorage.setItem('jwt', JSON.stringify(response));
+        sessionStorage.setItem('jwt', response);
         console.log(sessionStorage.getItem('jwt'));
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['dashboard']);

@@ -11,27 +11,40 @@
   </div>
   <div class="content">
     <div class="search">
-      <input type="text" placeholder="..." />
+      <input type="text" placeholder="..." [(ngModel)]="searchPhrase" />
       <button class="search-button" (click)="search()">Search</button>
     </div>
-    <button class="get-boards" (click)="getBoards()">Get Boards</button>
+    <button class="reset-view" (click)="resetView()">Reset View</button>
     <div class="board-list">
-      <!-- Lista boardów -->
+      <table class="board-table">
+        <thead>
+          <tr>
+            <th>Board</th>
+            <th>Date of Creation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let board of boards">
+            <td>{{ board.name }}</td>
+            <td>{{ board.dateOfCreation | date:'dd/MM/yyyy' }}</td>
+            <td>
+              <button (click)="showDetails(board)">Details</button>
+              <button (click)="editBoard(board)">Edit</button>
+              <button (click)="removeBoard(board)">Remove</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="pagination">
-      <button class="previous-page" (click)="previousPage()">Back</button>
+    <div class="pagination" *ngIf="totalPages > 0">
+      <button class="previous-page" (click)="previousPage()">&#171;&#171;</button>
       <div class="page-dropdown">
-        <button class="current-page">1</button>
-        <div class="dropdown-content">
-          <a href="#">5</a>
-          <a href="#">10</a>
-          <a href="#">15</a>
-        </div>
+        <button class="current-page">{{ pageNumber }}</button>
       </div>
-      <button class="next-page" (click)="nextPage()">Next</button>
+      <button class="next-page" (click)="nextPage()">&#187;&#187;</button>
       <div class="records-per-page">
         <label for="recordsPerPage">Records per page:</label>
-        <select id="recordsPerPage" (change)="onPageSizeChange($event)">
+        <select id="recordsPerPage" (change)="onPageSizeChange($event)" [(ngModel)]="pageSize">
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>
