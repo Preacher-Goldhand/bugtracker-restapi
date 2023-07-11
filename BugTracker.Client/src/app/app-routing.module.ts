@@ -6,6 +6,7 @@ import { RegisterComponent } from '../account/register/register.component';
 import { ChangePasswordComponent } from '../account/change-password/change-password.component';
 import { BoardServiceComponent } from '../dashboard/boards/boardservice/boardservice.component';
 import { HomeDashboardComponent } from '../dashboard/home-dashboard/home-dashboard.component';
+import { CreateBoardComponent } from '../dashboard/boards/boardservice/create-board/create-board.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'dashboard', component: HomeDashboardComponent },
-  { path: 'boards', component: BoardServiceComponent }
+  { path: 'boards', component: BoardServiceComponent },
+  { path: 'add-board', component: CreateBoardComponent }
 ];
 
 @NgModule({

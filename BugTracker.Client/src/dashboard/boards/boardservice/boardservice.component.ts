@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BoardData } from '../../models/board.model';
 import { PagedResult } from '../../models/paged-result.model';
@@ -15,8 +16,9 @@ export class BoardServiceComponent implements OnInit {
   pageSize: number = 5;
   totalPages: number = 0;
   noResultsMessage: string = '';
-
-  constructor(private http: HttpClient) { }
+  
+    
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.getData();
@@ -46,10 +48,10 @@ export class BoardServiceComponent implements OnInit {
     this.getData();
   }
 
-  resetView() {
-    this.searchPhrase = '';
-    this.pageNumber = 1;
-    this.getData();
+  addBoard() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/add-board']);
+    });
   }
 
   showDetails(boardId: number) {

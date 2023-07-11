@@ -14,7 +14,7 @@
       <input type="text" placeholder="..." [(ngModel)]="searchPhrase" />
       <button class="search-button" (click)="search()">Search</button>
     </div>
-    <button class="reset-view" (click)="resetView()">Reset View</button>
+    <button *ngIf="!noResultsMessage" class="add-board" (click)="addBoard()">New Board</button>
     <div *ngIf="!noResultsMessage" class="board-list">
       <table class="board-table">
         <thead>

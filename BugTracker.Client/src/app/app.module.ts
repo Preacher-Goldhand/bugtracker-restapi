@@ -11,6 +11,7 @@ import { RegisterComponent } from '../account/register/register.component';
 import { ChangePasswordComponent } from '../account/change-password/change-password.component';
 import { BoardServiceComponent } from '../dashboard/boards/boardservice/boardservice.component';
 import { HomeDashboardComponent } from '../dashboard/home-dashboard/home-dashboard.component';
+import { CreateBoardComponent } from '../dashboard/boards/boardservice/create-board/create-board.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HomeDashboardComponent } from '../dashboard/home-dashboard/home-dashboa
     ChangePasswordComponent,
     HomeDashboardComponent,
     BoardServiceComponent,
+    CreateBoardComponent,
 
   ],
   imports: [
