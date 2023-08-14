@@ -66,10 +66,12 @@ export class BoardServiceComponent implements OnInit {
 
   editBoard(board: BoardData) {
     // Logika edycji boardu
+    console.table(board);
   }
 
   removeBoard(board: BoardData) {
     // Logika usuwania boardu
+    console.table(board);
   }
 
   previousPage() {
