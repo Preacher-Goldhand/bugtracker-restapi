@@ -28,12 +28,12 @@ namespace BugTracker.Controllers
             return Created($"/bugtracker/board/{boardId}/task/{id}", null);
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<QuestDto>> GetAllQuests(int boardId, [FromQuery] PaginationQuery questQuery)
-        {
-            var questDtos = _questService.GetAll(boardId, questQuery);
-            return Ok(questDtos);
-        }
+        //[HttpGet]
+        //public ActionResult<IEnumerable<QuestDto>> GetAllQuests(int boardId, [FromQuery] PaginationQuery questQuery)
+        //{
+        //    var questDtos = _questService.GetAll(boardId, questQuery);
+        //    return Ok(questDtos);
+        //}
 
         [HttpGet("{questId}")]
         public ActionResult<QuestDto> GetQuestById([FromRoute] int boardId, [FromRoute] int questId)

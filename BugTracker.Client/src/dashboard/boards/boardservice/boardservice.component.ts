@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BoardData } from '../../models/board.model';
 import { PagedResult } from '../../models/paged-result.model';
+import { DetailedBoardData } from '../../models/detailed-board.model';
 
 @Component({
   selector: 'app-boardservice',
@@ -16,8 +17,7 @@ export class BoardServiceComponent implements OnInit {
   pageSize: number = 5;
   totalPages: number = 0;
   noResultsMessage: string = '';
-  
-    
+
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
@@ -54,13 +54,13 @@ export class BoardServiceComponent implements OnInit {
     });
   }
 
-  showDetails(boardId: number) {
-    const url = `https://localhost:7126/bugtracker/board/${boardId}`;
+  showDetails(board: BoardData) {
+    const url = `https://localhost:7126/bugtracker/board/${board.id}`;
 
-    this.http.get<BoardData>(url)
-      .subscribe((response: BoardData) => {
-        // Tutaj możesz obsłużyć otrzymane dane boarda i wykonać odpowiednie działania
-        console.log(response);
+    this.http.get<DetailedBoardData>(url)
+      .subscribe((result: DetailedBoardData) => {
+
+        this.router.navigate(['/board-details', board.id]);
       });
   }
 
@@ -73,7 +73,7 @@ export class BoardServiceComponent implements OnInit {
   }
 
   previousPage() {
-    if (this.pageNumber > 1) { 
+    if (this.pageNumber > 1) {
       this.pageNumber--;
       this.getData();
     }

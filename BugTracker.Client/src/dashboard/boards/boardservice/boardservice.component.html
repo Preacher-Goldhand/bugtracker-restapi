@@ -6,7 +6,7 @@
     <nav>
       <a routerLink="/boards">BOARDS</a>
       <a routerLink="/employees">EMPLOYEES</a>
-      <a routerLink="/quests">TASKS</a>
+      <a routerLink="/quests">FILES </a>
     </nav>
   </div>
   <div class="content">
@@ -28,7 +28,7 @@
             <td>{{ board.name }}</td>
             <td>{{ board.dateOfCreation | date:'dd/MM/yyyy' }}</td>
             <td class="actions">
-              <button (click)="showDetails(board.id)">Details</button>
+              <button (click)="showDetails(board)">Details</button>
               <button (click)="editBoard(board)">Edit</button>
               <button (click)="removeBoard(board)">Remove</button>
             </td>

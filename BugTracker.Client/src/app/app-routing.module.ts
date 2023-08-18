@@ -7,6 +7,7 @@ import { ChangePasswordComponent } from '../account/change-password/change-passw
 import { BoardServiceComponent } from '../dashboard/boards/boardservice/boardservice.component';
 import { HomeDashboardComponent } from '../dashboard/home-dashboard/home-dashboard.component';
 import { CreateBoardComponent } from '../dashboard/boards/boardservice/create-board/create-board.component';
+import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-service/minimalquest-service.component.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'dashboard', component: HomeDashboardComponent },
   { path: 'boards', component: BoardServiceComponent },
-  { path: 'add-board', component: CreateBoardComponent }
+  { path: 'add-board', component: CreateBoardComponent },
+  { path: 'board-details/:id', component: MinimalQuestServiceComponent },
 ];
 
 @NgModule({

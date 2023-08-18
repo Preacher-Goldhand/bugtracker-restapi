@@ -15,6 +15,5 @@
     <Folder Include="src\dashboard\employees\" />
     <Folder Include="src\dashboard\files\" />
     <Folder Include="src\dashboard\home\" />
-    <Folder Include="src\dashboard\quests\" />
   </ItemGroup>
 </Project>

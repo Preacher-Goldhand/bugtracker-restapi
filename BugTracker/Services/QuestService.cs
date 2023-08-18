@@ -13,7 +13,7 @@ namespace BugTracker.Services
     {
         int Create(int boardId, CreateQuestDto dto);
 
-        PagedResult<MinimalQuestDto> GetAll(int boardId, PaginationQuery questQuery);
+        //PagedResult<MinimalQuestDto> GetAll(int boardId, PaginationQuery questQuery);
 
         QuestDto GetById(int boardId, int questId);
 
@@ -53,29 +53,29 @@ namespace BugTracker.Services
             return quest.Id;
         }
 
-        public PagedResult<MinimalQuestDto> GetAll(int boardId, PaginationQuery questQuery)
-        {
-            var baseQuery = _dbContext
-              .Boards
-              .Include(t => t.BoardTasks)
-              .FirstOrDefault(b => b.Id == boardId);
+        //public PagedResult<MinimalQuestDto> GetAll(int boardId, PaginationQuery questQuery)
+        //{
+        //    var baseQuery = _dbContext
+        //      .Boards
+        //      .Include(t => t.BoardTasks)
+        //      .FirstOrDefault(b => b.Id == boardId);
 
-            var boardTasks = baseQuery.BoardTasks
-              .Where(b => questQuery.SearchPhrase == null || (b.Name.ToLower().Contains(questQuery.SearchPhrase.ToLower()))
-              || b.Category.ToLower().Contains(questQuery.SearchPhrase.ToLower()) || (b.Description.ToLower().Contains(questQuery.SearchPhrase.ToLower())));
+        //    var boardTasks = baseQuery.BoardTasks
+        //      .Where(b => questQuery.SearchPhrase == null || (b.Name.ToLower().Contains(questQuery.SearchPhrase.ToLower()))
+        //      || b.Category.ToLower().Contains(questQuery.SearchPhrase.ToLower()) || (b.Description.ToLower().Contains(questQuery.SearchPhrase.ToLower())));
 
-            var quests = boardTasks
-               .Skip(questQuery.PageSize * (questQuery.PageNumber - 1))
-               .Take(questQuery.PageSize)
-               .ToList();
+        //    var quests = boardTasks
+        //       .Skip(questQuery.PageSize * (questQuery.PageNumber - 1))
+        //       .Take(questQuery.PageSize)
+        //       .ToList();
 
-            var totalItemsCount = boardTasks.Count();
+        //    var totalItemsCount = boardTasks.Count();
 
-            var questsDtos = _mapper.Map<List<MinimalQuestDto>>(quests);
+        //    var questsDtos = _mapper.Map<List<MinimalQuestDto>>(quests);
 
-            var pagedResult = new PagedResult<MinimalQuestDto>(questsDtos, totalItemsCount, questQuery.PageSize, questQuery.PageNumber);
-            return pagedResult;
-        }
+        //    var pagedResult = new PagedResult<MinimalQuestDto>(questsDtos, totalItemsCount, questQuery.PageSize, questQuery.PageNumber);
+        //    return pagedResult;
+        //}
 
         public QuestDto GetById(int boardId, int questId)
         {
