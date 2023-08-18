@@ -1,13 +1,12 @@
 ﻿# Loggs files
-./Logs/
+**/Logs
 
 # Binaries
-**/bin/
-**/obj/
+**/bin
+**/obj
 
 # Visual Studio files
-**/.vs/
+**/.vs
 
-# Text files
-*.txt
-/Logs
+#Static files
+**/StaticFiles
