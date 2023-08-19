@@ -43,7 +43,7 @@ export class BoardServiceComponent implements OnInit {
       });
   }
 
-  search() {
+  searchBoard() {
     this.pageNumber = 1;
     this.getData();
   }
@@ -54,22 +54,26 @@ export class BoardServiceComponent implements OnInit {
     });
   }
 
-  showDetails(board: BoardData) {
+  showBoardDetails(board: BoardData) {
     const url = `https://localhost:7126/bugtracker/board/${board.id}`;
 
     this.http.get<DetailedBoardData>(url)
-      .subscribe((result: DetailedBoardData) => {
-
+      .subscribe(() => {
         this.router.navigate(['/board-details', board.id]);
       });
   }
 
   editBoard(board: BoardData) {
-    // Logika edycji boardu
+   
   }
 
   removeBoard(board: BoardData) {
-    // Logika usuwania boardu
+    const url = `https://localhost:7126/bugtracker/board/${board.id}`;
+
+    this.http.delete<BoardData>(url)
+      .subscribe((result: BoardData) => { 
+        
+    });
   }
 
   previousPage() {
@@ -88,7 +92,7 @@ export class BoardServiceComponent implements OnInit {
 
   onPageSizeChange(event: Event) {
     const pageSize = (event.target as HTMLSelectElement).value;
-    this.pageSize = +pageSize;
+    this.pageSize =+ pageSize;
     this.pageNumber = 1;
     this.getData();
   }

@@ -11,8 +11,8 @@
   </div>
   <div class="content">
     <div class="search">
-      <input type="text" placeholder="..." [(ngModel)]="searchPhrase" />
-      <button class="search-button" (click)="search()">Search</button>
+      <input type="text" [(ngModel)]="searchPhrase" />
+      <button class="search-button" (click)="searchBoard()">Search</button>
     </div>
     <button *ngIf="!noResultsMessage" class="add-board" (click)="addBoard()">New Board</button>
     <div *ngIf="!noResultsMessage" class="board-list">
@@ -28,7 +28,7 @@
             <td>{{ board.name }}</td>
             <td>{{ board.dateOfCreation | date:'dd/MM/yyyy' }}</td>
             <td class="actions">
-              <button (click)="showDetails(board)">Details</button>
+              <button (click)="showBoardDetails(board)">Details</button>
               <button (click)="editBoard(board)">Edit</button>
               <button (click)="removeBoard(board)">Remove</button>
             </td>

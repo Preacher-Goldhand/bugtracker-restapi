@@ -51,6 +51,34 @@ nav a {
   justify-content: space-between;
 }
 
+.search {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+  .search input {
+    padding: 5px;
+    width: 200px;
+  }
+
+.search-button {
+  background-color: #192a56;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
 .minimalquest-table {
   width: 100%;
   border-collapse: collapse;
