@@ -35,13 +35,6 @@ namespace BugTracker.Controllers
             return Ok(boardDtos);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<BoardDto> GetBoardById([FromRoute] int id)
-        {
-            BoardDto boardDto = _boardService.GetById(id);
-            return Ok(boardDto);
-        }
-
         [HttpPut("{id}")]
         public ActionResult UpdateBoard([FromBody] UpdateBoardDto dto, [FromRoute] int id)
         {

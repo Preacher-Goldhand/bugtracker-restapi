@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MinimalQuestServiceComponent } from './minimalquest-service.component.component';
+import { MinimalQuestServiceComponent } from './minimalquest-service.component';
 
 describe('MinimalquestServiceComponentComponent', () => {
   let component: MinimalQuestServiceComponent;

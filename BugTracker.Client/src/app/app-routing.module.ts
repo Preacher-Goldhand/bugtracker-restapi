@@ -4,10 +4,10 @@ import { HomeComponent } from '../account/home/home.component';
 import { LoginComponent } from '../account/login/login.component';
 import { RegisterComponent } from '../account/register/register.component';
 import { ChangePasswordComponent } from '../account/change-password/change-password.component';
-import { BoardServiceComponent } from '../dashboard/boards/boardservice/boardservice.component';
 import { HomeDashboardComponent } from '../dashboard/home-dashboard/home-dashboard.component';
-import { CreateBoardComponent } from '../dashboard/boards/boardservice/create-board/create-board.component';
-import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-service/minimalquest-service.component.component';
+import { BoardServiceComponent } from '../dashboard/boards/board-service/board-service.component';
+import { CreateBoardComponent } from '../dashboard/boards/board-service/create-board/create-board.component';
+import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-service/minimalquest-service.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BoardData } from '../../models/board.model';
 import { PagedResult } from '../../models/paged-result.model';
@@ -18,9 +18,15 @@ export class BoardServiceComponent implements OnInit {
   totalPages: number = 0;
   noResultsMessage: string = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      const boardId = params['id'];
+      if (boardId && confirm('Are you sure you want to delete this board?')) {
+        this.removeBoard(boardId);
+      }
+    });
     this.getData();
   }
 
@@ -64,16 +70,21 @@ export class BoardServiceComponent implements OnInit {
   }
 
   editBoard(board: BoardData) {
-   
   }
 
-  removeBoard(board: BoardData) {
-    const url = `https://localhost:7126/bugtracker/board/${board.id}`;
+  removeBoard(boardId: number) {
+    const url = `https://localhost:7126/bugtracker/board/${boardId}`;
+    const confirmDelete = confirm('Are you sure you want to delete this board?');
 
-    this.http.delete<BoardData>(url)
-      .subscribe((result: BoardData) => { 
-        
-    });
+    if (confirmDelete) {
+      this.http.delete<BoardData>(url)
+        .subscribe(() => {
+          this.router.navigate(['/boards']);
+          this.getData();
+        });
+    } else {
+      this.router.navigate(['/boards']);
+    }
   }
 
   previousPage() {
@@ -92,7 +103,7 @@ export class BoardServiceComponent implements OnInit {
 
   onPageSizeChange(event: Event) {
     const pageSize = (event.target as HTMLSelectElement).value;
-    this.pageSize =+ pageSize;
+    this.pageSize = + pageSize;
     this.pageNumber = 1;
     this.getData();
   }

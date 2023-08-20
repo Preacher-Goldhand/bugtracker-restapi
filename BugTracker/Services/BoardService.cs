@@ -16,8 +16,6 @@ namespace BugTracker.Services
 
         PagedResult<BoardWithoutQuestsDto> GetAll(PaginationQuery boardQuery);
 
-        BoardDto GetById(int id);
-
         void Update(int id, UpdateBoardDto dto);
 
         void Delete(int id);
@@ -81,20 +79,6 @@ namespace BugTracker.Services
 
             var pagedResult = new PagedResult<BoardWithoutQuestsDto>(boardDtos, totalItemsCount, boardQuery.PageSize, boardQuery.PageNumber);
             return pagedResult;
-        }
-
-        public BoardDto GetById(int id)
-        {
-            var board = _dbContext
-               .Boards
-               .Include(b => b.BoardTasks)
-               .FirstOrDefault(b => b.Id == id);
-
-            if (board == null)
-                throw new NotFoundException("Board not found");
-
-            var boardDto = _mapper.Map<BoardDto>(board);
-            return boardDto;
         }
 
         public void Update(int id, UpdateBoardDto dto)
