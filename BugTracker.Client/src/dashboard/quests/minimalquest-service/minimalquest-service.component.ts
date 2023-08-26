@@ -7,8 +7,8 @@ import { MinimalQuestData } from '../../models/minimal-quest.model';
 
 @Component({
   selector: 'app-minimalquest-service.component',
-  templateUrl: './minimalquest-service.component.component.html',
-  styleUrls: ['./minimalquest-service.component.component.css']
+  templateUrl: './minimalquest-service.component.html',
+  styleUrls: ['./minimalquest-service.component.css']
 })
 export class MinimalQuestServiceComponent implements OnInit {
   boardDetails: DetailedBoardData = {

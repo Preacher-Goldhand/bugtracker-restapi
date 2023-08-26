@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="sidebar">
+    <div class="brand">
+      <p>BUGTRACKER</p>
+    </div>
+    <nav>
+      <a routerLink="/boards">BOARDS</a>
+      <a routerLink="/employees">EMPLOYEES</a>
+      <a routerLink="/quests">FILES</a>
+    </nav>
+  </div>
+  <div class="content">
+    <form *ngFor="let board of boards">
+      <!-- Iterate through the boards array -->
+      <label for="boardName">Nowa nazwa tablicy:</label>
+      <input type="text" id="boardName" [(ngModel)]="board.updatedBoards.Name" name="boardName">
+      <button (click)="updateBoard(boards)">Zaktualizuj tablicę</button>
+    </form>
+  </div>
+</div>

@@ -29,7 +29,7 @@
             <td>{{ board.dateOfCreation | date:'dd/MM/yyyy' }}</td>
             <td class="actions">
               <button (click)="showBoardDetails(board)">Details</button>
-              <button (click)="editBoard(board)">Edit</button>
+              <button (click)="editBoard(board.id)">Edit</button>
               <button (click)="removeBoard(board.id)">Remove</button>
             </td>
           </tr>

@@ -14,6 +14,7 @@ import { HomeDashboardComponent } from '../dashboard/home-dashboard/home-dashboa
 import { BoardServiceComponent } from '../dashboard/boards/board-service/board-service.component';
 import { CreateBoardComponent } from '../dashboard/boards/board-service/create-board/create-board.component';
 import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-service/minimalquest-service.component';
+import { UpdateBoardComponent } from '../dashboard/boards/update-board/update-board.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-s
     BoardServiceComponent,
     CreateBoardComponent,
     MinimalQuestServiceComponent,
+    UpdateBoardComponent,
 
   ],
   imports: [

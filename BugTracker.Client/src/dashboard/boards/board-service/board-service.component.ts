@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BoardData } from '../../models/board.model';
 import { PagedResult } from '../../models/paged-result.model';
 import { DetailedBoardData } from '../../models/detailed-board.model';
+import { UpdateBoardData } from '../../models/update-board.model';
 
 @Component({
   selector: 'app-boardservice',
-  templateUrl: './boardservice.component.html',
-  styleUrls: ['./boardservice.component.css']
+  templateUrl: './board-service.component.html',
+  styleUrls: ['./board-service.component.css']
 })
 export class BoardServiceComponent implements OnInit {
   boards: BoardData[] = [];
@@ -69,7 +70,14 @@ export class BoardServiceComponent implements OnInit {
       });
   }
 
-  editBoard(board: BoardData) {
+  editBoard(boardId: number) {
+    const url = `https://localhost:7126/bugtracker/board/${boardId}`;
+
+    // Construct the route with parameter as an object
+    const navigationExtras: NavigationExtras = {
+      queryParams: { boardId } 
+    };
+    this.router.navigate(['/edit-board'], navigationExtras);
   }
 
   removeBoard(boardId: number) {
