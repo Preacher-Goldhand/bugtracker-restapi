@@ -10,7 +10,7 @@ export class LogoutComponent {
   constructor(private router: Router) { }
 
   logout(): void {
-    sessionStorage.removeItem('jwt');
+    sessionStorage.clear();
     this.router.navigate(['/login']);
   }
 }
