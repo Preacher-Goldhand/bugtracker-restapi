@@ -28,16 +28,12 @@ export class LoginComponent {
 
     this.http.post('https://localhost:7126/bugtracker/account/login', loginData, { responseType: 'text' }).subscribe(
       (response) => {
-        // Obsługa sukcesu logowania
-        console.log('Success:', response);
         sessionStorage.setItem('jwt', response);
-        console.log(sessionStorage.getItem('jwt'));
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['dashboard']);
         });
       },
       (error) => {
-        // Obsługa błędu logowania
         console.error('Fail:', error.error);
       }
     );

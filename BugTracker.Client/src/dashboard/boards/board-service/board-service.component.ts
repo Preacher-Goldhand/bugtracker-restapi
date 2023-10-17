@@ -19,7 +19,9 @@ export class BoardServiceComponent implements OnInit {
   totalPages: number = 0;
   noResultsMessage: string = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {
+    
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -72,12 +74,7 @@ export class BoardServiceComponent implements OnInit {
 
   editBoard(boardId: number) {
     const url = `https://localhost:7126/bugtracker/board/${boardId}`;
-
-    // Construct the route with parameter as an object
-    const navigationExtras: NavigationExtras = {
-      queryParams: { boardId } 
-    };
-    this.router.navigate(['/edit-board'], navigationExtras);
+    this.router.navigate(['/edit-board', boardId]);
   }
 
   removeBoard(boardId: number) {

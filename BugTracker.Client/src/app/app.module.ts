@@ -15,6 +15,7 @@ import { BoardServiceComponent } from '../dashboard/boards/board-service/board-s
 import { CreateBoardComponent } from '../dashboard/boards/board-service/create-board/create-board.component';
 import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-service/minimalquest-service.component';
 import { UpdateBoardComponent } from '../dashboard/boards/update-board/update-board.component';
+import { LogoutComponent } from '../account/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UpdateBoardComponent } from '../dashboard/boards/update-board/update-bo
     LoginComponent,
     RegisterComponent,
     ChangePasswordComponent,
+    LogoutComponent,
     HomeDashboardComponent,
     BoardServiceComponent,
     CreateBoardComponent,
