@@ -1,15 +1,4 @@
-<div class="container">
-  <div class="sidebar">
-    <div class="brand">
-      <p>BUGTRACKER</p>
-    </div>
-    <nav>
-      <a routerLink="/login">LOGIN</a>
-      <a routerLink="/register">REGISTER</a>
-      <a routerLink="/change-password">CHANGE PASSWORD</a>
-    </nav>
-  </div>
-  <div class="content">
+<div class="content">
     <div class="form-container">
       <form class="login-form" (ngSubmit)="login()" #loginForm="ngForm">
         <div class="form-group">
@@ -23,5 +12,4 @@
         <button class="btn" type="submit" [disabled]="!loginForm.form.valid">Login</button>
       </form>
     </div>
-  </div>
 </div>

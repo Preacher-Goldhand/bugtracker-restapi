@@ -1,0 +1,14 @@
+export interface Task {
+  id?: number;
+  name: string;
+  description: string;
+  category: string;
+  dateOfCreation: Date;
+  proposalDate: Date;
+  loggedTime: number;
+  priority: number;
+  taskStatus: string;
+  assignerId: number;
+  assigneeId: number;
+  boardId: number;
+}

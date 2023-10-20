@@ -17,8 +17,6 @@ namespace BugTracker.Services
 
         string GenerateJwt(LoginEmployeeDto dto);
 
-        //void Logout(string jwt);
-
         void ChangePassword(ChangePasswordDto dto);
     }
 
@@ -91,9 +89,9 @@ namespace BugTracker.Services
             return jwtToken;
         }
 
-        //public void Logout(string jwt)
+        //public void Logout()
         //{
-        //    _activeJwtTokens.Remove(jwt);
+        //    _httpContextAccessor.HttpContext.Response.Cookies.Delete("jwt");
         //}
 
         public void ChangePassword(ChangePasswordDto dto)
@@ -112,7 +110,6 @@ namespace BugTracker.Services
                 throw new BadRequestException("Invalid password");
             }
 
-            // Zmień hasło na nowe
             var newHashedPassword = _passwordHasher.HashPassword(employee, dto.NewPasswordHash);
             employee.EmployeePasswordHash = newHashedPassword;
 

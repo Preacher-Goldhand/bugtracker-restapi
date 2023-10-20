@@ -9,9 +9,14 @@ import { LoginComponent } from '../account/login/login.component'
 import { HomeComponent } from '../account/home/home.component'
 import { RegisterComponent } from '../account/register/register.component';
 import { ChangePasswordComponent } from '../account/change-password/change-password.component';
-import { BoardServiceComponent } from '../dashboard/boards/boardservice/boardservice.component';
+import { DatePipe } from '@angular/common';
 import { HomeDashboardComponent } from '../dashboard/home-dashboard/home-dashboard.component';
-import { CreateBoardComponent } from '../dashboard/boards/boardservice/create-board/create-board.component';
+import { BoardServiceComponent } from '../dashboard/boards/board-service/board-service.component';
+import { CreateBoardComponent } from '../dashboard/boards/board-service/create-board/create-board.component';
+import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-service/minimalquest-service.component';
+import { UpdateBoardComponent } from '../dashboard/boards/update-board/update-board.component';
+import { LogoutComponent } from '../account/logout/logout.component';
+import { AddTaskComponent } from './dashboard/tasks/add-task/add-task.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +25,13 @@ import { CreateBoardComponent } from '../dashboard/boards/boardservice/create-bo
     LoginComponent,
     RegisterComponent,
     ChangePasswordComponent,
+    LogoutComponent,
     HomeDashboardComponent,
     BoardServiceComponent,
     CreateBoardComponent,
+    MinimalQuestServiceComponent,
+    UpdateBoardComponent,
+    AddTaskComponent,
 
   ],
   imports: [
@@ -33,7 +42,8 @@ import { CreateBoardComponent } from '../dashboard/boards/boardservice/create-bo
   ],
   providers: [
     // Rejestruj interceptror JwtInterceptor
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

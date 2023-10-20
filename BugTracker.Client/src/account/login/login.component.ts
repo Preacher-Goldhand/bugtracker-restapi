@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginData } from './login.model';
 import { Router } from '@angular/router';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,9 @@ export class LoginComponent {
   email: string = "";
   password: string = "";
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private accountService: AccountService) {
+    this.accountService.setUserLogin(false);
+  }
 
   login() {
     const loginData: LoginData = {
@@ -28,16 +31,14 @@ export class LoginComponent {
 
     this.http.post('https://localhost:7126/bugtracker/account/login', loginData, { responseType: 'text' }).subscribe(
       (response) => {
-        // Obsługa sukcesu logowania
-        console.log('Success:', response);
         sessionStorage.setItem('jwt', response);
-        console.log(sessionStorage.getItem('jwt'));
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['dashboard']);
         });
+        this.accountService.setUserDetails(response);
+        this.accountService.setUserLogin(true);
       },
       (error) => {
-        // Obsługa błędu logowania
         console.error('Fail:', error.error);
       }
     );

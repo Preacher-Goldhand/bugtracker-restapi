@@ -1,0 +1,44 @@
+<div class="content">
+  <div class="search">
+    <input type="text" [(ngModel)]="searchPhrase" />
+    <button class="search-button" (click)="searchBoard()">Search</button>
+  </div>
+  <button *ngIf="!noResultsMessage" class="add-board" (click)="addBoard()">New Board</button>
+  <div *ngIf="!noResultsMessage" class="board-list">
+    <table class="board-table">
+      <thead>
+        <tr>
+          <th>Board</th>
+          <th>Date of Creation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let board of boards">
+          <td>{{ board.name }}</td>
+          <td>{{ board.dateOfCreation | date:'dd/MM/yyyy' }}</td>
+          <td class="actions">
+            <button (click)="showBoardDetails(board)">Details</button>
+            <button (click)="editBoard(board.id)">Edit</button>
+            <button (click)="removeBoard(board.id)">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="noResultsMessage" class="error-message">{{ noResultsMessage }}</div>
+  <div class="pagination" *ngIf="totalPages > 0">
+    <button class="previous-page" (click)="previousPage()">&#171;&#171;</button>
+    <div class="page-dropdown">
+      <button class="current-page">{{ pageNumber }}</button>
+    </div>
+    <button class="next-page" (click)="nextPage()">&#187;&#187;</button>
+    <div class="records-per-page">
+      <label for="recordsPerPage">Records per page:</label>
+      <select id="recordsPerPage" (change)="onPageSizeChange($event)" [(ngModel)]="pageSize">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
+    </div>
+  </div>
+</div>

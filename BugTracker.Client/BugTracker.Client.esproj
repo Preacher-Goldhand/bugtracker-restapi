@@ -14,7 +14,11 @@
     <Folder Include="src\app\interceptors\" />
     <Folder Include="src\dashboard\employees\" />
     <Folder Include="src\dashboard\files\" />
-    <Folder Include="src\dashboard\home\" />
-    <Folder Include="src\dashboard\quests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptConfiguration Remove="src\dashboard\home\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="src\dashboard\home\**" />
   </ItemGroup>
 </Project>
