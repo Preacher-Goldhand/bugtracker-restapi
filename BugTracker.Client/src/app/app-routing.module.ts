@@ -10,6 +10,7 @@ import { CreateBoardComponent } from '../dashboard/boards/board-service/create-b
 import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-service/minimalquest-service.component';
 import { UpdateBoardComponent } from '../dashboard/boards/update-board/update-board.component';
 import { LogoutComponent } from '../account/logout/logout.component';
+import {AddTaskComponent} from "../dashboard/tasks/add-task/add-task.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'add-board', component: CreateBoardComponent },
   { path: 'board-details/:id', component: MinimalQuestServiceComponent },
   { path: 'edit-board/:id', component: UpdateBoardComponent },
+  { path: 'add-task/:id', component: AddTaskComponent }
 ];
 
 @NgModule({

@@ -27,6 +27,13 @@ namespace BugTracker.Controllers
             return Ok(employeeDtos);
         }
 
+        [HttpGet("short")]
+        public ActionResult<IEnumerable<EmployeeShortDto>> GetAllEmployeesShort()
+        {
+            var employeeShortDtos = _employeeService.GetShortAll();
+            return Ok(employeeShortDtos);
+        }
+
         [HttpGet("{id}")]
         public ActionResult<EmployeeDto> GetEmployeeById([FromRoute] int id)
         {

@@ -1,8 +1,7 @@
-.container {
+.custom-container {
     display: flex;
     height: 100vh;
 }
-  
 .sidebar {
     background-color: #333;
     width: 200px;
@@ -11,7 +10,7 @@
     align-items: center;
     padding-top: 20px;
 }
-  
+
 nav a {
     text-decoration: none;
     color: whitesmoke;
@@ -35,10 +34,15 @@ nav a:hover {
     background-color: #333;
     padding: 20px;
 }
-  
+
 .brand p {
     color: #fff;
     font-size: 24px;
     font-weight: bold;
     margin-top: 0;
+}
+
+.content {
+  width: 100%;
+  padding: 10px;
 }

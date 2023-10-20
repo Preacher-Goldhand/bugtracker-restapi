@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace BugTracker.Entities
 {
     public class BugTrackerDbContext : DbContext
     {
         public BugTrackerDbContext(DbContextOptions<BugTrackerDbContext> options) : base(options)
-        {
-        }
+        { }
 
         public DbSet<Board> Boards { get; set; }
         public DbSet<Quest> Tasks { get; set; }

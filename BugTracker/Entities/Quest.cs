@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BugTracker.Entities
 {
     public class Quest
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -26,16 +26,16 @@ namespace BugTracker.Entities
         [MaxLength(20)]
         public string TaskStatus { get; set; }
 
-        public int? AssignerId { get; set; }
+        public int AssignerId { get; set; }
 
         public virtual Employee Assigner { get; set; }
 
-        public int? AssigneeId { get; set; }
+        public int AssigneeId { get; set; }
 
         public virtual Employee Assignee { get; set; }
 
         public int BoardId { get; set; }
 
-        public Board Board { get; set; }
+        public virtual Board Board { get; set; }
     }
 }

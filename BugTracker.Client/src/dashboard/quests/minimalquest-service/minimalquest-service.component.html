@@ -1,72 +1,90 @@
-<div class="content">
-  <div *ngIf="boardDetails">
-    <h2>{{ boardDetails.name }}</h2>
-    <div class="search">
-      <input type="text" [(ngModel)]="searchPhrase" />
-      <button class="search-button" (click)="searchQuest()">Search</button>
+<div *ngIf="boardDetails">
+  <h2>{{ boardDetails.name }}</h2>
+  <div class="row align-items-center">
+    <div class="col-6">
+      <input type="text" class="form-control form-control-sm" [(ngModel)]="searchPhrase" />
     </div>
-    <button *ngIf="!noResultsMessage" class="add-quest" (click)="addQuest()">New TaskModel</button>
-    <table *ngIf="!noResultsMessage" class="minimalquest-table">
-      <thead *ngIf="filteredQuests.length === 0 || noResultsMessage !== ''">
-        <tr>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Priority</th>
-          <th>TaskModel Status</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="filteredQuests.length === 0 && noResultsMessage === ''">
-        <tr *ngFor="let task of boardDetails.boardTasks">
-          <td>{{ task.name }}</td>
-          <td>{{ task.category }}</td>
-          <td>{{ task.priority }}</td>
-          <td>{{ task.taskStatus }}</td>
-          <td class="actions">
-            <button (click)="showQuestDetails()">Details</button>
-            <button (click)="editQuest()">Edit</button>
-            <button (click)="removeQuest()">Remove</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="minimalquest-table" *ngIf="filteredQuests.length > 0">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Priority</th>
-          <th>TaskModel Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let task of filteredQuests">
-          <td>{{ task.name }}</td>
-          <td>{{ task.category }}</td>
-          <td>{{ task.priority }}</td>
-          <td>{{ task.taskStatus }}</td>
-          <td class="actions">
-            <button (click)="showQuestDetails()">Details</button>
-            <button (click)="editQuest()">Edit</button>
-            <button (click)="removeQuest()">Remove</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="col-6">
+      <button class="btn btn-success btn-sm" (click)="searchQuest()">Search</button>
+    </div>
   </div>
-  <div *ngIf="noResultsMessage" class="error-message">{{ noResultsMessage }}</div>
-  <div *ngIf="!noResultsMessage" class="pagination">
-    <button class="previous-page" (click)="previousPage()">&#171;&#171;</button>
-    <div class="page-dropdown">
-      <button class="current-page">{{ pageNumber }}</button>
+  <div class="row mt-2 mb-2">
+    <div class="col">
+      <button type="button" class="btn btn-outline-primary btn-sm"
+              *ngIf="!noResultsMessage" (click)="addQuest()">Add New Task</button>
     </div>
-      <button class="next-page" (click)="nextPage()">&#187;&#187;</button>
-      <div class="records-per-page">
-        <label for="recordsPerPage">Records per page:</label>
-        <select id="recordsPerPage" [(ngModel)]="pageSize" (change)="updatePage()">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-        </select>
-      </div>
+  </div>
+
+  <table *ngIf="!noResultsMessage" class="table table-sm table-striped">
+    <thead *ngIf="filteredQuests.length === 0 || noResultsMessage !== ''">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Category</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Assignee</th>
+        <th scope="col">Assigner</th>
+        <th scope="col">Task Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="filteredQuests.length === 0 && noResultsMessage === ''">
+      <tr *ngFor="let task of boardDetails.boardTasks">
+        <td>{{ task.name }}</td>
+        <td>{{ taskCategoriesMap.get(task.category) }}</td>
+        <td>{{ taskPrioritiesMap.get(task.priority) }}</td>
+        <td>{{ task.assignee.firstName }} {{ task.assignee.lastName }}</td>
+        <td>{{ task.assigner.firstName }} {{ task.assigner.lastName }}</td>
+        <td>{{ taskStatusesMap.get(task.taskStatus) }}</td>
+        <td class="actions">
+          <button type="button" class="btn btn-primary btn-sm m-1" (click)="showQuestDetails()">Details</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="editQuest()">Edit</button>
+          <button type="button" class="btn btn-primary btn-sm m-1" (click)="removeQuest()">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table table-sm table-striped" *ngIf="filteredQuests.length > 0">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Category</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Assignee</th>
+        <th scope="col">Assigner</th>
+        <th scope="col">Task Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of filteredQuests">
+        <td>{{ task.name }}</td>
+        <td>{{ taskCategoriesMap.get(task.category) }}</td>
+        <td>{{ taskPrioritiesMap.get(task.priority) }}</td>
+        <td>{{ task.assignee.firstName }} {{ task.assignee.lastName }}</td>
+        <td>{{ task.assigner.firstName }} {{ task.assigner.lastName }}</td>
+        <td>{{ taskStatusesMap.get(task.taskStatus) }}</td>
+        <td class="actions">
+          <button type="button" class="btn btn-primary btn-sm m-1" (click)="showQuestDetails()">Details</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="editQuest()">Edit</button>
+          <button type="button" class="btn btn-primary btn-sm m-1" (click)="removeQuest()">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="noResultsMessage" class="error-message">{{ noResultsMessage }}</div>
+<div *ngIf="!noResultsMessage" class="pagination">
+  <button class="previous-page" (click)="previousPage()">&#171;&#171;</button>
+  <div class="page-dropdown">
+    <button class="current-page">{{ pageNumber }}</button>
+  </div>
+    <button class="next-page" (click)="nextPage()">&#187;&#187;</button>
+    <div class="records-per-page">
+      <label for="recordsPerPage">Records per page:</label>
+      <select id="recordsPerPage" [(ngModel)]="pageSize" (change)="updatePage()">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
     </div>
   </div>

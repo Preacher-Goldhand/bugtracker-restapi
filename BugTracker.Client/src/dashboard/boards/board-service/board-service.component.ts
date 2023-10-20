@@ -19,9 +19,7 @@ export class BoardServiceComponent implements OnInit {
   totalPages: number = 0;
   noResultsMessage: string = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {
-    
-  }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {

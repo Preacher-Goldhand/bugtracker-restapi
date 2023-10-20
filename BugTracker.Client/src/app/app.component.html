@@ -1,21 +1,23 @@
 <ng-template [ngIf]="userLogin" [ngIfElse]="loggedOut">
-    <div class="container">
+    <div class="custom-container">
         <div class="sidebar">
-        <div class="brand">
-            <p>BUGTRACKER</p>
+          <div class="brand">
+              <p>BUGTRACKER</p>
+          </div>
+          <nav>
+              <a routerLink="/boards">BOARDS</a>
+              <a routerLink="/employees">EMPLOYEES</a>
+              <a routerLink="/quests">FILES </a>
+              <a routerLink="/logout">LOGOUT</a>
+          </nav>
         </div>
-        <nav>
-            <a routerLink="/boards">BOARDS</a>
-            <a routerLink="/employees">EMPLOYEES</a>
-            <a routerLink="/quests">FILES </a>
-            <a routerLink="/logout">LOGOUT</a>
-        </nav>
+        <div class="content">
+          <router-outlet></router-outlet>
         </div>
-        <router-outlet></router-outlet>
     </div>
 </ng-template>
 <ng-template #loggedOut>
-    <div class="container">
+    <div class="custom-container">
         <div class="sidebar">
           <div class="brand">
             <p>BUGTRACKER</p>
@@ -26,7 +28,9 @@
             <a routerLink="/change-password">CHANGE PASSWORD</a>
           </nav>
         </div>
-        <router-outlet></router-outlet>
+        <div class="content">
+          <router-outlet></router-outlet>
+        </div>
       </div>
 </ng-template>
 

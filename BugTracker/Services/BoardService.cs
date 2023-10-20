@@ -87,8 +87,11 @@ namespace BugTracker.Services
         {
             var board = _dbContext
                .Boards
-               .Include(b => b.BoardTasks)
-               .FirstOrDefault(b => b.Id == id);
+               .Include(p => p.BoardTasks)
+                    .ThenInclude(p => p.Assignee)
+               .Include(p => p.BoardTasks)
+                    .ThenInclude(p => p.Assigner)
+               .FirstOrDefault(p => p.Id == id);
 
             if (board == null)
                 throw new NotFoundException("Board not found");

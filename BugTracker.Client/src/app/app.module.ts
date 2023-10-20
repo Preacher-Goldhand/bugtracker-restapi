@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from '../app/interceptors/jwt.interceptor';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../account/login/login.component'
 import { HomeComponent } from '../account/home/home.component'
@@ -16,7 +16,8 @@ import { CreateBoardComponent } from '../dashboard/boards/board-service/create-b
 import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-service/minimalquest-service.component';
 import { UpdateBoardComponent } from '../dashboard/boards/update-board/update-board.component';
 import { LogoutComponent } from '../account/logout/logout.component';
-import { AddTaskComponent } from './dashboard/tasks/add-task/add-task.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {AddTaskComponent} from "../dashboard/tasks/add-task/add-task.component";
 
 @NgModule({
   declarations: [
@@ -31,14 +32,14 @@ import { AddTaskComponent } from './dashboard/tasks/add-task/add-task.component'
     CreateBoardComponent,
     MinimalQuestServiceComponent,
     UpdateBoardComponent,
-    AddTaskComponent,
-
+    AddTaskComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgbModule,
   ],
   providers: [
     // Rejestruj interceptror JwtInterceptor

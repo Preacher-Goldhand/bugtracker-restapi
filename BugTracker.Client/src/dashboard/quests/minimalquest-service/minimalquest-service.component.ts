@@ -1,9 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { DetailedBoardData } from '../../models/detailed-board.model';
 import { MinimalQuestData } from '../../models/minimal-quest.model';
+import {TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap} from "../../models/consts";
 
 @Component({
   selector: 'app-minimalquest-service.component',
@@ -24,18 +25,26 @@ export class MinimalQuestServiceComponent implements OnInit {
   pageNumber: number = 1;
   totalPages: number = 0;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private datePipe: DatePipe) { }
+  taskStatusesMap = TaskStatusesMap;
+  taskCategoriesMap = TaskCategoriesMap;
+  taskPrioritiesMap = TaskPrioritiesMap;
+
+  private _boardId!: number;
+
+  constructor(private route: ActivatedRoute,
+              private http: HttpClient,
+              private datePipe: DatePipe,
+              private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const boardId = params['id'];
-      this.getData(boardId);
+      this._boardId = params['id'];
+      this.getData(this._boardId);
     });
   }
 
   getData(boardId: number) {
     const url = `https://localhost:7126/bugtracker/board/${boardId}`;
-
     this.http.get<DetailedBoardData>(url)
       .subscribe((result: DetailedBoardData) => {
         this.boardDetails = result;
@@ -55,7 +64,7 @@ export class MinimalQuestServiceComponent implements OnInit {
       task.priority.toString().includes(this.searchPhrase) ||
       task.taskStatus.toLowerCase().includes(this.searchPhrase.toLowerCase())
     );
- 
+
     if (this.filteredQuests.length === 0) {
       this.noResultsMessage = 'No results found for the entered search phrase';
     } else {
@@ -64,8 +73,8 @@ export class MinimalQuestServiceComponent implements OnInit {
     this.updatePagedQuests();
   }
 
-  addQuest() { 
-    
+  addQuest() {
+    this.router.navigate(['/add-task', this._boardId]);
   }
   showQuestDetails() { }
   editQuest() { }

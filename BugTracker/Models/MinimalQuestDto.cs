@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using BugTracker.Entities;
 
 namespace BugTracker.Models
 {
@@ -17,5 +18,13 @@ namespace BugTracker.Models
         [Required]
         [MaxLength(20)]
         public string TaskStatus { get; set; }
+
+        public int AssignerId { get; set; }
+
+        public virtual EmployeeDto Assigner { get; set; }
+
+        public int AssigneeId { get; set; }
+
+        public virtual EmployeeDto Assignee { get; set; }
     }
 }

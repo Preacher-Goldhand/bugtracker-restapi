@@ -1,1 +1,103 @@
-<p>add-task works!</p>
+<div class="content">
+  <form (ngSubmit)="addTask()" #taskForm="ngForm">
+    <div class="form-row">
+      <div class="col mb-3">
+        <label for="name">Name</label>
+        <input type="text" class="form-control form-control-sm" id="name" name="name"
+               [(ngModel)]="task.name" #name="ngModel" required />
+        <div *ngIf="name.errors?.['required'] && (name.dirty || name.touched)" class="error">
+          Name is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col mb-3">
+        <label for="category">Category</label>
+        <select class="form-control form-control-sm" id="category" name="category"
+                [(ngModel)]="task.category" #category="ngModel" required>
+          <option value=""></option>
+          <option *ngFor="let category of taskCategories" value="{{category}}">{{taskCategoriesMap.get(category)}}</option>
+        </select>
+        <div *ngIf="category.errors?.['required'] && (category.dirty || category.touched)" class="error">
+          Category is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col mb-3">
+        <label for="status">Status</label>
+        <select class="form-control form-control-sm" id="status" name="status"
+                [(ngModel)]="task.taskStatus" #status="ngModel" required>
+          <option value=""></option>
+          <option *ngFor="let status of taskStatuses" value="{{status}}">{{taskStatusesMap.get(status)}}</option>
+        </select>
+        <div *ngIf="status.errors?.['required'] && (status.dirty || status.touched)" class="error">
+          Status is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col mb-3">
+        <label for="priority">Priority</label>
+        <select class="form-control form-control-sm" id="priority" name="priority"
+                [(ngModel)]="task.priority" #priority="ngModel" required>
+          <option value=""></option>
+          <option *ngFor="let priority of taskPriorities" value="{{priority}}">{{taskPrioritiesMap.get(priority)}}</option>
+        </select>
+        <div *ngIf="priority.errors?.['required'] && (priority.dirty || priority.touched)" class="error">
+          Priority is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col mb-3">
+        <label for="assignee">Assignee</label>
+        <select class="form-control form-control-sm" id="assignee" name="assignee"
+                [(ngModel)]="task.assigneeId" #assignee="ngModel" required>
+          <option value=""></option>
+          <option *ngFor="let employee of employeesData" value="{{employee.id}}">{{employee.fullName}}</option>
+        </select>
+        <div *ngIf="assignee.errors?.['required'] && (assignee.dirty || assignee.touched)" class="error">
+          Assignee is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col mb-3">
+        <label for="loggedTime">Logged Time</label>
+        <input type="number" class="form-control form-control-sm" id="loggedTime" name="loggedTime"
+               [(ngModel)]="task.loggedTime" #loggedTime="ngModel" required />
+        <div *ngIf="loggedTime.errors?.['required'] && (loggedTime.dirty || loggedTime.touched)" class="error">
+          Logged Time is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col mb-3">
+        <label for="description">Description</label>
+        <textarea class="form-control form-control-sm"
+                  rows="3"
+                  maxlength="500"
+                  name="description"
+                  id="description" [(ngModel)]="task.description"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col mb-3">
+        <label for="proposalDate">Proposal Date</label>
+        <input type="date" class="form-control form-control-sm" id="proposalDate" name="proposalDate"
+               [(ngModel)]="task.proposalDate" #proposalDate="ngModel" required />
+        <div *ngIf="proposalDate.errors?.['required'] && (proposalDate.dirty || proposalDate.touched)" class="error">
+          Proposal Date is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col mb-3 text-end">
+        <button type="submit" class="btn btn-sm btn-success m-1"
+                [disabled]="taskForm.invalid">Save</button>
+        <button type="button" class="btn btn-sm btn-danger m-1" onclick="cancelTask()">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

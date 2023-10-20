@@ -14,6 +14,8 @@ namespace BugTracker.Services
     {
         PagedResult<EmployeeDto> GetAll(PaginationQuery employeeQuery);
 
+        IEnumerable<EmployeeShortDto> GetShortAll();
+
         EmployeeDto GetById(int id);
 
         void Update(int id, UpdateEmployeeDto dto);
@@ -65,6 +67,12 @@ namespace BugTracker.Services
 
             var pagedResult = new PagedResult<EmployeeDto>(employeeDtos, totalItemsCount, employeeQuery.PageSize, employeeQuery.PageNumber);
             return pagedResult;
+        }
+
+        public IEnumerable<EmployeeShortDto> GetShortAll()
+        {
+            var employees = _dbContext.Employees.Where(p => p.EmployeeStatus.Equals("Active")).ToList();
+            return _mapper.Map<IEnumerable<EmployeeShortDto>>(employees);
         }
 
         public EmployeeDto GetById(int id)

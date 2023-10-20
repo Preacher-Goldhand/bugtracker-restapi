@@ -25,7 +25,7 @@ namespace BugTracker.Controllers
         {
             var id = _questService.Create(boardId, dto);
 
-            return Created($"/bugtracker/board/{boardId}/task/{id}", null);
+            return Ok(id);
         }
 
         //[HttpGet]
