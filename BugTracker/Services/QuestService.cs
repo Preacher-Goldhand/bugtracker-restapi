@@ -15,6 +15,10 @@ namespace BugTracker.Services
 
         //PagedResult<MinimalQuestDto> GetAll(int boardId, PaginationQuery questQuery);
 
+        TaskComment? AddComment(int taskId, CreateTaskCommentDto dto);
+
+        IEnumerable<TaskCommentDto> GetAllComments(int taskId);
+
         QuestDto GetById(int boardId, int questId);
 
         void Update(int boardId, int questId, UpdateQuestDto dto);
@@ -51,6 +55,27 @@ namespace BugTracker.Services
 
             _dbContext.SaveChanges();
             return quest.Id;
+        }
+
+        public TaskComment? AddComment(int taskId, CreateTaskCommentDto dto)
+        {
+            var taskComment = _mapper.Map<TaskComment>(dto);
+            taskComment.TaskId = taskId;
+
+            _dbContext.TaskComments.Add(taskComment);
+            _dbContext.SaveChanges();
+
+            return _dbContext.TaskComments.Find(taskComment.Id);
+        }
+
+        public IEnumerable<TaskCommentDto> GetAllComments(int taskId)
+        {
+            var comments = _dbContext.TaskComments
+                .Include(p => p.UserCreated)
+                .Where(p => p.TaskId == taskId).ToList();
+
+            var commentsDto = _mapper.Map<List<TaskCommentDto>>(comments);
+            return commentsDto;
         }
 
         //public PagedResult<MinimalQuestDto> GetAll(int boardId, PaginationQuery questQuery)

@@ -1,0 +1,16 @@
+.task-comment-container {
+  border-bottom: 1px solid #bbbb;
+}
+.task-comment-header {
+  display: flex;
+  flex-direction: column;
+}
+.task-comment-header span:last-child {
+  font-size: 9px;
+  font-style: italic;
+  color: grey;
+}
+.task-comment-body {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

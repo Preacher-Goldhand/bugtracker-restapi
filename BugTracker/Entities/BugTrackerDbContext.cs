@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace BugTracker.Entities
 {
@@ -11,43 +10,26 @@ namespace BugTracker.Entities
         public DbSet<Board> Boards { get; set; }
         public DbSet<Quest> Tasks { get; set; }
         public DbSet<Employee> Employees { get; set; }
-
         public DbSet<Role> Roles { get; set; }
+        public DbSet<TaskComment> TaskComments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Required elements of Boards table
-            modelBuilder.Entity<Board>()
-                .Property(b => b.Name)
-                .IsRequired()
-                .HasMaxLength(50);
-
-            // Required elements of Tasks table
-            modelBuilder.Entity<Quest>()
-                .Property(t => t.Name)
-                .IsRequired()
-                .HasMaxLength(50);
-
-            modelBuilder.Entity<Quest>()
-                .Property(t => t.TaskStatus)
+            modelBuilder
+                .Entity<Quest>()
+                .HasOne(p => p.Assignee)
+                .WithMany()
+                .HasForeignKey("AssigneeId")
+                .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 
-            // Required elements of Employees table
-            modelBuilder.Entity<Employee>()
-                .Property(e => e.FirstName)
-                .IsRequired()
-                .HasMaxLength(50);
-
-            modelBuilder.Entity<Employee>()
-                .Property(e => e.LastName)
-                .IsRequired()
-                .HasMaxLength(50);
-
-            // Required elements of Roles table
-            modelBuilder.Entity<Role>()
-                .Property(r => r.Name)
-                .IsRequired()
-                .HasMaxLength(50);
+            modelBuilder
+                .Entity<Quest>()
+                .HasOne(p => p.Assigner)
+                .WithMany()
+                .HasForeignKey("AssignerId")
+                .OnDelete(DeleteBehavior.NoAction)
+                .IsRequired();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

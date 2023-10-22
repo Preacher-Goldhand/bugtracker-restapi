@@ -73,12 +73,16 @@ export class MinimalQuestServiceComponent implements OnInit {
     this.updatePagedQuests();
   }
 
-  addQuest() {
-    this.router.navigate(['/add-task', this._boardId]);
+  addQuest(): void {
+    this.router.navigate(['/task-add', this._boardId]);
   }
   showQuestDetails() { }
   editQuest() { }
   removeQuest() { }
+
+  showComments(taskId: number): void {
+    this.router.navigate(['/task-comment', this._boardId, taskId]);
+  }
 
   updatePage() {
     this.pageNumber = 1;

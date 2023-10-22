@@ -10,11 +10,11 @@ import {AccountService} from "../../../app/services/account.service";
 import {TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap} from "../../models/consts";
 
 @Component({
-  selector: 'app-add-task',
-  templateUrl: './add-task.component.html',
-  styleUrls: ['./add-task.component.css']
+  selector: 'app-task-add',
+  templateUrl: './task-add.component.html',
+  styleUrls: ['./task-add.component.css']
 })
-export class AddTaskComponent implements OnInit {
+export class TaskAddComponent implements OnInit {
   task: Task = {
     boardId: 0,
     assigneeId: 0,
@@ -67,9 +67,7 @@ export class AddTaskComponent implements OnInit {
         next: value => {
           this.router.navigate(['/board-details', this._boardId]);
         },
-        error: err => {
-
-        }
+        error: err => {}
       })
   }
 

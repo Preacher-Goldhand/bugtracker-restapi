@@ -17,7 +17,8 @@ import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-s
 import { UpdateBoardComponent } from '../dashboard/boards/update-board/update-board.component';
 import { LogoutComponent } from '../account/logout/logout.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {AddTaskComponent} from "../dashboard/tasks/add-task/add-task.component";
+import {TaskAddComponent} from "../dashboard/tasks/task-add/task-add.component";
+import {TaskCommentComponent} from "../dashboard/tasks/task-comment/task-comment.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {AddTaskComponent} from "../dashboard/tasks/add-task/add-task.component";
     CreateBoardComponent,
     MinimalQuestServiceComponent,
     UpdateBoardComponent,
-    AddTaskComponent
+    TaskAddComponent,
+    TaskCommentComponent
   ],
   imports: [
     BrowserModule,

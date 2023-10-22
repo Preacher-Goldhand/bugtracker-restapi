@@ -35,6 +35,20 @@ namespace BugTracker.Controllers
         //    return Ok(questDtos);
         //}
 
+        [HttpPost("{taskId}/comment")]
+        public ActionResult AddComment([FromRoute] int taskId, [FromBody] CreateTaskCommentDto dto)
+        {
+            var taskComment = _questService.AddComment(taskId, dto);
+            return Ok(taskComment?.Id);
+        }
+
+        [HttpGet("{taskId}/comments")]
+        public ActionResult<IEnumerable<TaskCommentDto>> GetAllComments([FromRoute] int taskId)
+        {
+            var taskComments = _questService.GetAllComments(taskId);
+            return Ok(taskComments);
+        }
+
         [HttpGet("{questId}")]
         public ActionResult<QuestDto> GetQuestById([FromRoute] int boardId, [FromRoute] int questId)
         {
