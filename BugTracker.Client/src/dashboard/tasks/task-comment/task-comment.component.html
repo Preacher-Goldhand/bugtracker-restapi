@@ -7,7 +7,14 @@
           <span>{{ comment.userCreated?.firstName ?? '' }} {{ comment.userCreated?.lastName ?? '' }}</span>
           <span>{{ comment.dateOfCreation | date: "yyyy-MM-dd hh:mm" }}</span>
         </div>
-        <div class="task-comment-body">{{ comment.description }}</div>
+        <div class="task-comment-body">
+          <div>
+            {{ comment.description }}
+          </div>
+          <div>
+            <app-task-image *ngIf="comment.fileName" [fileName]="comment.fileName"></app-task-image>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -25,7 +32,15 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="col mb-3 text-end">
+          <div class="col mb-3">
+            <div class="input-group">
+              <input class="form-control form-control-sm" type="file"
+              (change)="onFileSelected($event)" #fileUpload />
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col mb-3 text-start">
             <button type="submit" class="btn btn-sm btn-success m-1"
                     [disabled]="commentForm.invalid">Add</button>
             <button type="button" class="btn btn-sm btn-danger m-1" (click)="cancelComments()">Cancel</button>

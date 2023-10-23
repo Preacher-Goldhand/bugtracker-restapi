@@ -9,6 +9,8 @@
         public DateTime DateOfCreation { get; set; }
 
         public int UserCreatedId { get; set; }
+
+        public string? FileName { get; set; }
     }
 }
 

@@ -19,6 +19,7 @@ import { LogoutComponent } from '../account/logout/logout.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {TaskAddComponent} from "../dashboard/tasks/task-add/task-add.component";
 import {TaskCommentComponent} from "../dashboard/tasks/task-comment/task-comment.component";
+import {TaskImageComponent} from "../dashboard/tasks/task-image/task-image.component";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {TaskCommentComponent} from "../dashboard/tasks/task-comment/task-comment
     MinimalQuestServiceComponent,
     UpdateBoardComponent,
     TaskAddComponent,
-    TaskCommentComponent
+    TaskCommentComponent,
+    TaskImageComponent
   ],
   imports: [
     BrowserModule,

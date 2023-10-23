@@ -20,14 +20,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.4" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.12" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="BugTracker.IntegrationTests" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="StaticFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="appsettings.json">

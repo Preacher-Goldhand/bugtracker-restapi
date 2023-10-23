@@ -51,7 +51,16 @@ namespace BugTracker.Models
                 .ForMember(m => m.Description, c => c.MapFrom(s => s.Description))
                 .ForMember(m => m.DateOfCreation, c => c.MapFrom(s => s.DateOfCreation))
                 .ForMember(m => m.UserCreatedId, c => c.MapFrom(s => s.UserCreatedId))
-                .ForMember(m => m.UserCreated, c => c.MapFrom(s => s.UserCreated));
+                .ForMember(m => m.UserCreated, c => c.MapFrom(s => s.UserCreated))
+                .ForMember(m => m.FileName, c => c.MapFrom(s => s.FileName));
+
+            CreateMap<TaskCommentDto, TaskComment>()
+                .ForMember(m => m.Id, c => c.MapFrom(s => s.Id))
+                .ForMember(m => m.Description, c => c.MapFrom(s => s.Description))
+                .ForMember(m => m.DateOfCreation, c => c.MapFrom(s => s.DateOfCreation))
+                .ForMember(m => m.UserCreatedId, c => c.MapFrom(s => s.UserCreatedId))
+                .ForMember(m => m.UserCreated, c => c.MapFrom(s => s.UserCreated))
+                .ForMember(m => m.FileName, c => c.MapFrom(s => s.FileName));
         }
     }
 }

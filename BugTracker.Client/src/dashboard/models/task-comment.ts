@@ -7,4 +7,5 @@ export interface TaskComment {
   dateOfCreation: Date;
   userCreatedId: number;
   userCreated?: Employee;
+  fileName?: string;
 }

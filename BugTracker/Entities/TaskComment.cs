@@ -23,6 +23,9 @@ namespace BugTracker.Entities
         public int UserCreatedId { get; set; }
 
         public virtual Employee UserCreated { get; set; }
+
+        [MaxLength(200)]
+        public string? FileName { get; set; }
     }
 }
 

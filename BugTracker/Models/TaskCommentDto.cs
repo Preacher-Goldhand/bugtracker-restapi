@@ -1,11 +1,8 @@
-﻿using System;
-using BugTracker.Entities;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using BugTracker.Entities;
 
 namespace BugTracker.Models
 {
-	public class TaskCommentDto
+    public class TaskCommentDto
 	{
         public int Id { get; set; }
 
@@ -18,6 +15,8 @@ namespace BugTracker.Models
         public int UserCreatedId { get; set; }
 
         public virtual Employee UserCreated { get; set; }
+
+        public string? FileName { get; set; }
     }
 }
 

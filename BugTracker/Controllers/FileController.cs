@@ -6,12 +6,12 @@ namespace BugTracker.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("file")]
+    [Route("bugtracker/file")]
     public class FileController : ControllerBase
     {
         [HttpGet]
         [ResponseCache(Duration = 1200, VaryByQueryKeys = new[] { "fileName" })]
-        public ActionResult GetFile([FromQuery] string fileName)
+        public ActionResult<string> GetFile([FromQuery] string fileName)
         {
             var rootPath = Directory.GetCurrentDirectory();
 
@@ -24,11 +24,16 @@ namespace BugTracker.Controllers
             }
 
             var contentProvider = new FileExtensionContentTypeProvider();
-            contentProvider.TryGetContentType(fileName, out string contentType);
+            if (!contentProvider.TryGetContentType(fileName, out var contentType))
+            {
+                contentType = "application/octet-stream";
+            };
 
             var fileContent = System.IO.File.ReadAllBytes(filePath);
 
-            return File(fileContent, contentType, fileName);
+            return $"data:{contentType};base64,{Convert.ToBase64String(fileContent)}";
+
+            //return File(fileContent, contentType, fileName);
         }
 
         [HttpPost]
@@ -39,6 +44,7 @@ namespace BugTracker.Controllers
                 var rootPath = Directory.GetCurrentDirectory();
                 var fileName = file.FileName;
                 var fullPath = $"{rootPath}/StaticFiles/{fileName}";
+
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
@@ -64,6 +70,6 @@ namespace BugTracker.Controllers
             System.IO.File.Delete(filePath);
 
             return Ok();
-        }
+        }       
     }
 }
