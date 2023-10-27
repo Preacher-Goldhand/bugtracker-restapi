@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BugTracker.Migrations
 {
     [DbContext(typeof(BugTrackerDbContext))]
-    [Migration("20231026185321_Init")]
+    [Migration("20231027161927_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -138,6 +138,9 @@ namespace BugTracker.Migrations
 
                     b.Property<DateTime>("PropsalDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("StoryPoints")
+                        .HasColumnType("int");
 
                     b.Property<string>("TaskStatus")
                         .IsRequired()

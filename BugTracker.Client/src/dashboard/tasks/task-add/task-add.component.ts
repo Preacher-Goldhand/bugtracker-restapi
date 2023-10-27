@@ -23,6 +23,7 @@ export class TaskAddComponent implements OnInit {
     dateOfCreation: new Date(),
     description: "",
     loggedTime: 0,
+    storyPoints: 4,
     name: "",
     priority: TaskPriority.LOW,
     proposalDate: new Date(),
@@ -33,6 +34,7 @@ export class TaskAddComponent implements OnInit {
   taskCategories: TaskCategory[] = [TaskCategory.ADMINISTRATIVE_TASK, TaskCategory.ANALYTIC_TASK, TaskCategory.BUGFIX_TASK,
                                     TaskCategory.DEVELOPMENT_TASK, TaskCategory.DEVOPS_TASK, TaskCategory.TESTING_TASK];
   taskPriorities: TaskPriority[] = [TaskPriority.LOW, TaskPriority.HIGH, TaskPriority.CRITICAL];
+  taskStoryPoints: number[] = [4, 8, 10, 14, 20, 30, 40, 100];
 
   employeesData: EmployeeShortData[] = [];
 

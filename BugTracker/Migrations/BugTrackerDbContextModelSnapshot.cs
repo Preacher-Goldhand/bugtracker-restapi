@@ -136,6 +136,9 @@ namespace BugTracker.Migrations
                     b.Property<DateTime>("PropsalDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("StoryPoints")
+                        .HasColumnType("int");
+
                     b.Property<string>("TaskStatus")
                         .IsRequired()
                         .HasMaxLength(20)

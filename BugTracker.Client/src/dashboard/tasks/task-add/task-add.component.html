@@ -51,6 +51,19 @@
     </div>
     <div class="form-row">
       <div class="col mb-3">
+        <label for="storyPoints">Story Points</label>
+        <select class="form-control form-control-sm" id="storyPoints" name="storyPoints"
+                [(ngModel)]="task.storyPoints" #storyPoints="ngModel" required>
+          <option value=""></option>
+          <option *ngFor="let storyPoint of taskStoryPoints" [value]="storyPoint">{{storyPoint}}</option>
+        </select>
+        <div *ngIf="storyPoints.errors?.['required'] && (storyPoints.dirty || storyPoints.touched)" class="error">
+          StoryPoints is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col mb-3">
         <label for="assignee">Assignee</label>
         <select class="form-control form-control-sm" id="assignee" name="assignee"
                 [(ngModel)]="task.assigneeId" #assignee="ngModel" required>
@@ -95,7 +108,9 @@
     <div class="form-row">
       <div class="col mb-3 text-end">
         <button type="submit" class="btn btn-sm btn-success m-1"
-                [disabled]="taskForm.invalid">Save</button>
+                [disabled]="taskForm.invalid">
+          Save
+        </button>
         <button type="button" class="btn btn-sm btn-danger m-1" onclick="cancelTask()">Cancel</button>
       </div>
     </div>

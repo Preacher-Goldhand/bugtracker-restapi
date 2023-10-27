@@ -7,6 +7,7 @@ export interface Task {
   proposalDate: Date;
   loggedTime: number;
   priority: number;
+  storyPoints: number,
   taskStatus: string;
   assignerId: number;
   assigneeId: number;

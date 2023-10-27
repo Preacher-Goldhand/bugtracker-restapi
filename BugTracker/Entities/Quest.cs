@@ -21,6 +21,7 @@ namespace BugTracker.Entities
         public DateTime PropsalDate { get; set; }
         public float LoggedTime { get; set; }
         public int Priority { get; set; }
+        public int StoryPoints { get; set; }
 
         [Required]
         [MaxLength(20)]
