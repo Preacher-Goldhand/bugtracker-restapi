@@ -76,7 +76,6 @@ export class MinimalQuestServiceComponent implements OnInit {
   addQuest(): void {
     this.router.navigate(['/task-add', this._boardId]);
   }
-  showQuestDetails() { }
   editQuest() { }
   removeQuest() { }
 

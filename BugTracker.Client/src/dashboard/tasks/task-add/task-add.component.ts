@@ -19,7 +19,7 @@ export class TaskAddComponent implements OnInit {
     boardId: 0,
     assigneeId: 0,
     assignerId: 0,
-    category: TaskCategory.DEVELOPMENT_TASK,
+    category: TaskCategory.ADMINISTRATIVE_TASK,
     dateOfCreation: new Date(),
     description: "",
     loggedTime: 0,
@@ -29,8 +29,9 @@ export class TaskAddComponent implements OnInit {
     taskStatus: TaskStatus.TO_DO
   };
 
-  taskStatuses: TaskStatus[] = [TaskStatus.TO_DO];
-  taskCategories: TaskCategory[] = [TaskCategory.DEVELOPMENT_TASK];
+  taskStatuses: TaskStatus[] = [TaskStatus.TO_DO, TaskStatus.IN_PROGRESS, TaskStatus.IN_TESTING, TaskStatus.DONE, TaskStatus.CLOSED];
+  taskCategories: TaskCategory[] = [TaskCategory.ADMINISTRATIVE_TASK, TaskCategory.ANALYTIC_TASK, TaskCategory.BUGFIX_TASK,
+                                    TaskCategory.DEVELOPMENT_TASK, TaskCategory.DEVOPS_TASK, TaskCategory.TESTING_TASK];
   taskPriorities: TaskPriority[] = [TaskPriority.LOW, TaskPriority.HIGH, TaskPriority.CRITICAL];
 
   employeesData: EmployeeShortData[] = [];
