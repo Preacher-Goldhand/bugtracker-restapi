@@ -6,6 +6,7 @@ using BugTracker.Models.CreateDtos;
 using BugTracker.Models.Pagination;
 using BugTracker.Models.UpdateDtos;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BugTracker.Services
 {
@@ -14,7 +15,7 @@ namespace BugTracker.Services
         int Create(int boardId, CreateQuestDto dto);
 
         //PagedResult<MinimalQuestDto> GetAll(int boardId, PaginationQuery questQuery);
-
+      
         TaskComment? AddComment(int taskId, CreateTaskCommentDto dto);
 
         IEnumerable<TaskCommentDto> GetAllComments(int taskId);
