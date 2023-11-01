@@ -34,6 +34,7 @@ namespace BugTracker.Models
                 .ForMember(dest => dest.AssignerLastName, opt => opt.MapFrom(src => src.Assigner.LastName));
 
             CreateMap<Quest, MinimalQuestDto>();
+            CreateMap<Quest, MyTaskDto>();
 
             CreateMap<Employee, EmployeeShortDto>()
                 .ForMember(m => m.Id, c => c.MapFrom(s => s.Id))

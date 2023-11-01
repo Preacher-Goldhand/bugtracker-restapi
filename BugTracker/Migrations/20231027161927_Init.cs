@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BugTracker.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -73,7 +73,8 @@ namespace BugTracker.Migrations
                     TaskId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     DateOfCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserCreatedId = table.Column<int>(type: "int", nullable: false)
+                    UserCreatedId = table.Column<int>(type: "int", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -99,6 +100,7 @@ namespace BugTracker.Migrations
                     PropsalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LoggedTime = table.Column<float>(type: "real", nullable: false),
                     Priority = table.Column<int>(type: "int", nullable: false),
+                    StoryPoints = table.Column<int>(type: "int", nullable: false),
                     TaskStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     AssignerId = table.Column<int>(type: "int", nullable: false),
                     AssigneeId = table.Column<int>(type: "int", nullable: false),

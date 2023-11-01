@@ -1,4 +1,4 @@
-import {Employee} from "./employee";
+import { Employee } from './employee'; 
 
 export interface MinimalQuestData {
   id: number;
@@ -8,4 +8,8 @@ export interface MinimalQuestData {
   taskStatus: string;
   assigner: Employee;
   assignee: Employee;
+  loggedTime: number; 
+  storyPoints: number; 
+  proposalDate: Date; 
+  description: string; 
 }

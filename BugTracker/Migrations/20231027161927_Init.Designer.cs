@@ -12,17 +12,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BugTracker.Migrations
 {
     [DbContext(typeof(BugTrackerDbContext))]
-    [Migration("20221217194141_PasswordHashRefactor")]
-    partial class PasswordHashRefactor
+    [Migration("20231027161927_Init")]
+    partial class Init
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "7.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("BugTracker.Entities.Board", b =>
                 {
@@ -30,7 +31,7 @@ namespace BugTracker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateOfCreation")
                         .HasColumnType("datetime2");
@@ -51,7 +52,7 @@ namespace BugTracker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Department")
                         .IsRequired()
@@ -101,14 +102,12 @@ namespace BugTracker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AssigneeId")
-                        .IsRequired()
+                    b.Property<int>("AssigneeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AssignerId")
-                        .IsRequired()
+                    b.Property<int>("AssignerId")
                         .HasColumnType("int");
 
                     b.Property<int>("BoardId")
@@ -140,6 +139,9 @@ namespace BugTracker.Migrations
                     b.Property<DateTime>("PropsalDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("StoryPoints")
+                        .HasColumnType("int");
+
                     b.Property<string>("TaskStatus")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -162,16 +164,48 @@ namespace BugTracker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("BugTracker.Entities.TaskComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("FileName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserCreatedId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserCreatedId");
+
+                    b.ToTable("TaskComments");
                 });
 
             modelBuilder.Entity("BugTracker.Entities.Employee", b =>
@@ -188,13 +222,15 @@ namespace BugTracker.Migrations
             modelBuilder.Entity("BugTracker.Entities.Quest", b =>
                 {
                     b.HasOne("BugTracker.Entities.Employee", "Assignee")
-                        .WithMany("AssigneeTasks")
+                        .WithMany()
                         .HasForeignKey("AssigneeId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("BugTracker.Entities.Employee", "Assigner")
-                        .WithMany("AssignerTasks")
+                        .WithMany()
                         .HasForeignKey("AssignerId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("BugTracker.Entities.Board", "Board")
@@ -210,16 +246,20 @@ namespace BugTracker.Migrations
                     b.Navigation("Board");
                 });
 
+            modelBuilder.Entity("BugTracker.Entities.TaskComment", b =>
+                {
+                    b.HasOne("BugTracker.Entities.Employee", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("UserCreatedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserCreated");
+                });
+
             modelBuilder.Entity("BugTracker.Entities.Board", b =>
                 {
                     b.Navigation("BoardTasks");
-                });
-
-            modelBuilder.Entity("BugTracker.Entities.Employee", b =>
-                {
-                    b.Navigation("AssigneeTasks");
-
-                    b.Navigation("AssignerTasks");
                 });
 #pragma warning restore 612, 618
         }

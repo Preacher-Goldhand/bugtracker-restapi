@@ -5,12 +5,12 @@
       <input type="text" class="form-control form-control-sm" [(ngModel)]="searchPhrase" />
     </div>
     <div class="col-6">
-      <button class="btn btn-success btn-sm" (click)="searchQuest()">Search</button>
+      <button class="btn btn-outline-primary btn-sm" (click)="searchQuest()">Search</button>
     </div>
   </div>
   <div class="row mt-2 mb-2">
     <div class="col">
-      <button type="button" class="btn btn-outline-primary btn-sm"
+      <button type="button" class="btn btn-success btn-sm" 
               *ngIf="!noResultsMessage" (click)="addQuest()">Add New Task</button>
     </div>
   </div>
@@ -21,9 +21,13 @@
         <th scope="col">Name</th>
         <th scope="col">Category</th>
         <th scope="col">Priority</th>
+        <th scope="col">Logged Time</th>
+        <th scope="col">Story Points</th>
         <th scope="col">Assignee</th>
         <th scope="col">Assigner</th>
+        <th scope="col">Proposal Date</th>
         <th scope="col">Task Status</th>
+        <th scope="col">Description</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -32,13 +36,16 @@
         <td>{{ task.name }}</td>
         <td>{{ taskCategoriesMap.get(task.category) }}</td>
         <td>{{ taskPrioritiesMap.get(task.priority) }}</td>
+        <td>{{ task.loggedTime }}</td>
+        <td>{{ task.storyPoints }}</td>
         <td>{{ task.assignee.firstName }} {{ task.assignee.lastName }}</td>
         <td>{{ task.assigner.firstName }} {{ task.assigner.lastName }}</td>
+        <td>{{ task.proposalDate }}</td>
         <td>{{ taskStatusesMap.get(task.taskStatus) }}</td>
+        <td>{{ task.description }}</td>
         <td class="actions">
-          <button type="button" class="btn btn-primary btn-sm m-1" (click)="showQuestDetails()">Details</button>
-          <button type="button" class="btn btn-primary btn-sm" (click)="editQuest()">Edit</button>
-          <button type="button" class="btn btn-primary btn-sm m-1" (click)="removeQuest()">Remove</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="editQuest(task.id)">Edit</button>
+          <button type="button" class="btn btn-danger btn-sm m-1" (click)="removeQuest(task.id)">Remove</button>
           <button type="button" class="btn btn-dark btn-sm m-1" (click)="showComments(task.id)">Comments</button>
         </td>
       </tr>
@@ -50,9 +57,13 @@
         <th scope="col">Name</th>
         <th scope="col">Category</th>
         <th scope="col">Priority</th>
+        <th scope="col">Logged Time</th>
+        <th scope="col">Story Points</th>
         <th scope="col">Assignee</th>
         <th scope="col">Assigner</th>
+        <th scope="col">Proposal Date</th>
         <th scope="col">Task Status</th>
+        <th scope="col">Description</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -61,13 +72,16 @@
         <td>{{ task.name }}</td>
         <td>{{ taskCategoriesMap.get(task.category) }}</td>
         <td>{{ taskPrioritiesMap.get(task.priority) }}</td>
+        <td>{{ task.loggedTime }}</td>
+        <td>{{ task.storyPoints }}</td>
         <td>{{ task.assignee.firstName }} {{ task.assignee.lastName }}</td>
         <td>{{ task.assigner.firstName }} {{ task.assigner.lastName }}</td>
+        <td>{{ task.proposalDate }}</td>
         <td>{{ taskStatusesMap.get(task.taskStatus) }}</td>
+        <td>{{ task.description }}</td>
         <td class="actions">
-          <button type="button" class="btn btn-primary btn-sm m-1" (click)="showQuestDetails()">Details</button>
-          <button type="button" class="btn btn-primary btn-sm" (click)="editQuest()">Edit</button>
-          <button type="button" class="btn btn-primary btn-sm m-1" (click)="removeQuest()">Remove</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="editQuest(task.id)">Edit</button>
+          <button type="button" class="btn btn-danger btn-sm m-1" (click)="removeQuest(task.id)">Remove</button>
           <button type="button" class="btn btn-dark btn-sm m-1" (click)="showComments(task.id)">Comments</button>
         </td>
       </tr>

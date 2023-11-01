@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { DetailedBoardData } from '../../models/detailed-board.model';
-import { MinimalQuestData } from '../../models/minimal-quest.model';
 import {TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap} from "../../models/consts";
+import { MinimalQuestData } from '../../models/minimal-quest.model';
 
 @Component({
   selector: 'app-minimalquest-service.component',
@@ -38,7 +38,7 @@ export class MinimalQuestServiceComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this._boardId = params['id'];
+      this._boardId = params['id'];;
       this.getData(this._boardId);
     });
   }
@@ -76,9 +76,23 @@ export class MinimalQuestServiceComponent implements OnInit {
   addQuest(): void {
     this.router.navigate(['/task-add', this._boardId]);
   }
-  showQuestDetails() { }
-  editQuest() { }
-  removeQuest() { }
+  editQuest(taskId: number) {
+    this.router.navigate(['/task-comment', this._boardId, taskId]);
+  }
+  removeQuest(taskId: number) {
+    const url = `https://localhost:7126/bugtracker/board/${this._boardId}/task/${taskId}`;
+    const confirmDelete = confirm('Are you sure you want to delete this task');
+
+    if (confirmDelete) {
+      this.http.delete<DetailedBoardData>(url)
+        .subscribe(() => {
+          this.router.navigate(['/boards']);
+          this.getData(this._boardId);
+        });
+    } else {
+      this.router.navigate(['/boards']);
+    }
+  }
 
   showComments(taskId: number): void {
     this.router.navigate(['/task-comment', this._boardId, taskId]);

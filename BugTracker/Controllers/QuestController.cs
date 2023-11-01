@@ -5,6 +5,7 @@ using BugTracker.Models.UpdateDtos;
 using BugTracker.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BugTracker.Controllers
 {
@@ -34,6 +35,7 @@ namespace BugTracker.Controllers
         //    var questDtos = _questService.GetAll(boardId, questQuery);
         //    return Ok(questDtos);
         //}
+
 
         [HttpPost("{taskId}/comment")]
         public ActionResult AddComment([FromRoute] int taskId, [FromBody] CreateTaskCommentDto dto)

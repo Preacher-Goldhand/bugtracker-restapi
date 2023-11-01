@@ -23,6 +23,7 @@
         public float LoggedTime { get; set; }
 
         public int Priority { get; set; }
+        public int StoryPoints { get; set; }
 
         public int BoardId { get; set; }
     }
