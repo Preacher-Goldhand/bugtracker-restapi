@@ -17,11 +17,11 @@ namespace BugTracker.Entities
         {
             modelBuilder
                 .Entity<Quest>()
-                .HasMany(e => e.TaskComments)
-                .WithOne(e => e.Quest)
-                .HasForeignKey(e => e.TaskId)
+                .HasOne(p => p.Assignee)
+                .WithMany()
+                .HasForeignKey("AssigneeId")
                 .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired(false);
+                .IsRequired();
 
             modelBuilder
                 .Entity<Quest>()

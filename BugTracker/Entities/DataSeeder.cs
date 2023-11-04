@@ -79,7 +79,17 @@
                                 EmployeePhoneNumber = "753159852",
                                 EmployeeStatus = "Active",
                             },
-                            AssigneeName = "Jan Kowalski",
+                            Assignee = new Employee()
+                            {
+                                FirstName = "John",
+                                LastName = "Snow",
+                                Department = "DevTool Department",
+                                EmployeeEmail = "jsnow@test.com",
+                                EmployeePasswordHash = "password",
+                                RoleId = 2,
+                                EmployeePhoneNumber = "753159852",
+                                EmployeeStatus = "Active",
+                            },
                             Board = new Board()
                             {
                                 Name = "MyBoard"

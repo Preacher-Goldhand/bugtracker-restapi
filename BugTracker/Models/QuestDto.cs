@@ -26,6 +26,7 @@ namespace BugTracker.Models
 
         public string AssignerFirstName { get; set; }
         public string AssignerLastName { get; set; }
-        public string AssigneeName { get; set; }
+        public string AssigneeFirstName { get; set; }
+        public string AssigneeLastName { get; set; }
     }
 }

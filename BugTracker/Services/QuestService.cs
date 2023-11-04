@@ -106,7 +106,7 @@ namespace BugTracker.Services
         public QuestDto GetById(int boardId, int questId)
         {
             var quest = _dbContext.Tasks
-
+                .Include(t => t.Assignee)
                 .Include(t => t.Assigner)
                 .Include(t => t.Board)
                 .FirstOrDefault(t => t.Id == questId && t.Board.Id == boardId);
@@ -136,7 +136,13 @@ namespace BugTracker.Services
                 throw new NotFoundException("Assigner not found");
             }
             quest.AssignerId = assigner.Id;
-            quest.AssigneeName = dto.AssigneeName;
+
+            var assignee = _dbContext.Employees.FirstOrDefault(e => e.FirstName == dto.AssigneeFirstName && e.LastName == dto.AssigneeLastName);
+            if (assignee == null)
+            {
+                throw new NotFoundException("Assignee not found");
+            }
+            quest.AssigneeId = assignee.Id;
 
             _dbContext.SaveChanges();
         }

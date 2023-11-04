@@ -30,13 +30,10 @@ namespace BugTracker.Entities
         public int AssignerId { get; set; }
         public virtual Employee Assigner { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        public string AssigneeName { get; set; }
+        public int AssigneeId { get; set; }
+        public virtual Employee Assignee { get; set; }
 
         public int BoardId { get; set; }
         public virtual Board Board { get; set; }
-
-        public ICollection<TaskComment> TaskComments { get; set; } = new List<TaskComment>();
     }
 }

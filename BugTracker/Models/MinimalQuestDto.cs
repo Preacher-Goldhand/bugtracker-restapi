@@ -26,8 +26,8 @@ namespace BugTracker.Models
 
         public virtual EmployeeDto Assigner { get; set; }
 
-        public string AssigneeName { get; set; }
+        public int AssigneeId { get; set; }
 
-        public ICollection<TaskCommentDto> TaskComments { get; set; } = new List<TaskCommentDto>();
+        public virtual EmployeeDto Assignee { get; set; }
     }
 }
