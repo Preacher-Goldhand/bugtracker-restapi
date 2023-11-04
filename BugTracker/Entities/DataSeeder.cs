@@ -62,12 +62,12 @@
                         {
                             Name = "MyTask",
                             Description = "MyTask description",
-                            Category = "Development Task",
+                            Category = "DEVELOPMENT_TASK",
                             DateOfCreation = new DateTime(2022, 1, 1), //yyy-mm-dd
-                            PropsalDate = new DateTime(2022, 1, 31),   //yyy-mm-dd
+                            ProposalDate = new DateTime(2022, 1, 31),   //yyy-mm-dd
                             LoggedTime = 1.5f,
                             Priority = 3,
-                            TaskStatus = "ToDo",
+                            TaskStatus = "TO_DO",
                             Assigner = new Employee()
                             {
                                 FirstName = "John",
@@ -79,17 +79,7 @@
                                 EmployeePhoneNumber = "753159852",
                                 EmployeeStatus = "Active",
                             },
-                            Assignee = new Employee()
-                            {
-                                FirstName = "Emma",
-                                LastName = "Watson",
-                                Department = "DevTool Department",
-                                EmployeeEmail = "ewatson@test.com",
-                                EmployeePasswordHash = "password123",
-                                RoleId = 1,
-                                EmployeePhoneNumber = "700159002",
-                                EmployeeStatus = "Active"
-                            },
+                            AssigneeName = "Jan Kowalski",
                             Board = new Board()
                             {
                                 Name = "MyBoard"

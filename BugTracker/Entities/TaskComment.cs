@@ -10,9 +10,6 @@ namespace BugTracker.Entities
         public int Id { get; set; }
 
         [Required]
-        public int TaskId { get; set; }
-
-        [Required]
         [MaxLength(500)]
         public string Description { get; set; }
 
@@ -26,6 +23,10 @@ namespace BugTracker.Entities
 
         [MaxLength(200)]
         public string? FileName { get; set; }
+
+        [Required]
+        public int TaskId { get; set; }
+        public Quest? Quest { get; set; }
     }
 }
 

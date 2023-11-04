@@ -15,7 +15,7 @@ namespace BugTracker.Models
         public string Category { get; set; }
 
         public DateTime DateOfCreation { get; set; }
-        public DateTime PropsalDate { get; set; }
+        public DateTime ProposalDate { get; set; }
         public float LoggedTime { get; set; }
         public int Priority { get; set; }
         public int StoryPoints { get; set; }
@@ -26,7 +26,6 @@ namespace BugTracker.Models
 
         public string AssignerFirstName { get; set; }
         public string AssignerLastName { get; set; }
-        public string AssigneeFirstName { get; set; }
-        public string AssigneeLastName { get; set; }
+        public string AssigneeName { get; set; }
     }
 }

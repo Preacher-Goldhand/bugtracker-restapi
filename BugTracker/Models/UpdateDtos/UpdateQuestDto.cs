@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BugTracker.Models.UpdateDtos
 {
@@ -17,7 +12,7 @@ namespace BugTracker.Models.UpdateDtos
         [MaxLength(20)]
         public string Category { get; set; }
 
-        public DateTime PropsalDate { get; set; }
+        public DateTime ProposalDate { get; set; }
         public float LoggedTime { get; set; }
         public int Priority { get; set; }
 
@@ -28,7 +23,6 @@ namespace BugTracker.Models.UpdateDtos
         public string AssignerFirstName { get; set; }
         public string AssignerLastName { get; set; }
         public int AssigneeId { get; set; }
-        public string AssigneeFirstName { get; set; }
-        public string AssigneeLastName { get; set; }
+        public string AssigneeName { get; set; }
     }
 }

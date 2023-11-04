@@ -12,13 +12,15 @@
 
         public DateTime DateOfCreation { get; set; }
 
-        public DateTime PropsalDate { get; set; }
+        public DateTime ProposalDate { get; set; }
 
         public string TaskStatus { get; set; }
 
         public int AssignerId { get; set; }
 
         public int AssigneeId { get; set; }
+
+        public string AssigneeName { get; set; }
 
         public float LoggedTime { get; set; }
 

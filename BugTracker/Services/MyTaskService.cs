@@ -26,8 +26,7 @@ namespace BugTracker.Services
             var loggedInUserId = int.Parse(user.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             var allTasks = _dbContext.Tasks
-                .Where(b => b.AssigneeId == loggedInUserId || b.AssignerId == loggedInUserId)
-                .Include(t => t.Assignee)
+                .Where(b => b.AssignerId == loggedInUserId)
                 .Include(t => t.Assigner);
 
             var tasks = allTasks
@@ -49,11 +48,6 @@ namespace BugTracker.Services
                 {
                     FirstName = task.Assigner != null ? task.Assigner.FirstName : null,
                     LastName = task.Assigner != null ? task.Assigner.LastName : null,
-                },
-                Assignee = new EmployeeShortDto
-                {
-                    FirstName = task.Assignee != null ? task.Assignee.FirstName : null,
-                    LastName = task.Assignee != null ? task.Assignee.LastName : null,
                 }
             }).ToList();
 

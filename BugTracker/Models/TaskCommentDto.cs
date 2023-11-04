@@ -14,7 +14,7 @@ namespace BugTracker.Models
 
         public int UserCreatedId { get; set; }
 
-        public virtual Employee UserCreated { get; set; }
+        public virtual EmployeeDto UserCreated { get; set; }
 
         public string? FileName { get; set; }
     }

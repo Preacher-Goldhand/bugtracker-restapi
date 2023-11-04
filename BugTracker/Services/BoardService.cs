@@ -88,9 +88,10 @@ namespace BugTracker.Services
             var board = _dbContext
                .Boards
                .Include(p => p.BoardTasks)
-                    .ThenInclude(p => p.Assignee)
-               .Include(p => p.BoardTasks)
                     .ThenInclude(p => p.Assigner)
+                .Include(p => p.BoardTasks)
+                    .ThenInclude(p => p.TaskComments)
+                    .ThenInclude(p => p.UserCreated)
                .FirstOrDefault(p => p.Id == id);
 
             if (board == null)

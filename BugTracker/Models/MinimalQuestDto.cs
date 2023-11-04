@@ -1,4 +1,6 @@
-﻿namespace BugTracker.Models
+﻿using BugTracker.Entities;
+
+namespace BugTracker.Models
 {
     public class MinimalQuestDto
     {
@@ -8,6 +10,14 @@
 
         public string Category { get; set; }
 
+        public int StoryPoints { get; set; }
+
+        public float LoggedTime { get; set; }
+
+        public DateTime ProposalDate { get; set; }
+
+        public string Description { get; set; }
+
         public int Priority { get; set; }
 
         public string TaskStatus { get; set; }
@@ -16,8 +26,8 @@
 
         public virtual EmployeeDto Assigner { get; set; }
 
-        public int AssigneeId { get; set; }
+        public string AssigneeName { get; set; }
 
-        public virtual EmployeeDto Assignee { get; set; }
+        public ICollection<TaskCommentDto> TaskComments { get; set; } = new List<TaskCommentDto>();
     }
 }
