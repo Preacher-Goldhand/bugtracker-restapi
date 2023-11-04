@@ -65,8 +65,17 @@
     <div class="form-row">
       <div class="col mb-3">
         <label for="assignee">Assignee</label>
-        <input type="text" class="form-control form-control-sm" id="assignee" name="assignee"
-               [(ngModel)]="task.assigneeName" #assignee="ngModel" required />
+        <select2 
+          class="form-control form-control-sm"
+          styleMode="noStyle"
+          displaySearchStatus="always"
+          resettable="true"
+          [data]="selectGroupEmployeesData"
+          [(ngModel)]="task.assigneeId"
+          #assignee="ngModel"
+          id="assignee"
+          name="assignee"></select2>
+
         <div *ngIf="assignee.errors?.['required'] && (assignee.dirty || assignee.touched)" class="error">
           Assignee is required.
         </div>

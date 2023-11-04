@@ -38,7 +38,7 @@
           <td>{{ taskPrioritiesMap.get(task.priority) }}</td>
           <td>{{ task.loggedTime }}</td>
           <td>{{ task.storyPoints }}</td>
-          <td>{{ task.assigneeName }}</td>
+          <td>{{ task.assignee.firstName }} {{ task.assignee.lastName }}</td>
           <td>{{ task.assigner.firstName }} {{ task.assigner.lastName }}</td>
           <td>{{ task.proposalDate | date: 'yyyy-MM-dd' }}</td>
           <td>{{ taskStatusesMap.get(task.taskStatus) }}</td>
@@ -90,7 +90,7 @@
           <td>{{ taskPrioritiesMap.get(task.priority) }}</td>
           <td>{{ task.loggedTime }}</td>
           <td>{{ task.storyPoints }}</td>
-          <td>{{ task.assigneeName }}</td>
+          <td>{{ task.assignee.firstName }} {{ task.assignee.lastName }}</td>
           <td>{{ task.assigner.firstName }} {{ task.assigner.lastName }}</td>
           <td>{{ task.proposalDate | date: 'yyyy-MM-dd' }}</td>
           <td>{{ taskStatusesMap.get(task.taskStatus) }}</td>

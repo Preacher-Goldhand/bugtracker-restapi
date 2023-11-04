@@ -7,7 +7,7 @@ export interface MinimalQuestData {
   priority: number;
   taskStatus: string;
   assigner: Employee;
-  assigneeName: string;
+  assignee: Employee;
   loggedTime: number; 
   storyPoints: number; 
   proposalDate: Date; 

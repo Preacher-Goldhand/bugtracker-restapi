@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^15.2.2",
+    "@angular/cdk": "^15.2.9",
     "@angular/common": "^15.2.2",
     "@angular/compiler": "^15.2.2",
     "@angular/core": "^15.2.2",
@@ -27,6 +28,7 @@
     "js-base64": "^3.7.5",
     "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
+    "ng-select2-component": "^10.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

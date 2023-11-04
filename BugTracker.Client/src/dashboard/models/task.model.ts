@@ -10,6 +10,7 @@ export interface Task {
   storyPoints: number,
   taskStatus: string;
   assignerId: number;
+  assigneeId: number;
   assigneeName: string;
   boardId: number;
 }

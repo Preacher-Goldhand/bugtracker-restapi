@@ -20,6 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {TaskAddComponent} from "../dashboard/tasks/task-add/task-add.component";
 import {TaskCommentComponent} from "../dashboard/tasks/task-comment/task-comment.component";
 import {TaskImageComponent} from "../dashboard/tasks/task-image/task-image.component";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { Select2Module } from 'ng-select2-component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import {TaskImageComponent} from "../dashboard/tasks/task-image/task-image.compo
     FormsModule,
     HttpClientModule,
     NgbModule,
+    BrowserAnimationsModule,
+    Select2Module
   ],
   providers: [
     // Rejestruj interceptror JwtInterceptor

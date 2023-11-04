@@ -8,6 +8,7 @@ import {HttpClient} from "@angular/common/http";
 import {EmployeeShortData} from "../../models/employee-short-data";
 import {AccountService} from "../../../app/services/account.service";
 import {TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap} from "../../models/consts";
+import { Select2Data, Select2Group } from 'ng-select2-component';
 
 @Component({
   selector: 'app-task-add',
@@ -18,6 +19,7 @@ export class TaskAddComponent implements OnInit {
   task: Task = {
     boardId: 0,
     assigneeName: '',
+    assigneeId: 0,
     assignerId: 0,
     category: TaskCategory.ADMINISTRATIVE_TASK,
     dateOfCreation: new Date(),
@@ -36,7 +38,7 @@ export class TaskAddComponent implements OnInit {
   taskPriorities: TaskPriority[] = [TaskPriority.LOW, TaskPriority.HIGH, TaskPriority.CRITICAL];
   taskStoryPoints: number[] = [4, 8, 10, 14, 20, 30, 40, 100];
 
-  employeesData: EmployeeShortData[] = [];
+  selectGroupEmployeesData: Select2Group[] = [];
 
   taskStatusesMap = TaskStatusesMap;
   taskCategoriesMap = TaskCategoriesMap;
@@ -57,7 +59,7 @@ export class TaskAddComponent implements OnInit {
     const url = `https://localhost:7126/bugtracker/employee/short`;
     this.http.get<EmployeeShortData[]>(url)
       .subscribe((result: EmployeeShortData[]) => {
-          this.employeesData = result;
+          this.selectGroupEmployeesData = this.mapToSelectGroup(result) as Select2Group[];
       });
 
     this.task.boardId = this._boardId ?? 0;
@@ -76,5 +78,12 @@ export class TaskAddComponent implements OnInit {
 
   cancelTask(): void {
     this.router.navigate(['/board-details', this._boardId]);
+  }
+
+  private mapToSelectGroup(data: EmployeeShortData[]): any {
+    return data.map(item => ({
+      value: item.id,
+      label: item.fullName
+    }))
   }
 }
