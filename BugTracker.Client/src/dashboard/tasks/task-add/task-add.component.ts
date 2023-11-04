@@ -17,7 +17,7 @@ import {TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap} from "../../model
 export class TaskAddComponent implements OnInit {
   task: Task = {
     boardId: 0,
-    assigneeId: 0,
+    assigneeName: '',
     assignerId: 0,
     category: TaskCategory.ADMINISTRATIVE_TASK,
     dateOfCreation: new Date(),

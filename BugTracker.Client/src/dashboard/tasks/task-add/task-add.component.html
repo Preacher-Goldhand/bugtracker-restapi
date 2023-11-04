@@ -65,11 +65,8 @@
     <div class="form-row">
       <div class="col mb-3">
         <label for="assignee">Assignee</label>
-        <select class="form-control form-control-sm" id="assignee" name="assignee"
-                [(ngModel)]="task.assigneeId" #assignee="ngModel" required>
-          <option value=""></option>
-          <option *ngFor="let employee of employeesData" value="{{employee.id}}">{{employee.fullName}}</option>
-        </select>
+        <input type="text" class="form-control form-control-sm" id="assignee" name="assignee"
+               [(ngModel)]="task.assigneeName" #assignee="ngModel" required />
         <div *ngIf="assignee.errors?.['required'] && (assignee.dirty || assignee.touched)" class="error">
           Assignee is required.
         </div>

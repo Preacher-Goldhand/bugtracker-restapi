@@ -18,6 +18,9 @@ export class MinimalQuestServiceComponent implements OnInit {
     boardTasks: []
   };
 
+  taskDetails: MinimalQuestData | undefined;
+  indexDescription: number | undefined;
+
   searchPhrase: string = '';
   filteredQuests: MinimalQuestData[] = [];
   noResultsMessage: string = '';
@@ -76,10 +79,10 @@ export class MinimalQuestServiceComponent implements OnInit {
   addQuest(): void {
     this.router.navigate(['/task-add', this._boardId]);
   }
-  editQuest(taskId: number) {
+  editQuest(taskId: any) {
     this.router.navigate(['/task-comment', this._boardId, taskId]);
   }
-  removeQuest(taskId: number) {
+  removeQuest(taskId: any) {
     const url = `https://localhost:7126/bugtracker/board/${this._boardId}/task/${taskId}`;
     const confirmDelete = confirm('Are you sure you want to delete this task');
 
@@ -94,8 +97,16 @@ export class MinimalQuestServiceComponent implements OnInit {
     }
   }
 
-  showComments(taskId: number): void {
+  showComments(taskId: any): void {
     this.router.navigate(['/task-comment', this._boardId, taskId]);
+  }
+  
+  showDescription(taskId: number): void {
+    if (this.indexDescription) {
+      this.indexDescription = undefined;
+    } else {
+      this.indexDescription = taskId;
+    }
   }
 
   updatePage() {
