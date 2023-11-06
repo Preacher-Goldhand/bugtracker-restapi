@@ -20,7 +20,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<QuestDto>> GetAssignedTasks([FromQuery] PaginationQuery questQuery)
+        public ActionResult<IEnumerable<MyTaskDto>> GetAssignedTasks([FromQuery] PaginationQuery questQuery)
         {
             ClaimsPrincipal user = HttpContext.User;
             var tasks = _myTaskService.GetAssignedTasks(questQuery, user);

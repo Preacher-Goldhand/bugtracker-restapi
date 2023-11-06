@@ -9,7 +9,7 @@
 
         public int Priority { get; set; }
 
-        public string TaskStatus { get; set; }
+        public string Status { get; set; }
 
         public int AssignerId { get; set; }
 

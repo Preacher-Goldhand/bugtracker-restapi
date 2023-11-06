@@ -27,7 +27,9 @@ namespace BugTracker.Services
 
             var allTasks = _dbContext.Tasks
                 .Where(b => b.AssignerId == loggedInUserId)
-                .Include(t => t.Assigner);
+                .Include(t => t.Assignee)
+                .Include(t => t.Assigner)
+                .ToList();
 
             var tasks = allTasks
                 .Skip(questQuery.PageSize * (questQuery.PageNumber - 1))
@@ -37,21 +39,28 @@ namespace BugTracker.Services
             var totalItemsCount = allTasks.Count();
 
             // Mapowanie danych zadań na DTO z uwzględnieniem informacji o osobach (tylko imię i nazwisko)
-            var tasksDtos = tasks.Select(task => new MyTaskDto
+            var myTasks = tasks.Select(task => new MyTaskDto
             {
                 Id = task.Id,
                 Name = task.Name,
                 Category = task.Category,
                 Priority = task.Priority,
-                TaskStatus = task.TaskStatus,
+                Status = task.TaskStatus,
                 Assigner = new EmployeeShortDto
                 {
-                    FirstName = task.Assigner != null ? task.Assigner.FirstName : null,
-                    LastName = task.Assigner != null ? task.Assigner.LastName : null,
+                    FirstName = task.Assigner.FirstName,
+                    LastName = task.Assigner.LastName
+                },
+                Assignee = new EmployeeShortDto
+                {
+                    FirstName = task.Assignee.FirstName,
+                    LastName = task.Assignee.LastName
                 }
             }).ToList();
 
-            var pagedResult = new PagedResult<MyTaskDto>(tasksDtos, totalItemsCount, questQuery.PageSize, questQuery.PageNumber);
+
+            var pagedResult = new PagedResult<MyTaskDto>(myTasks, totalItemsCount, questQuery.PageSize, questQuery.PageNumber);
+
             return pagedResult;
         }
 
