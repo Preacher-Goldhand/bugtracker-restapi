@@ -1,0 +1,39 @@
+<h3>My Tasks</h3>
+<table class="table table-sm">
+  <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Category</th>
+    <th scope="col">Priority</th>
+    <th scope="col">Task Status</th>
+    <th scope="col">Assignee</th>
+    <th scope="col">Assigner</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>{{task.name}}</td>
+      <td>{{taskCategoriesMap.get(task.category)}}</td>
+      <td>{{taskPrioritiesMap.get(task.priority)}}</td>
+      <td>{{taskStatusesMap.get(task.status)}}</td>
+      <td>{{task.assignee.fullName}}</td>
+      <td>{{task.assigner.fullName}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="pagination">
+  <button class="previous-page" (click)="previousPage()">&#171;&#171;</button>
+  <div class="page-dropdown">
+    <button class="current-page">{{ pageNumber }}</button>
+  </div>
+  <button class="next-page" (click)="nextPage()">&#187;&#187;</button>
+  <div class="records-per-page">
+    <label for="recordsPerPage">Records per page:</label>
+    <select id="recordsPerPage" [(ngModel)]="pageSize" (change)="updatePage()">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+    </select>
+  </div>
+</div>

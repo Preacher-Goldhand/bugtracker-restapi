@@ -1,3 +1,4 @@
+
 export interface Task {
   id?: number;
   name: string;
@@ -11,6 +12,5 @@ export interface Task {
   taskStatus: string;
   assignerId: number;
   assigneeId: number;
-  assigneeName: string;
   boardId: number;
 }

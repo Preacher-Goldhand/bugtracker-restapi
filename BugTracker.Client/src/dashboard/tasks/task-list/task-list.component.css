@@ -1,0 +1,29 @@
+.pagination {
+  display: flex;
+  justify-content: left;
+  align-items: end;
+  margin-top: 20px;
+}
+
+.previous-page,
+.next-page {
+  background-color: #192a56;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.page-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.current-page {
+  padding: 5px 10px;
+  background-color: white;
+  border: none;
+}

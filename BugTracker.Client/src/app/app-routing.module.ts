@@ -12,6 +12,7 @@ import { UpdateBoardComponent } from '../dashboard/boards/update-board/update-bo
 import { LogoutComponent } from '../account/logout/logout.component';
 import {TaskAddComponent} from "../dashboard/tasks/task-add/task-add.component";
 import {TaskCommentComponent} from "../dashboard/tasks/task-comment/task-comment.component";
+import {TaskListComponent} from "../dashboard/tasks/task-list/task-list.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'add-board', component: CreateBoardComponent },
   { path: 'board-details/:id', component: MinimalQuestServiceComponent },
   { path: 'edit-board/:id', component: UpdateBoardComponent },
+  { path: 'tasks', component: TaskListComponent },
   { path: 'task-add/:id', component: TaskAddComponent },
   { path: 'task-comment/:boardId/:taskId', component: TaskCommentComponent }
 ];

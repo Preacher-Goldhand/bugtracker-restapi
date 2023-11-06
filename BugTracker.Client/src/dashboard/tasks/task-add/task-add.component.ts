@@ -8,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
 import {EmployeeShortData} from "../../models/employee-short-data";
 import {AccountService} from "../../../app/services/account.service";
 import {TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap} from "../../models/consts";
-import { Select2Data, Select2Group } from 'ng-select2-component';
+import {Select2Group} from 'ng-select2-component';
 
 @Component({
   selector: 'app-task-add',
@@ -18,7 +18,6 @@ import { Select2Data, Select2Group } from 'ng-select2-component';
 export class TaskAddComponent implements OnInit {
   task: Task = {
     boardId: 0,
-    assigneeName: '',
     assigneeId: 0,
     assignerId: 0,
     category: TaskCategory.ADMINISTRATIVE_TASK,
