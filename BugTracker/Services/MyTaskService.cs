@@ -46,6 +46,10 @@ namespace BugTracker.Services
                 Category = task.Category,
                 Priority = task.Priority,
                 Status = task.TaskStatus,
+                StoryPoints = task.StoryPoints,
+                LoggedTime = task.LoggedTime,
+                ProposalDate = task.ProposalDate,
+                Description = task.Description,
                 Assigner = new EmployeeShortDto
                 {
                     FirstName = task.Assigner.FirstName,

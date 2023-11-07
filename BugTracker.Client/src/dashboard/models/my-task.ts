@@ -10,4 +10,8 @@ export interface MyTask {
   assigner: EmployeeShortData;
   assigneeId: number;
   assignee: EmployeeShortData;
+  loggedTime: number;
+  storyPoints: number;
+  proposalDate: Date;
+  description: string;
 }

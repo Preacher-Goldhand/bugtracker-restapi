@@ -16,6 +16,8 @@ export class TaskListComponent implements OnInit {
   taskCategoriesMap = TaskCategoriesMap;
   taskPrioritiesMap = TaskPrioritiesMap;
 
+  indexDescription: number | undefined;
+
   pageNumber: number = 1;
   pageSize: number = 5;
   private totalPages: number = 0;
@@ -32,6 +34,14 @@ export class TaskListComponent implements OnInit {
       .subscribe((result: PagedResult<MyTask>) => {
         this.tasks = result.items;
       });
+  }
+
+  showDescription(taskId: number): void {
+    if (this.indexDescription) {
+      this.indexDescription = undefined;
+    } else {
+      this.indexDescription = taskId;
+    }
   }
 
   updatePage() {

@@ -20,8 +20,6 @@
 
         public int AssigneeId { get; set; }
 
-        public string AssigneeName { get; set; }
-
         public float LoggedTime { get; set; }
 
         public int Priority { get; set; }
