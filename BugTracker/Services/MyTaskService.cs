@@ -42,6 +42,7 @@ namespace BugTracker.Services
             var myTasks = tasks.Select(task => new MyTaskDto
             {
                 Id = task.Id,
+                BoardId = task.BoardId,
                 Name = task.Name,
                 Category = task.Category,
                 Priority = task.Priority,

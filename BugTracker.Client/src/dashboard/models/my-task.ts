@@ -2,6 +2,7 @@ import {EmployeeShortData} from "./employee-short-data";
 
 export interface MyTask {
   id: number;
+  boardId: number;
   name: string;
   category: string;
   priority: string;

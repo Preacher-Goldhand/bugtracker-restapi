@@ -1,30 +1,23 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {saveAs} from "file-saver";
 
 @Component({
   selector: 'app-task-image',
   templateUrl: './task-image.component.html',
   styleUrls: ['./task-image.component.css']
 })
-export class TaskImageComponent implements OnInit {
+export class TaskImageComponent {
   @Input() fileName: string | undefined;
 
-  fileContent: SafeResourceUrl | undefined;
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
-
-  ngOnInit(): void {
-    console.log(this.fileName);
-    this.getFile(this.fileName);
-  }
-
-  private getFile(name?: string): void {
-    if (name) {
-      this.http.get(`https://localhost:7126/bugtracker/file?fileName=${name}`,
-        {responseType: "text"})
-        .subscribe((baseImage: any) => {
-          this.fileContent = this.sanitizer.bypassSecurityTrustResourceUrl(baseImage);
+  downloadFile(): void {
+    if (this.fileName) {
+      this.http.get(`https://localhost:7126/bugtracker/file?fileName=${this.fileName}`,
+        { responseType: "blob" })
+        .subscribe((response: any) => {
+          saveAs(response, this.fileName);
         });
     }
   }

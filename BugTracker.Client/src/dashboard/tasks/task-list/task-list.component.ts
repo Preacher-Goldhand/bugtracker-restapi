@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {MyTask} from "../../models/my-task";
 import {PagedResult} from "../../models/paged-result.model";
 import {TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap} from "../../models/consts";
+import {DetailedBoardData} from "../../models/detailed-board.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-add',
@@ -22,7 +24,7 @@ export class TaskListComponent implements OnInit {
   pageSize: number = 5;
   private totalPages: number = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.getData();
@@ -42,6 +44,29 @@ export class TaskListComponent implements OnInit {
     } else {
       this.indexDescription = taskId;
     }
+  }
+
+  editQuest(boardId: number, taskId: any) {
+    this.router.navigate(['/task-comment', boardId, taskId]);
+  }
+
+  removeQuest(boardId: number, taskId: any) {
+    const url = `https://localhost:7126/bugtracker/board/${boardId}/task/${taskId}`;
+    const confirmDelete = confirm('Are you sure you want to delete this task');
+
+    if (confirmDelete) {
+      this.http.delete<DetailedBoardData>(url)
+        .subscribe(() => {
+          this.router.navigate(['/boards']);
+          this.getData();
+        });
+    } else {
+      this.router.navigate(['/boards']);
+    }
+  }
+
+  showComments(boardId: number, taskId: any): void {
+    this.router.navigate(['/task-comment', boardId, taskId]);
   }
 
   updatePage() {

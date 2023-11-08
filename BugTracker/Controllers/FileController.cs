@@ -11,7 +11,7 @@ namespace BugTracker.Controllers
     {
         [HttpGet]
         [ResponseCache(Duration = 1200, VaryByQueryKeys = new[] { "fileName" })]
-        public ActionResult<string> GetFile([FromQuery] string fileName)
+        public ActionResult GetFile([FromQuery] string fileName)
         {
             var rootPath = Directory.GetCurrentDirectory();
 
@@ -31,9 +31,9 @@ namespace BugTracker.Controllers
 
             var fileContent = System.IO.File.ReadAllBytes(filePath);
 
-            return $"data:{contentType};base64,{Convert.ToBase64String(fileContent)}";
+            //return $"data:{contentType};base64,{Convert.ToBase64String(fileContent)}";
 
-            //return File(fileContent, contentType, fileName);
+            return File(fileContent, contentType, fileName);
         }
 
         [HttpPost]

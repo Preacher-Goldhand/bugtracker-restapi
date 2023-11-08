@@ -11,6 +11,7 @@
     <th scope="col">Assigner</th>
     <th scope="col">Proposal Date</th>
     <th scope="col">Task Status</th>
+    <th scope="col">Actions</th>
   </tr>
   </thead>
   <tbody>
@@ -25,6 +26,11 @@
         <td>{{task.assigner.fullName}}</td>
         <td>{{ task.proposalDate | date: 'yyyy-MM-dd' }}</td>
         <td>{{taskStatusesMap.get(task.status)}}</td>
+        <td class="actions">
+          <button type="button" class="btn btn-primary btn-sm" (click)="editQuest(task.boardId, task.id)">Edit</button>
+          <button type="button" class="btn btn-danger btn-sm m-1" (click)="removeQuest(task.boardId, task.id)">Remove</button>
+          <button type="button" class="btn btn-dark btn-sm m-1" (click)="showComments(task.boardId, task.id)">Comments</button>
+        </td>
       </tr>
       <tr class="collapse" [class.show]="indexDescription == task.id">
         <td colspan="10">
