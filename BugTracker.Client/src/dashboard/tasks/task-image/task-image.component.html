@@ -1,1 +1,6 @@
-<button *ngIf="fileName" class="btn btn-sm btn-success" (click)="downloadFile()">Download File</button>
+<div>
+  <ng-container *ngIf="comment?.fileName">
+    <button class="btn btn-sm btn-outline-success me-1" (click)="downloadFile()">Download File</button>
+    <button class="btn btn-sm btn-outline-danger" (click)="removeFile()">Remove File</button>
+  </ng-container>
+</div>

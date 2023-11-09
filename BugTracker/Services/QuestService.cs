@@ -18,6 +18,8 @@ namespace BugTracker.Services
       
         TaskComment? AddComment(int taskId, CreateTaskCommentDto dto);
 
+        void UpdateComment(CreateTaskCommentDto dto);
+
         IEnumerable<TaskCommentDto> GetAllComments(int taskId);
 
         QuestDto GetById(int boardId, int questId);
@@ -77,6 +79,14 @@ namespace BugTracker.Services
 
             var commentsDto = _mapper.Map<List<TaskCommentDto>>(comments);
             return commentsDto;
+        }
+
+        public void UpdateComment(CreateTaskCommentDto dto)
+        {
+            var comment = GetCommentById(dto.Id);
+            comment.Description = dto.Description;
+            comment.FileName = dto.FileName;
+            _dbContext.SaveChanges();
         }
 
         //public PagedResult<MinimalQuestDto> GetAll(int boardId, PaginationQuery questQuery)
@@ -155,6 +165,17 @@ namespace BugTracker.Services
 
             _dbContext.Tasks.Remove(quest);
             _dbContext.SaveChanges();
+        }
+
+        private TaskComment GetCommentById(int commentId)
+        {
+            var comment = _dbContext
+               .TaskComments
+               .FirstOrDefault(b => b.Id == commentId);
+
+            if (comment == null)
+                throw new NotFoundException("Comment not found");
+            return comment;
         }
 
         private Board GetBoardsById(int boardId)

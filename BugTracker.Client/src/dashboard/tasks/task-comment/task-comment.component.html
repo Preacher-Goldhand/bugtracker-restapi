@@ -11,8 +11,13 @@
           <div>
             {{ comment.description }}
           </div>
+        </div>
+        <div class="task-comment-footer">
           <div>
-            <app-task-image *ngIf="comment.fileName" [fileName]="comment.fileName"></app-task-image>
+            <button class="btn btn-sm btn-outline-dark" (click)="editComment(comment.id)">Edit</button>
+          </div>
+          <div>
+            <app-task-image *ngIf="comment.fileName" [boardId]="boardId" [comment]="comment"></app-task-image>
           </div>
         </div>
       </div>
@@ -20,7 +25,12 @@
   </div>
   <div class="row">
     <div class="col mb-3">
-      <h5>Add new comment</h5>
+      <ng-template [ngIf]="editMode" [ngIfElse]="addModeTitle">
+        <h5>Edit comment</h5>
+      </ng-template>
+      <ng-template #addModeTitle>
+        <h5>Add new comment</h5>
+      </ng-template>
       <form (ngSubmit)="addComment()" #commentForm="ngForm">
         <div class="form-row">
           <div class="col mb-3">
@@ -41,9 +51,20 @@
         </div>
         <div class="form-row">
           <div class="col mb-3 text-start">
-            <button type="submit" class="btn btn-sm btn-success m-1"
-                    [disabled]="commentForm.invalid">Add</button>
-            <button type="button" class="btn btn-sm btn-danger m-1" (click)="cancelComments()">Cancel</button>
+            <ng-template [ngIf]="editMode" [ngIfElse]="addMode">
+              <div>
+                <button type="submit" class="btn btn-sm btn-success m-1"
+                        [disabled]="commentForm.invalid">Save</button>
+                <button type="button" class="btn btn-sm btn-danger m-1" (click)="cancelEdit()">Cancel</button>
+              </div>
+            </ng-template>
+            <ng-template #addMode>
+              <div>
+                <button type="submit" class="btn btn-sm btn-success m-1"
+                        [disabled]="commentForm.invalid">Add</button>
+                <button type="button" class="btn btn-sm btn-danger m-1" (click)="cancelComments()">Cancel</button>
+              </div>
+            </ng-template>
           </div>
         </div>
       </form>

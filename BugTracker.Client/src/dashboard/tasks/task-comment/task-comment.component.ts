@@ -16,6 +16,8 @@ export class TaskCommentComponent implements OnInit {
   task: Task = {} as Task;
   taskComments: TaskComment[] = [];
 
+  editMode: boolean = false;
+
   taskComment: TaskComment = {
     dateOfCreation: new Date(),
     description: '',
@@ -25,7 +27,7 @@ export class TaskCommentComponent implements OnInit {
   btnFileDelete: boolean = false;
 
   private _file: File | undefined;
-  private _boardId!: number;
+  boardId!: number;
   private _taskId!: number;
 
   constructor(private route: ActivatedRoute,
@@ -35,26 +37,52 @@ export class TaskCommentComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this._boardId = params['boardId'];
+      this.boardId = params['boardId'];
       this._taskId = params['taskId'];
-      this.getTaskDetails(this._boardId, this._taskId);
-      this.getComments(this._boardId, this._taskId);
+      this.getTaskDetails(this.boardId, this._taskId);
+      this.getComments(this.boardId, this._taskId);
     });
   }
 
   addComment(): void {
     this.taskComment.userCreatedId = this.accountService.getUserDetails()?.id ?? 0;
     this.taskComment.fileName = this._file?.name;
-    const url = `https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}/comment`;
-    this.http.post(url, this.taskComment)
-      .subscribe({
+
+    const url = `https://localhost:7126/bugtracker/board/${this.boardId}/task/${this._taskId}/comment`;
+
+    let action;
+
+    if (this.editMode) {
+      action = this.http.put(url, this.taskComment);
+    }
+    else {
+      action = this.http.post(url, this.taskComment);
+    }
+
+    action.subscribe({
         next: value => {
           this.uploadFile();
-          this.getComments(this._boardId, this._taskId);
+          this.getComments(this.boardId, this._taskId);
           this.reset();
+          if (this.editMode) this.editMode = false;
         },
-        error: err => { }
-      })
+        error: err => {
+        }
+      });
+  }
+
+  editComment(commentId: number | undefined): void {
+    this.taskComment = this.taskComments.find(comment => comment.id == commentId)!;
+    this.editMode = true;
+  }
+
+  cancelEdit(): void {
+    this.editMode = false;
+    this.taskComment = {
+      dateOfCreation: new Date(),
+      description: '',
+      userCreatedId: 0
+    };
   }
 
   cancelComments(): void {
