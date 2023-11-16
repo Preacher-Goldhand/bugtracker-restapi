@@ -21,6 +21,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult CreateBoard([FromBody] CreateBoardDto dto)
         {
             var id = _boardService.Create(dto);
@@ -43,6 +44,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult UpdateBoard([FromBody] UpdateBoardDto dto, [FromRoute] int id)
         {
             _boardService.Update(id, dto);
@@ -50,6 +52,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult DeleteBoard([FromRoute] int id)
         {
             _boardService.Delete(id);

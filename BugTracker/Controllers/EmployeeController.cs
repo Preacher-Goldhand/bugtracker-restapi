@@ -21,6 +21,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult<IEnumerable<EmployeeDto>> GetAllEmployees([FromQuery] PaginationQuery employeeQuery)
         {
             var employeeDtos = _employeeService.GetAll(employeeQuery);
@@ -28,6 +29,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet("short")]
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult<IEnumerable<EmployeeShortDto>> GetAllEmployeesShort()
         {
             var employeeShortDtos = _employeeService.GetShortAll();
@@ -35,6 +37,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult<EmployeeDto> GetEmployeeById([FromRoute] int id)
         {
             EmployeeDto employeeDto = _employeeService.GetById(id);
@@ -50,7 +53,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteEmployee([FromRoute] int id)
         {
             _employeeService.Delete(id);
