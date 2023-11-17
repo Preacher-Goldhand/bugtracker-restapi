@@ -65,29 +65,6 @@ namespace BugTracker.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TaskComments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TaskId = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    DateOfCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserCreatedId = table.Column<int>(type: "int", nullable: false),
-                    FileName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TaskComments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TaskComments_Employees_UserCreatedId",
-                        column: x => x.UserCreatedId,
-                        principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tasks",
                 columns: table => new
                 {
@@ -97,7 +74,7 @@ namespace BugTracker.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     DateOfCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PropsalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProposalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LoggedTime = table.Column<float>(type: "real", nullable: false),
                     Priority = table.Column<int>(type: "int", nullable: false),
                     StoryPoints = table.Column<int>(type: "int", nullable: false),
@@ -127,10 +104,44 @@ namespace BugTracker.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TaskComments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    DateOfCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserCreatedId = table.Column<int>(type: "int", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    TaskId = table.Column<int>(type: "int", nullable: false),
+                    QuestId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TaskComments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TaskComments_Employees_UserCreatedId",
+                        column: x => x.UserCreatedId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TaskComments_Tasks_QuestId",
+                        column: x => x.QuestId,
+                        principalTable: "Tasks",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_RoleId",
                 table: "Employees",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskComments_QuestId",
+                table: "TaskComments",
+                column: "QuestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TaskComments_UserCreatedId",

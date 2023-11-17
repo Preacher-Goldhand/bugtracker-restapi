@@ -18,8 +18,10 @@ namespace BugTracker.Entities
         public string Category { get; set; }
 
         public DateTime DateOfCreation { get; set; }
+
         public DateTime ProposalDate { get; set; }
         public float LoggedTime { get; set; }
+
         public int Priority { get; set; }
         public int StoryPoints { get; set; }
 

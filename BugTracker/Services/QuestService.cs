@@ -15,7 +15,7 @@ namespace BugTracker.Services
         int Create(int boardId, CreateQuestDto dto);
 
         //PagedResult<MinimalQuestDto> GetAll(int boardId, PaginationQuery questQuery);
-      
+
         TaskComment? AddComment(int taskId, CreateTaskCommentDto dto);
 
         void UpdateComment(CreateTaskCommentDto dto);

@@ -11,6 +11,7 @@ namespace BugTracker.Services
     {
         PagedResult<MyTaskDto> GetAssignedTasks(PaginationQuery questQuery, ClaimsPrincipal user);
     }
+
     public class MyTaskService : IMyTaskService
     {
         private readonly BugTrackerDbContext _dbContext;
@@ -21,6 +22,7 @@ namespace BugTracker.Services
             _dbContext = dbContext;
             _mapper = mapper;
         }
+
         public PagedResult<MyTaskDto> GetAssignedTasks(PaginationQuery questQuery, ClaimsPrincipal user)
         {
             var loggedInUserId = int.Parse(user.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -63,13 +65,9 @@ namespace BugTracker.Services
                 }
             }).ToList();
 
-
             var pagedResult = new PagedResult<MyTaskDto>(myTasks, totalItemsCount, questQuery.PageSize, questQuery.PageNumber);
 
             return pagedResult;
         }
-
-
-
     }
 }

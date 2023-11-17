@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BugTracker.Migrations
 {
     [DbContext(typeof(BugTrackerDbContext))]
-    [Migration("20231027161927_Init")]
+    [Migration("20231117161319_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -136,7 +136,7 @@ namespace BugTracker.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("PropsalDate")
+                    b.Property<DateTime>("ProposalDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("StoryPoints")
@@ -195,6 +195,9 @@ namespace BugTracker.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<int?>("QuestId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TaskId")
                         .HasColumnType("int");
 
@@ -202,6 +205,8 @@ namespace BugTracker.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("QuestId");
 
                     b.HasIndex("UserCreatedId");
 
@@ -248,11 +253,17 @@ namespace BugTracker.Migrations
 
             modelBuilder.Entity("BugTracker.Entities.TaskComment", b =>
                 {
+                    b.HasOne("BugTracker.Entities.Quest", "Quest")
+                        .WithMany()
+                        .HasForeignKey("QuestId");
+
                     b.HasOne("BugTracker.Entities.Employee", "UserCreated")
                         .WithMany()
                         .HasForeignKey("UserCreatedId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Quest");
 
                     b.Navigation("UserCreated");
                 });
