@@ -1,9 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DetailedBoardData } from '../../models/detailed-board.model';
-import {TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap} from "../../models/consts";
+import { TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap } from "../../models/consts";
 import { MinimalQuestData } from '../../models/minimal-quest.model';
 
 @Component({
@@ -35,9 +35,9 @@ export class MinimalQuestServiceComponent implements OnInit {
   private _boardId!: number;
 
   constructor(private route: ActivatedRoute,
-              private http: HttpClient,
-              private datePipe: DatePipe,
-              private router: Router) { }
+    private http: HttpClient,
+    private datePipe: DatePipe,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -80,7 +80,7 @@ export class MinimalQuestServiceComponent implements OnInit {
     this.router.navigate(['/task-add', this._boardId]);
   }
   editQuest(taskId: any) {
-    this.router.navigate(['/task-comment', this._boardId, taskId]);
+    this.router.navigate(['/task-edit', this._boardId, taskId]);
   }
   removeQuest(taskId: any) {
     const url = `https://localhost:7126/bugtracker/board/${this._boardId}/task/${taskId}`;
@@ -100,7 +100,7 @@ export class MinimalQuestServiceComponent implements OnInit {
   showComments(taskId: any): void {
     this.router.navigate(['/task-comment', this._boardId, taskId]);
   }
-  
+
   showDescription(taskId: number): void {
     if (this.indexDescription) {
       this.indexDescription = undefined;

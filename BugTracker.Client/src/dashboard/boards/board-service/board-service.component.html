@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let board of boards">
-          <td>{{ board.name }}</td>
+          <td (click)="showBoardDetails(board)">{{ board.name }}</td>
           <td>{{ board.dateOfCreation | date:'dd/MM/yyyy' }}</td>
           <td class="actions">
             <button class="btn btn-primary btn-sm" (click)="showBoardDetails(board)">Details</button>

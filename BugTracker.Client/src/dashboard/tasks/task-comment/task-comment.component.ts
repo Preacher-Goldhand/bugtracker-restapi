@@ -86,7 +86,7 @@ export class TaskCommentComponent implements OnInit {
   }
 
   cancelComments(): void {
-    this.router.navigate(['/tasks']);
+    this.router.navigate(['/board-details', this.boardId]);
   }
 
   onFileSelected($event: any): void {

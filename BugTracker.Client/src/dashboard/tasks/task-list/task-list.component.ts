@@ -1,10 +1,10 @@
-import {Component, OnInit} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {MyTask} from "../../models/my-task";
-import {PagedResult} from "../../models/paged-result.model";
-import {TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap} from "../../models/consts";
-import {DetailedBoardData} from "../../models/detailed-board.model";
-import {Router} from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { MyTask } from "../../models/my-task";
+import { PagedResult } from "../../models/paged-result.model";
+import { TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap } from "../../models/consts";
+import { DetailedBoardData } from "../../models/detailed-board.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-list-add',
@@ -24,7 +24,7 @@ export class TaskListComponent implements OnInit {
   pageSize: number = 5;
   private totalPages: number = 0;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.getData();
@@ -57,11 +57,11 @@ export class TaskListComponent implements OnInit {
     if (confirmDelete) {
       this.http.delete<DetailedBoardData>(url)
         .subscribe(() => {
-          this.router.navigate(['/boards']);
+          this.router.navigate(['/tasks']);
           this.getData();
         });
     } else {
-      this.router.navigate(['/boards']);
+      this.router.navigate(['/tasks']);
     }
   }
 

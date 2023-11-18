@@ -3,7 +3,8 @@
     <label for="boardName">Enter new name:</label>
     <div class="input-control-wrapper">
       <input class="input-control" type="text" id="boardName" [(ngModel)]="updatedBoard.Name" name="boardName">
-      <button class="btn" type="submit" (click)="updateBoard()">Update</button>
+      <button class="btn btn-sm btn-primary" type="submit" (click)="updateBoard()">Update</button>
+      <button type="button" class="btn btn-sm btn-danger m-1" (click)="cancelUpdate()">Cancel</button>
     </div>
   </div>
 </div>

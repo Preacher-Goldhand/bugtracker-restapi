@@ -44,4 +44,8 @@ export class UpdateBoardComponent implements OnInit {
       }
     );
   }
+
+  cancelUpdate() {
+    this.router.navigate(['/boards']); 
+  }
 }

@@ -1,5 +1,5 @@
 <div class="content">
-  <form (ngSubmit)="addTask()" #taskForm="ngForm">
+  <form (ngSubmit)="editTask()" #taskForm="ngForm">
     <div class="form-row">
       <div class="col mb-3">
         <label for="name">Name</label>
@@ -65,16 +65,15 @@
     <div class="form-row">
       <div class="col mb-3">
         <label for="assignee">Assignee</label>
-        <select2 
-          class="form-control form-control-sm"
-          styleMode="noStyle"
-          displaySearchStatus="always"
-          resettable="true"
-          [data]="selectGroupEmployeesData"
-          [(ngModel)]="task.assigneeId"
-          #assignee="ngModel"
-          id="assignee"
-          name="assignee"></select2>
+        <select2 class="form-control form-control-sm"
+                 styleMode="noStyle"
+                 displaySearchStatus="always"
+                 resettable="true"
+                 [data]="selectGroupEmployeesData"
+                 [(ngModel)]="task.assigneeId"
+                 #assignee="ngModel"
+                 id="assignee"
+                 name="assignee"></select2>
 
         <div *ngIf="assignee.errors?.['required'] && (assignee.dirty || assignee.touched)" class="error">
           Assignee is required.
@@ -117,7 +116,7 @@
                 [disabled]="taskForm.invalid">
           Save
         </button>
-        <button type="button" class="btn btn-sm btn-danger m-1" (click)="cancelTask()">Cancel</button>
+        <button type="button" class="btn btn-sm btn-danger m-1" (click)="cancelEditTask()">Cancel</button>
       </div>
     </div>
   </form>

@@ -23,6 +23,7 @@ import {TaskImageComponent} from "../dashboard/tasks/task-image/task-image.compo
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { Select2Module } from 'ng-select2-component';
 import {TaskListComponent} from "../dashboard/tasks/task-list/task-list.component";
+import { TaskEditComponent } from '../dashboard/tasks/task-edit/task-edit.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {TaskListComponent} from "../dashboard/tasks/task-list/task-list.componen
     TaskAddComponent,
     TaskCommentComponent,
     TaskImageComponent,
-    TaskListComponent
+    TaskListComponent,
+    TaskEditComponent
   ],
   imports: [
     BrowserModule,

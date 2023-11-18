@@ -10,9 +10,10 @@ import { CreateBoardComponent } from '../dashboard/boards/board-service/create-b
 import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-service/minimalquest-service.component';
 import { UpdateBoardComponent } from '../dashboard/boards/update-board/update-board.component';
 import { LogoutComponent } from '../account/logout/logout.component';
-import {TaskAddComponent} from "../dashboard/tasks/task-add/task-add.component";
-import {TaskCommentComponent} from "../dashboard/tasks/task-comment/task-comment.component";
-import {TaskListComponent} from "../dashboard/tasks/task-list/task-list.component";
+import { TaskAddComponent } from "../dashboard/tasks/task-add/task-add.component";
+import { TaskCommentComponent } from "../dashboard/tasks/task-comment/task-comment.component";
+import { TaskListComponent } from "../dashboard/tasks/task-list/task-list.component";
+import { TaskEditComponent } from '../dashboard/tasks/task-edit/task-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'edit-board/:id', component: UpdateBoardComponent },
   { path: 'tasks', component: TaskListComponent },
   { path: 'task-add/:id', component: TaskAddComponent },
+  { path: 'task-edit/:boardId/:taskId', component: TaskEditComponent },
   { path: 'task-comment/:boardId/:taskId', component: TaskCommentComponent }
 ];
 
