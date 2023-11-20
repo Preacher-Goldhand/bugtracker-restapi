@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select2Group } from 'ng-select2-component';
 import { AccountService } from '../../../app/services/account.service';
 import { TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap } from '../../models/consts';
+import { EmployeeShortData } from '../../models/employee-short-data';
 import { TaskCategory } from '../../models/task-category';
 import { TaskPriority } from '../../models/task-priority';
 import { TaskStatus } from '../../models/task-status';
@@ -14,7 +15,7 @@ import { Task } from '../../models/task.model';
   templateUrl: './task-edit.component.html',
   styleUrls: ['./task-edit.component.css']
 })
-export class TaskEditComponent {
+export class TaskEditComponent implements OnInit {
   task: Task = {
     boardId: 0,
     assigneeId: 0,
@@ -47,12 +48,27 @@ export class TaskEditComponent {
 
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router) { }
+    private router: Router, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this._boardId = params['boardId'];
       this._taskId = params['taskId'];
+
+      if (this._boardId !== undefined && this._taskId !== undefined) {
+        this.http.get<Task>(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`)
+          .subscribe((data) => {
+            this.task = data
+          });
+      }
+      const url = `https://localhost:7126/bugtracker/employee/short`;
+      this.http.get<EmployeeShortData[]>(url)
+        .subscribe((result: EmployeeShortData[]) => {
+          this.selectGroupEmployeesData = this.mapToSelectGroup(result) as Select2Group[];
+        });
+
+      this.task.boardId = this._boardId ?? 0;
+      this.task.assignerId = this.accountService.getUserDetails()?.id ?? 0;
     });
   }
 
@@ -74,4 +90,10 @@ export class TaskEditComponent {
     }
   }
 
+  private mapToSelectGroup(data: EmployeeShortData[]): any {
+    return data.map(item => ({
+      value: item.id,
+      label: item.fullName
+    }));
+  }
 }

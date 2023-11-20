@@ -28,13 +28,15 @@
         <td>{{taskStatusesMap.get(task.status)}}</td>
         <td class="actions">
           <button type="button" class="btn btn-primary btn-sm" (click)="editQuest(task.boardId, task.id)">Edit</button>
-          <button type="button" class="btn btn-dark btn-sm m-1" (click)="showComments(task.boardId, task.id)">Comments</button>
-          <button type="button" class="btn btn-danger btn-sm m-1" (click)="removeQuest(task.boardId, task.id)">Remove</button>
+          <button type="button" class="btn btn-dark btn-sm m-1" (click)="goBoards()">Boards</button>
         </td>
       </tr>
       <tr class="collapse" [class.show]="indexDescription == task.id">
         <td colspan="10">
           <table class="table mb-0">
+            <thead>
+              <tr><th scope="col">Description</th></tr>
+            </thead>
             <tbody>
               <tr>
                 <td>

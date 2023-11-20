@@ -18,12 +18,11 @@ export class UpdateBoardComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const boardId = params['id'];
-      console.log('boardId:', boardId);
 
       const url = `https://localhost:7126/bugtracker/board/${boardId}`;
       this.http.get<BoardData>(url).subscribe((data) => {
         this.board = data;
-        console.log('this.board:', this.board);
+        this.updatedBoard.Name = this.board.name;
       });
     });
   }
@@ -37,15 +36,15 @@ export class UpdateBoardComponent implements OnInit {
 
     this.http.put<UpdateBoardData>(url, updateData).subscribe(
       () => {
-        console.log("Suckes")
+        this.router.navigate(['/boards']);
       },
       (error) => {
-        console.error('Błąd żądania PUT:', error);
+      
       }
     );
   }
 
   cancelUpdate() {
-    this.router.navigate(['/boards']); 
+    this.router.navigate(['/boards']);
   }
 }

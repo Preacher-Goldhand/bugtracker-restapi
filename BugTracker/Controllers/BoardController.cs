@@ -44,7 +44,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         public ActionResult UpdateBoard([FromBody] UpdateBoardDto dto, [FromRoute] int id)
         {
             _boardService.Update(id, dto);

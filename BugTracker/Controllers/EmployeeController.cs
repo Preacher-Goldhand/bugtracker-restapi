@@ -29,7 +29,6 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet("short")]
-        [Authorize(Roles = "Admin, Manager")]
         public ActionResult<IEnumerable<EmployeeShortDto>> GetAllEmployeesShort()
         {
             var employeeShortDtos = _employeeService.GetShortAll();

@@ -9,8 +9,8 @@
 .pagination {
   display: flex;
   justify-content: left;
-  align-items: left;
-  margin-top: 360px;
+  align-items: end;
+  margin-top: 20px;
 }
 
 .previous-page,
@@ -34,36 +34,4 @@
   padding: 5px 10px;
   background-color: white;
   border: none;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 40px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-  .dropdown-content a {
-    color: black;
-    padding: 5px 10px;
-    text-decoration: none;
-    display: block;
-  }
-
-    .dropdown-content a:hover {
-      background-color: #ddd;
-    }
-
-.page-dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.records-per-page {
-  margin-left: 50px;
-}
-
-body {
-  text-align: center;
 }

@@ -47,26 +47,11 @@ export class TaskListComponent implements OnInit {
   }
 
   editQuest(boardId: number, taskId: any) {
-    this.router.navigate(['/task-comment', boardId, taskId]);
+    this.router.navigate(['/task-edit', boardId, taskId]);
   }
 
-  removeQuest(boardId: number, taskId: any) {
-    const url = `https://localhost:7126/bugtracker/board/${boardId}/task/${taskId}`;
-    const confirmDelete = confirm('Are you sure you want to delete this task');
-
-    if (confirmDelete) {
-      this.http.delete<DetailedBoardData>(url)
-        .subscribe(() => {
-          this.router.navigate(['/tasks']);
-          this.getData();
-        });
-    } else {
-      this.router.navigate(['/tasks']);
-    }
-  }
-
-  showComments(boardId: number, taskId: any): void {
-    this.router.navigate(['/task-comment', boardId, taskId]);
+  goBoards(): void {
+    this.router.navigate(['/boards']);
   }
 
   updatePage() {

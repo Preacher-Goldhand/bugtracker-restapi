@@ -10,8 +10,7 @@
   </div>
   <div class="row mt-2 mb-2">
     <div class="col">
-      <button type="button" class="btn btn-success btn-sm" 
-              *ngIf="!noResultsMessage" (click)="addQuest()">Add New Task</button>
+      <button type="button" class="btn btn-success btn-sm" *ngIf="!noResultsMessage" (click)="addQuest()">Add New Task</button>
     </div>
   </div>
 
@@ -32,7 +31,7 @@
     </thead>
     <tbody *ngIf="filteredQuests.length === 0 && noResultsMessage === ''">
       <ng-container *ngFor="let task of boardDetails.boardTasks">
-        <tr (click)="showDescription(task.id)">
+        <tr (click)="showDescription(task.id)" [ngClass]="{'table-light': task.taskStatus === 'CLOSED', 'text-decoration-line-through': task.taskStatus === 'CLOSED'}">
           <td>{{ task.name }}</td>
           <td>{{ taskCategoriesMap.get(task.category) }}</td>
           <td>{{ taskPrioritiesMap.get(task.priority) }}</td>
@@ -55,11 +54,11 @@
                 <tr><th scope="col">Description</th></tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>
-                          {{task.description}}
-                      </td>
-                  </tr>
+                <tr>
+                  <td>
+                    {{task.description}}
+                  </td>
+                </tr>
               </tbody>
             </table>
           </td>
@@ -84,7 +83,7 @@
     </thead>
     <tbody>
       <ng-container *ngFor="let task of boardDetails.boardTasks">
-        <tr (click)="showDescription(task.id)">
+        <tr (click)="showDescription(task.id)" [ngClass]="{'table-light': task.taskStatus === 'CLOSED', 'text-decoration-line-through': task.taskStatus === 'CLOSED'}">
           <td>{{ task.name }}</td>
           <td>{{ taskCategoriesMap.get(task.category) }}</td>
           <td>{{ taskPrioritiesMap.get(task.priority) }}</td>
@@ -95,20 +94,20 @@
           <td>{{ task.proposalDate | date: 'yyyy-MM-dd' }}</td>
           <td>{{ taskStatusesMap.get(task.taskStatus) }}</td>
           <td class="actions">
-              <button type="button" class="btn btn-primary btn-sm" (click)="editQuest(task.id)">Edit</button>
-              <button type="button" class="btn btn-danger btn-sm m-1" (click)="removeQuest(task.id)">Remove</button>
-              <button type="button" class="btn btn-dark btn-sm m-1" (click)="showComments(task.id)">Comments</button>
+            <button type="button" class="btn btn-primary btn-sm" (click)="editQuest(task.id)">Edit</button>
+            <button type="button" class="btn btn-danger btn-sm m-1" (click)="removeQuest(task.id)">Remove</button>
+            <button type="button" class="btn btn-dark btn-sm m-1" (click)="showComments(task.id)">Comments</button>
           </td>
         </tr>
         <tr class="collapse" [class.show]="indexDescription == task.id">
           <td colspan="10">
             <table class="table mb-0">
               <tbody>
-                  <tr>
-                      <td>
-                          {{task.description}}
-                      </td>
-                  </tr>
+                <tr>
+                  <td>
+                    {{task.description}}
+                  </td>
+                </tr>
               </tbody>
             </table>
           </td>
@@ -123,13 +122,13 @@
   <div class="page-dropdown">
     <button class="current-page">{{ pageNumber }}</button>
   </div>
-    <button class="next-page" (click)="nextPage()">&#187;&#187;</button>
-    <div class="records-per-page">
-      <label for="recordsPerPage">Records per page:</label>
-      <select id="recordsPerPage" [(ngModel)]="pageSize" (change)="updatePage()">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-      </select>
-    </div>
+  <button class="next-page" (click)="nextPage()">&#187;&#187;</button>
+  <div class="records-per-page">
+    <label for="recordsPerPage">Records per page:</label>
+    <select id="recordsPerPage" [(ngModel)]="pageSize" (change)="updatePage()">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+    </select>
   </div>
+</div>
