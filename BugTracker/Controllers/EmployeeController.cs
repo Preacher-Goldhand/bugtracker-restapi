@@ -21,7 +21,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         public ActionResult<IEnumerable<EmployeeDto>> GetAllEmployees([FromQuery] PaginationQuery employeeQuery)
         {
             var employeeDtos = _employeeService.GetAll(employeeQuery);
@@ -36,7 +36,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         public ActionResult<EmployeeDto> GetEmployeeById([FromRoute] int id)
         {
             EmployeeDto employeeDto = _employeeService.GetById(id);
@@ -44,7 +44,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         public ActionResult UpdateEmployee([FromBody] UpdateEmployeeDto dto, [FromRoute] int id)
         {
             _employeeService.Update(id, dto);

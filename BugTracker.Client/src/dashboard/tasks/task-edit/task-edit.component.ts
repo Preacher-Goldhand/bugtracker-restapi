@@ -73,13 +73,23 @@ export class TaskEditComponent implements OnInit {
   }
 
   editTask(): void {
-    this.http.put(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`, this.task)
-      .subscribe({
-        next: value => {
-          this.router.navigate(['/board-details', this._boardId]);
-        },
-        error: err => { }
-      });
+    const userDetails = this.accountService.getUserDetails();
+
+    if (userDetails && userDetails.availableHours !== undefined) {
+      if (this.task.storyPoints > userDetails.availableHours) {
+        console.error("Przydzielone punkty przekraczają dostępne godziny użytkownika.");
+      } else {
+        this.http.put(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`, this.task)
+          .subscribe({
+            next: value => {
+              this.router.navigate(['/board-details', this._boardId]);
+            },
+            error: err => { }
+          });
+      }
+    } else {
+      console.error("Brak dostępnych godzin użytkownika.");
+    }
   }
 
   cancelEditTask(): void {
