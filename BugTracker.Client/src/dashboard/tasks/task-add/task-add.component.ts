@@ -9,6 +9,7 @@ import {EmployeeShortData} from "../../models/employee-short-data";
 import {AccountService} from "../../../app/services/account.service";
 import {TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap} from "../../models/consts";
 import {Select2Group} from 'ng-select2-component';
+import { UserDetails } from '../../../app/model/user-details';
 
 @Component({
   selector: 'app-task-add',
@@ -66,13 +67,23 @@ export class TaskAddComponent implements OnInit {
   }
 
   addTask(): void {
-    this.http.post(`https://localhost:7126/bugtracker/board/${this._boardId}/task`, this.task)
-      .subscribe({
-        next: value => {
-          this.router.navigate(['/board-details', this._boardId]);
-        },
-        error: err => {}
-      })
+    const userDetails: UserDetails | undefined = this.accountService.getUserDetails();
+
+    if (userDetails && userDetails.availableHours !== undefined) {
+      if (this.task.storyPoints > userDetails.availableHours) {
+        console.error("Przydzielone punkty przekraczają dostępne godziny użytkownika.");
+      } else {
+        this.http.post(`https://localhost:7126/bugtracker/board/${this._boardId}/task`, this.task)
+          .subscribe({
+            next: value => {
+              this.router.navigate(['/board-details', this._boardId]);
+            },
+            error: err => { }
+          });
+      }
+    } else {
+      console.error("Brak dostępnych godzin użytkownika.");
+    }
   }
 
   cancelTask(): void {
