@@ -103,6 +103,7 @@ namespace BugTracker.Services
             employee.EmployeeEmail = dto.EmployeeEmail;
             employee.EmployeePhoneNumber = dto.EmployeePhoneNumber;
             employee.EmployeePasswordHash = dto.EmployeePasswordHash;
+            employee.AvailableHours = dto.AvailableHours;
             employee.RoleId = dto.RoleId;
             employee.EmployeeStatus = dto.EmployeeStatus;
 

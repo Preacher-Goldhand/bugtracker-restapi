@@ -58,7 +58,7 @@ export class TaskEditComponent implements OnInit {
       if (this._boardId !== undefined && this._taskId !== undefined) {
         this.http.get<Task>(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`)
           .subscribe((data) => {
-            this.task = data
+            this.task = data;
           });
       }
       const url = `https://localhost:7126/bugtracker/employee/short`;

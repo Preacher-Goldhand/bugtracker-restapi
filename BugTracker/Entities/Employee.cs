@@ -25,6 +25,7 @@ namespace BugTracker.Entities
         public string EmployeeEmail { get; set; }
 
         public string EmployeePasswordHash { get; set; }
+        public int AvailableHours { get; set; }
 
         public int RoleId { get; set; } = 1;
         public virtual Role Role { get; set; }

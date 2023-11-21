@@ -1,3 +1,4 @@
+<!-- task-edit.component.html -->
 <div class="content">
   <form (ngSubmit)="editTask()" #taskForm="ngForm">
     <div class="form-row">
@@ -112,8 +113,7 @@
     </div>
     <div class="form-row">
       <div class="col mb-3 text-end">
-        <button type="submit" class="btn btn-sm btn-success m-1"
-                [disabled]="taskForm.invalid">
+        <button type="submit" class="btn btn-sm btn-success m-1" [disabled]="taskForm.invalid">
           Save
         </button>
         <button type="button" class="btn btn-sm btn-danger m-1" (click)="cancelEditTask()">Cancel</button>

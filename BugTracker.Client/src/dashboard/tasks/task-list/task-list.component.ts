@@ -49,7 +49,7 @@ export class TaskListComponent implements OnInit {
   editQuest(boardId: number, taskId: any) {
     this.router.navigate(['/task-edit', boardId, taskId]);
   }
-
+ 
   goBoards(): void {
     this.router.navigate(['/boards']);
   }

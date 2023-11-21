@@ -11,6 +11,7 @@
         public string EmployeeEmail { get; set; }
 
         public string EmployeePhoneNumber { get; set; }
+        public int AvailableHours { get; set; }
 
         public string EmployeeStatus { get; set; }
 

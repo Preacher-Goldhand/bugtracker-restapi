@@ -74,6 +74,7 @@ namespace BugTracker.Services
                 new Claim(ClaimTypes.NameIdentifier, employee.Id.ToString()),
                 new Claim(ClaimTypes.Name, $"{employee.FirstName } {employee.LastName}"),
                 new Claim(ClaimTypes.Role, $"{employee.Role.Name}"),
+                new Claim(AvailableHoursCustomClaim.AvailableHours, employee.AvailableHours.ToString())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
@@ -88,11 +89,6 @@ namespace BugTracker.Services
             var jwtToken = tokenHandler.WriteToken(token);
             return jwtToken;
         }
-
-        //public void Logout()
-        //{
-        //    _httpContextAccessor.HttpContext.Response.Cookies.Delete("jwt");
-        //}
 
         public void ChangePassword(ChangePasswordDto dto)
         {
