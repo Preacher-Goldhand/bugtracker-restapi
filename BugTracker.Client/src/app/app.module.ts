@@ -24,6 +24,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { Select2Module } from 'ng-select2-component';
 import {TaskListComponent} from "../dashboard/tasks/task-list/task-list.component";
 import { TaskEditComponent } from '../dashboard/tasks/task-edit/task-edit.component';
+import { EmployeesComponent } from '../dashboard/employees/employees.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TaskEditComponent } from '../dashboard/tasks/task-edit/task-edit.compon
     TaskCommentComponent,
     TaskImageComponent,
     TaskListComponent,
-    TaskEditComponent
+    TaskEditComponent,
+    EmployeesComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,6 @@ import { TaskEditComponent } from '../dashboard/tasks/task-edit/task-edit.compon
     Select2Module
   ],
   providers: [
-    // Rejestruj interceptror JwtInterceptor
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     DatePipe
   ],

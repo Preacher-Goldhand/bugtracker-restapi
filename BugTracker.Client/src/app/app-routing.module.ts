@@ -14,6 +14,7 @@ import { TaskAddComponent } from "../dashboard/tasks/task-add/task-add.component
 import { TaskCommentComponent } from "../dashboard/tasks/task-comment/task-comment.component";
 import { TaskListComponent } from "../dashboard/tasks/task-list/task-list.component";
 import { TaskEditComponent } from '../dashboard/tasks/task-edit/task-edit.component';
+import { EmployeesComponent } from '../dashboard/employees/employees.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: 'tasks', component: TaskListComponent },
   { path: 'task-add/:id', component: TaskAddComponent },
   { path: 'task-edit/:boardId/:taskId', component: TaskEditComponent },
-  { path: 'task-comment/:boardId/:taskId', component: TaskCommentComponent }
+  { path: 'task-comment/:boardId/:taskId', component: TaskCommentComponent },
+  { path: 'employees', component: EmployeesComponent },
 ];
 
 @NgModule({

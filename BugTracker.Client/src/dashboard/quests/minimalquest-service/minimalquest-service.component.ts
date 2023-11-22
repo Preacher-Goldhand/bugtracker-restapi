@@ -56,32 +56,30 @@ export class MinimalQuestServiceComponent implements OnInit {
 
   searchQuest() {
     if (this.searchPhrase === '') {
-      this.filteredQuests = [];
+      this.filteredQuests = this.boardDetails.boardTasks; 
       this.noResultsMessage = '';
-      return;
-    }
-
-    this.filteredQuests = this.boardDetails.boardTasks.filter(task =>
-      task.name.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
-      task.category.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
-      task.priority.toString().includes(this.searchPhrase) ||
-      task.taskStatus.toLowerCase().includes(this.searchPhrase.toLowerCase())
-    );
-
-    if (this.filteredQuests.length === 0) {
-      this.noResultsMessage = 'No results found for the entered search phrase';
     } else {
-      this.noResultsMessage = '';
+      this.filteredQuests = this.boardDetails.boardTasks.filter(task =>
+        task.name.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
+        task.category.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
+        task.priority.toString().includes(this.searchPhrase) ||
+        task.taskStatus.toLowerCase().includes(this.searchPhrase.toLowerCase())
+      );
+
+      this.noResultsMessage = this.filteredQuests.length === 0 ? 'No results found for the entered search phrase' : '';
     }
+
     this.updatePagedQuests();
   }
 
   addQuest(): void {
     this.router.navigate(['/task-add', this._boardId]);
   }
+
   editQuest(taskId: any) {
     this.router.navigate(['/task-edit', this._boardId, taskId]);
   }
+
   removeQuest(taskId: any) {
     const url = `https://localhost:7126/bugtracker/board/${this._boardId}/task/${taskId}`;
     const confirmDelete = confirm('Are you sure you want to delete this task');

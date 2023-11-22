@@ -13,9 +13,8 @@
       <button type="button" class="btn btn-success btn-sm" *ngIf="!noResultsMessage" (click)="addQuest()">Add New Task</button>
     </div>
   </div>
-
-  <table *ngIf="!noResultsMessage" class="table table-sm">
-    <thead *ngIf="filteredQuests.length === 0 || noResultsMessage !== ''">
+  <table *ngIf="filteredQuests.length > 0" class="table table-sm">
+    <thead>
       <tr>
         <th scope="col">Name</th>
         <th scope="col">Category</th>
@@ -29,8 +28,8 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody *ngIf="filteredQuests.length === 0 && noResultsMessage === ''">
-      <ng-container *ngFor="let task of boardDetails.boardTasks">
+    <tbody>
+      <ng-container *ngFor="let task of filteredQuests">
         <tr (click)="showDescription(task.id)" [ngClass]="{'table-light': task.taskStatus === 'CLOSED', 'text-decoration-line-through': task.taskStatus === 'CLOSED'}">
           <td>{{ task.name }}</td>
           <td>{{ taskCategoriesMap.get(task.category) }}</td>
@@ -66,7 +65,7 @@
       </ng-container>
     </tbody>
   </table>
-  <table class="table table-sm" *ngIf="filteredQuests.length > 0">
+  <table class="table table-sm" *ngIf="filteredQuests.length === 0">
     <thead>
       <tr>
         <th scope="col">Name</th>
