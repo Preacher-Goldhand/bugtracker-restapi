@@ -17,7 +17,7 @@
         <th scope="col">Phone Number</th>
         <th scope="col">Available Hours</th>
         <th scope="col">Status</th>
-        <th scope="col">Role ID</th>
+        <th scope="col">Role</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -31,7 +31,7 @@
           <td>{{ employee.employeePhoneNumber }}</td>
           <td>{{ employee.availableHours }}</td>
           <td>{{ employee.employeeStatus }}</td>
-          <td>{{ employee.roleId }}</td>
+          <td>{{ getRoleName(employee.roleId) }}</td>
           <td class="actions">
             <button type="button" class="btn btn-primary btn-sm" (click)="editEmployee(employee.id)">Edit</button>
           </td>
@@ -49,7 +49,7 @@
         <th scope="col">Phone Number</th>
         <th scope="col">Available Hours</th>
         <th scope="col">Status</th>
-        <th scope="col">Role ID</th>
+        <th scope="col">Role</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -63,7 +63,7 @@
           <td>{{ employee.employeePhoneNumber }}</td>
           <td>{{ employee.availableHours }}</td>
           <td>{{ employee.employeeStatus }}</td>
-          <td>{{ employee.roleId }}</td>
+          <td>{{ getRoleName(employee.roleId) }}</td>
           <td class="actions">
             <button type="button" class="btn btn-primary btn-sm" (click)="editEmployee(employee.id)">Edit</button>
           </td>

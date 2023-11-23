@@ -77,6 +77,19 @@ export class EmployeesComponent {
     this.router.navigate(['/employee-edit', employeeId]);
   }
 
+  getRoleName(roleId: number): string {
+    switch (roleId) {
+      case 1:
+        return 'User';
+      case 2:
+        return 'Manager';
+      case 3:
+        return 'Admin';
+      default:
+        return 'Unknown Role';
+    }
+  }
+
   updatePage() {
     this.pageNumber = 1;
     this.searchEmployee();
