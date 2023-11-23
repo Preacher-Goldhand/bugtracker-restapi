@@ -81,6 +81,9 @@ export class TaskEditComponent implements OnInit {
       if (+this.task.storyPoints > +userDetails.availableHours) {
         alert("Story Points exceed available hours.");
       } else {
+        const updatedHours = userDetails.availableHours - +this.task.storyPoints;
+        this.accountService.updateAvailableHours(updatedHours);
+
         this.http.put(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`, this.task)
           .subscribe({
             next: value => {

@@ -29,14 +29,6 @@ namespace BugTracker.Controllers
             return Ok(id);
         }
 
-        //[HttpGet]
-        //public ActionResult<IEnumerable<QuestDto>> GetAllQuests(int boardId, [FromQuery] PaginationQuery questQuery)
-        //{
-        //    var questDtos = _questService.GetAll(boardId, questQuery);
-        //    return Ok(questDtos);
-        //}
-
-
         [HttpPost("{taskId}/comment")]
         public ActionResult AddComment([FromRoute] int taskId, [FromBody] CreateTaskCommentDto dto)
         {

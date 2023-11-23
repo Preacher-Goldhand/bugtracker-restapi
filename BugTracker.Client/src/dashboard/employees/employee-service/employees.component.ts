@@ -32,8 +32,6 @@ export class EmployeesComponent {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this._employeeId = params['id'];
-      console.log('EmployeeId from route params:', this._employeeId);
-      console.log('employeeDetails:', this.employeeDetails);
       this.getData();
     });
   }
@@ -71,9 +69,7 @@ export class EmployeesComponent {
     this.updatePagedEmployees();
   }
 
-
   editEmployee(employeeId: number) {
-    console.log('Editing employee with id:', employeeId);
     this.router.navigate(['/employee-edit', employeeId]);
   }
 

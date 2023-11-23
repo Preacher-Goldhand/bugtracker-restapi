@@ -33,11 +33,14 @@ export class AccountService {
         role: jwt["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
         availableHours: jwt["http://schemas.bugtracker.com/claims/availableHours"]
     };
-    console.log("Available Hours:", this.userDetails.availableHours);
     this._userLogin.next(true);
   }
 
   public getUserDetails(): UserDetails {
     return this.userDetails;
+  }
+
+  public updateAvailableHours(hours: number): void {
+    this.userDetails.availableHours = hours;
   }
 }
