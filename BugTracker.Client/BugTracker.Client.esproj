@@ -12,7 +12,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\app\interceptors\" />
-    <Folder Include="src\dashboard\employees\" />
     <Folder Include="src\dashboard\files\" />
   </ItemGroup>
   <ItemGroup>

@@ -13,7 +13,6 @@ import { DatePipe } from '@angular/common';
 import { HomeDashboardComponent } from '../dashboard/home-dashboard/home-dashboard.component';
 import { BoardServiceComponent } from '../dashboard/boards/board-service/board-service.component';
 import { CreateBoardComponent } from '../dashboard/boards/board-service/create-board/create-board.component';
-import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-service/minimalquest-service.component';
 import { UpdateBoardComponent } from '../dashboard/boards/update-board/update-board.component';
 import { LogoutComponent } from '../account/logout/logout.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -24,7 +23,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { Select2Module } from 'ng-select2-component';
 import {TaskListComponent} from "../dashboard/tasks/task-list/task-list.component";
 import { TaskEditComponent } from '../dashboard/tasks/task-edit/task-edit.component';
-import { EmployeesComponent } from '../dashboard/employees/employees.component';
+import { MinimalQuestServiceComponent } from '../dashboard/tasks/quest-service/minimalquest-service.component';
+import { EmployeesComponent } from '../dashboard/employees/employee-service/employees.component';
+import { EmployeeEditComponent } from '../dashboard/employees/employee-edit/employee-edit.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { EmployeesComponent } from '../dashboard/employees/employees.component';
     TaskImageComponent,
     TaskListComponent,
     TaskEditComponent,
-    EmployeesComponent
+    EmployeesComponent,
+    EmployeeEditComponent
   ],
   imports: [
     BrowserModule,

@@ -2,8 +2,9 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmployeeData } from '../models/employee-model';
-import { PagedResult } from '../models/paged-result.model';
+import { EmployeeData } from '../../models/employee-model';
+import { PagedResult } from '../../models/paged-result.model';
+
 
 @Component({
   selector: 'app-employees',
@@ -21,6 +22,7 @@ export class EmployeesComponent {
   pageNumber: number = 1;
   totalPages: number = 0;
 
+  private _employeeId: number | undefined;
 
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
@@ -29,6 +31,9 @@ export class EmployeesComponent {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      this._employeeId = params['id'];
+      console.log('EmployeeId from route params:', this._employeeId);
+      console.log('employeeDetails:', this.employeeDetails);
       this.getData();
     });
   }
@@ -67,8 +72,22 @@ export class EmployeesComponent {
   }
 
 
-  editEmployee(employeeId: any) {
+  editEmployee(employeeId: number) {
+    console.log('Editing employee with id:', employeeId);
     this.router.navigate(['/employee-edit', employeeId]);
+  }
+
+  getRoleName(roleId: number): string {
+    switch (roleId) {
+      case 1:
+        return 'User';
+      case 2:
+        return 'Manager';
+      case 3:
+        return 'Admin';
+      default:
+        return 'Unknown Role';
+    }
   }
 
   updatePage() {

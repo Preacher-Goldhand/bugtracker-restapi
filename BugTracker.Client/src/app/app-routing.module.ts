@@ -7,14 +7,15 @@ import { ChangePasswordComponent } from '../account/change-password/change-passw
 import { HomeDashboardComponent } from '../dashboard/home-dashboard/home-dashboard.component';
 import { BoardServiceComponent } from '../dashboard/boards/board-service/board-service.component';
 import { CreateBoardComponent } from '../dashboard/boards/board-service/create-board/create-board.component';
-import { MinimalQuestServiceComponent } from '../dashboard/quests/minimalquest-service/minimalquest-service.component';
 import { UpdateBoardComponent } from '../dashboard/boards/update-board/update-board.component';
 import { LogoutComponent } from '../account/logout/logout.component';
 import { TaskAddComponent } from "../dashboard/tasks/task-add/task-add.component";
 import { TaskCommentComponent } from "../dashboard/tasks/task-comment/task-comment.component";
 import { TaskListComponent } from "../dashboard/tasks/task-list/task-list.component";
 import { TaskEditComponent } from '../dashboard/tasks/task-edit/task-edit.component';
-import { EmployeesComponent } from '../dashboard/employees/employees.component';
+import { MinimalQuestServiceComponent } from '../dashboard/tasks/quest-service/minimalquest-service.component';
+import { EmployeesComponent } from '../dashboard/employees/employee-service/employees.component';
+import { EmployeeEditComponent } from '../dashboard/employees/employee-edit/employee-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'task-edit/:boardId/:taskId', component: TaskEditComponent },
   { path: 'task-comment/:boardId/:taskId', component: TaskCommentComponent },
   { path: 'employees', component: EmployeesComponent },
+  { path: 'employee-edit/:id', component: EmployeeEditComponent },
 ];
 
 @NgModule({

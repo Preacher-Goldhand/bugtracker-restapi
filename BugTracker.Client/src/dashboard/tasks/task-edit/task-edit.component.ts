@@ -79,7 +79,7 @@ export class TaskEditComponent implements OnInit {
 
     if (userDetails && userDetails.availableHours !== undefined) {
       if (+this.task.storyPoints > +userDetails.availableHours) {
-        console.error("Przydzielone punkty przekraczają dostępne godziny użytkownika.");
+        alert("Story Points exceed available hours.");
       } else {
         this.http.put(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`, this.task)
           .subscribe({
@@ -88,9 +88,11 @@ export class TaskEditComponent implements OnInit {
             },
             error: err => { }
           });
+
+        this.accountService.getUserDetails();
       }
     } else {
-      console.error("Brak dostępnych godzin użytkownika.");
+      alert("User's available hours not defined.");
     }
   }
 
