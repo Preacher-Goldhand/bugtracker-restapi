@@ -74,8 +74,8 @@
                  [(ngModel)]="task.assigneeId"
                  #assignee="ngModel"
                  id="assignee"
-                 name="assignee"></select2>
-
+                 name="assignee">
+        </select2>
         <div *ngIf="assignee.errors?.['required'] && (assignee.dirty || assignee.touched)" class="error">
           Assignee is required.
         </div>

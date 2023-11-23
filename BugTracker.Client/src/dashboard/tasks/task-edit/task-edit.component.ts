@@ -47,13 +47,20 @@ export class TaskEditComponent implements OnInit {
   private _taskId: number | undefined;
 
   constructor(private route: ActivatedRoute,
-    private http: HttpClient,
-    private router: Router, private accountService: AccountService) { }
+              private http: HttpClient,
+              private router: Router,
+              private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this._boardId = params['boardId'];
       this._taskId = params['taskId'];
+
+      const url = `https://localhost:7126/bugtracker/employee/short`;
+      this.http.get<EmployeeShortData[]>(url)
+        .subscribe((result: EmployeeShortData[]) => {
+          this.selectGroupEmployeesData = this.mapToSelectGroup(result) as Select2Group[];
+        });
 
       if (this._boardId !== undefined && this._taskId !== undefined) {
         this.http.get<Task>(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`)
@@ -61,11 +68,6 @@ export class TaskEditComponent implements OnInit {
             this.task = data;
           });
       }
-      const url = `https://localhost:7126/bugtracker/employee/short`;
-      this.http.get<EmployeeShortData[]>(url)
-        .subscribe((result: EmployeeShortData[]) => {
-          this.selectGroupEmployeesData = this.mapToSelectGroup(result) as Select2Group[];
-        });
 
       this.task.boardId = this._boardId ?? 0;
       this.task.assignerId = this.accountService.getUserDetails()?.id ?? 0;
@@ -76,7 +78,7 @@ export class TaskEditComponent implements OnInit {
     const userDetails = this.accountService.getUserDetails();
 
     if (userDetails && userDetails.availableHours !== undefined) {
-      if (this.task.storyPoints > userDetails.availableHours) {
+      if (+this.task.storyPoints > +userDetails.availableHours) {
         console.error("Przydzielone punkty przekraczają dostępne godziny użytkownika.");
       } else {
         this.http.put(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`, this.task)

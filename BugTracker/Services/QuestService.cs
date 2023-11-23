@@ -113,6 +113,7 @@ namespace BugTracker.Services
             quest.LoggedTime = dto.LoggedTime;
             quest.Priority = dto.Priority;
             quest.TaskStatus = dto.TaskStatus;
+            quest.StoryPoints = dto.StoryPoints;
 
             var assigner = _dbContext.Employees.FirstOrDefault(e => e.FirstName == dto.AssignerFirstName && e.LastName == dto.AssignerLastName);
             if (assigner == null)

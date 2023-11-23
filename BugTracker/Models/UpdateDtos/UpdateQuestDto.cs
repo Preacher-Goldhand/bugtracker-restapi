@@ -25,5 +25,7 @@ namespace BugTracker.Models.UpdateDtos
         public int AssigneeId { get; set; }
         public string AssigneeFirstName { get; set; }
         public string AssigneeLastName { get; set; }
+
+        public int StoryPoints { get; set; }
     }
 }

@@ -9,7 +9,7 @@
 .pagination {
   display: flex;
   justify-content: left;
-  align-items: end;
+  align-items: flex-end;
   margin-top: 20px;
 }
 
