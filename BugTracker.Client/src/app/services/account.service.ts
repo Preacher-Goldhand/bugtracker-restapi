@@ -34,6 +34,7 @@ export class AccountService {
         availableHours: jwt["http://schemas.bugtracker.com/claims/availableHours"]
     };
     console.log("Available Hours:", this.userDetails.availableHours);
+    this._userLogin.next(true);
   }
 
   public getUserDetails(): UserDetails {

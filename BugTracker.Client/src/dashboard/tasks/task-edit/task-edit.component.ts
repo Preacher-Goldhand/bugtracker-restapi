@@ -86,6 +86,8 @@ export class TaskEditComponent implements OnInit {
             },
             error: err => { }
           });
+
+        this.accountService.getUserDetails();
       }
     } else {
       alert("User's available hours not defined.");
