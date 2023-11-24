@@ -32,4 +32,7 @@ export class CreateBoardComponent {
         }
       );
   }
+  cancelEditBoard(): void {
+      this.router.navigate(['/boards']);
+  }
 }

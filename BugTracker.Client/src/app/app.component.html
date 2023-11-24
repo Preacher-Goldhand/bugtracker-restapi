@@ -1,36 +1,27 @@
-<ng-template [ngIf]="userLogin" [ngIfElse]="loggedOut">
-    <div class="custom-container">
-        <div class="sidebar">
-          <div class="brand">
-              <p>BUGTRACKER</p>
-          </div>
-          <nav>
-            <a routerLink="/boards">BOARDS</a>
-            <a routerLink="/tasks">MY TASKS</a>
-            <a routerLink="/employees">EMPLOYEES</a>
-            <a routerLink="/logout">LOGOUT</a>
-          </nav>
-        </div>
-        <div class="content">
-          <router-outlet></router-outlet>
-        </div>
+<div class="custom-container">
+  <div class="sidebar">
+    <div class="brand">
+      <p>BUGTRACKER</p>
     </div>
-</ng-template>
-<ng-template #loggedOut>
-    <div class="custom-container">
-        <div class="sidebar">
-          <div class="brand">
-            <p>BUGTRACKER</p>
-          </div>
-          <nav>
-            <a routerLink="/login">LOGIN</a>
-            <a routerLink="/register">REGISTER</a>
-            <a routerLink="/change-password">CHANGE PASSWORD</a>
-          </nav>
-        </div>
-        <div class="content">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
-</ng-template>
-
+    <ng-container *ngIf="userLogin; else loggedOutNav">
+      <nav>
+        <a routerLink="/boards">BOARDS</a>
+        <a routerLink="/tasks">MY TASKS</a>
+        <a routerLink="/employees">EMPLOYEES</a>
+        <a routerLink="/logout">LOGOUT</a>
+      </nav>
+      <p class="logged-in-message">Welcome, </p>
+      <p class="logged-in-message">{{ userName }}</p>
+    </ng-container>
+    <ng-template #loggedOutNav>
+      <nav>
+        <a routerLink="/login">LOGIN</a>
+        <a routerLink="/register">REGISTER</a>
+        <a routerLink="/change-password">CHANGE PASSWORD</a>
+      </nav>
+    </ng-template>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

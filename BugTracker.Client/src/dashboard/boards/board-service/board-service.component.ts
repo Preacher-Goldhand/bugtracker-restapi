@@ -55,6 +55,13 @@ export class BoardServiceComponent implements OnInit {
     this.getData();
   }
 
+  resetSearch() {
+    this.searchPhrase = '';
+    this.pageNumber = 1;
+    this.getData();
+    window.location.reload();
+  }
+
   addBoard() {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/add-board']);

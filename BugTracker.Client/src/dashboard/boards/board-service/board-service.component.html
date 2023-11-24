@@ -5,6 +5,7 @@
     </div>
     <div class="col-6">
       <button class="btn btn-outline-primary btn-sm search-button" (click)="searchBoard()">Search</button>
+      <button class="btn btn-outline-secondary btn-sm reset-button" (click)="resetSearch()">Reset</button>
     </div>
   </div>
   <button *ngIf="!noResultsMessage" class="btn btn-success btn-sm add-board" (click)="addBoard()">New Board</button>

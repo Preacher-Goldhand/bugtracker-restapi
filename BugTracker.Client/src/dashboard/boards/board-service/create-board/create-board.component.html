@@ -1,16 +1,33 @@
 <div class="content">
   <form (ngSubmit)="createBoard()" #boardForm="ngForm">
-    <div>
-      <label for="Name">Name</label>
-      <input type="text" id="Name" name="Name" required [(ngModel)]="createBoardData.Name" #name="ngModel">
-      <div *ngIf="name.errors?.['required'] && (name.dirty || name.touched)" class="error">
-        Name is required.
+    <div class="form-row">
+      <div class="col mb-3">
+        <label for="name">Name</label>
+        <input type="text" class="form-control form-control-sm" id="name" name="name"
+               [(ngModel)]="createBoardData.Name" #name="ngModel" required />
+        <div *ngIf="name.errors?.['required'] && (name.dirty || name.touched)" class="error">
+          Name is required.
+        </div>
       </div>
     </div>
-    <div>
-      <label for="DateOfCreation">DateOfCreation</label>
-      <input type="date" id="DateOfCreation" name="DateOfCreation" [(ngModel)]="createBoardData.DateOfCreation" #dateOfCreation="ngModel">
+    <div class="form-row">
+      <div class="col mb-3">
+        <label for="dateOfCreation">Date of Creation</label>
+        <input type="date" class="form-control form-control-sm" id="dateOfCreation" name="dateOfCreation"
+               [(ngModel)]="createBoardData.DateOfCreation" #dateOfCreation="ngModel" required />
+        <div *ngIf="dateOfCreation.errors?.['required'] && (dateOfCreation.dirty || dateOfCreation.touched)" class="error">
+          Date of Creation is required.
+        </div>
+      </div>
     </div>
-    <button class="btn" type="submit" [disabled]="boardForm.invalid">Add Board</button>
+    <div class="form-row">
+      <div class="col mb-3 text-end">
+        <button type="submit" class="btn btn-sm btn-success m-1"
+                [disabled]="boardForm.invalid">
+          Save
+        </button>
+        <button type="button" class="btn btn-sm btn-danger m-1" (click)="cancelEditBoard()">Cancel</button>
+      </div>
+    </div>
   </form>
 </div>
