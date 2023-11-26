@@ -40,7 +40,6 @@ namespace BugTracker.Services
 
             var totalItemsCount = allTasks.Count();
 
-            // Mapowanie danych zadań na DTO z uwzględnieniem informacji o osobach (tylko imię i nazwisko)
             var myTasks = tasks.Select(task => new MyTaskDto
             {
                 Id = task.Id,

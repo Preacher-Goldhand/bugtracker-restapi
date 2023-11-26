@@ -1,40 +1,44 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AccountService } from '../../../app/services/account.service';
 import { EmployeeData } from '../../models/employee-model';
 import { PagedResult } from '../../models/paged-result.model';
-
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.css']
 })
-export class EmployeesComponent {
-
+export class EmployeesComponent implements OnInit {
   employeeDetails: EmployeeData[] = [];
-
   searchPhrase: string = '';
   filteredEmployees: EmployeeData[] = [];
   noResultsMessage: string = '';
   pageSize: number = 5;
   pageNumber: number = 1;
   totalPages: number = 0;
-
   private _employeeId: number | undefined;
+  private availableHoursSubscription!: Subscription;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private http: HttpClient,
     private datePipe: DatePipe,
-    private router: Router) { }
+    private router: Router,
+    private accountService: AccountService
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this._employeeId = params['id'];
-      console.log('EmployeeId from route params:', this._employeeId);
-      console.log('employeeDetails:', this.employeeDetails);
       this.getData();
+      this.availableHoursSubscription = this.accountService._availableHours$
+        .subscribe(updatedHours => {
+          this.updateAvailableHoursInView(updatedHours);
+        });
     });
   }
 
@@ -44,6 +48,7 @@ export class EmployeesComponent {
       .subscribe((result: PagedResult<EmployeeData>) => {
         this.employeeDetails = result.items;
         this.totalPages = result.totalPages;
+        this.accountService.setFilteredEmployees(this.employeeDetails);
       });
   }
 
@@ -71,10 +76,30 @@ export class EmployeesComponent {
     this.updatePagedEmployees();
   }
 
+  resetSearch() {
+    this.searchPhrase = '';
+    this.pageNumber = 1;
+    this.getData();
+    window.location.reload();
+  }
 
   editEmployee(employeeId: number) {
-    console.log('Editing employee with id:', employeeId);
     this.router.navigate(['/employee-edit', employeeId]);
+  }
+
+  removeEmployee(employeeId: number) {
+    const url = `https://localhost:7126/bugtracker/employee/${employeeId}`;
+    const confirmDelete = confirm('Are you sure you want to delete this employee');
+
+    if (confirmDelete) {
+      this.http.delete<EmployeeData>(url)
+        .subscribe(() => {
+          this.router.navigate(['/employees']);
+          this.getData();
+        });
+    } else {
+      this.router.navigate(['/employees']);
+    }
   }
 
   getRoleName(roleId: number): string {
@@ -118,5 +143,13 @@ export class EmployeesComponent {
   formatDateString(date: Date): string {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return this.datePipe.transform(date, 'shortDate')!;
+  }
+
+  private updateAvailableHoursInView(updatedHours: number): void {
+    const index = this.filteredEmployees.findIndex(employee => employee.id === this._employeeId);
+
+    if (index !== -1) {
+      this.filteredEmployees[index].availableHours = updatedHours;
+    }
   }
 }

@@ -72,6 +72,12 @@ export class MinimalQuestServiceComponent implements OnInit {
     this.updatePagedQuests();
   }
 
+  resetSearch() {
+    this.searchPhrase = '';
+    this.pageNumber = 1;
+    window.location.reload();
+  }
+
   addQuest(): void {
     this.router.navigate(['/task-add', this._boardId]);
   }
@@ -87,11 +93,10 @@ export class MinimalQuestServiceComponent implements OnInit {
     if (confirmDelete) {
       this.http.delete<DetailedBoardData>(url)
         .subscribe(() => {
-          this.router.navigate(['/boards']);
-          this.getData(this._boardId);
+          window.location.reload();
         });
     } else {
-      this.router.navigate(['/boards']);
+      window.location.reload();
     }
   }
 

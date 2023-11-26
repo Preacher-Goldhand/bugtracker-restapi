@@ -1,3 +1,5 @@
+// task-edit.component.ts
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -47,9 +49,9 @@ export class TaskEditComponent implements OnInit {
   private _taskId: number | undefined;
 
   constructor(private route: ActivatedRoute,
-              private http: HttpClient,
-              private router: Router,
-              private accountService: AccountService) { }
+    private http: HttpClient,
+    private router: Router,
+    private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -81,6 +83,9 @@ export class TaskEditComponent implements OnInit {
       if (+this.task.storyPoints > +userDetails.availableHours) {
         alert("Story Points exceed available hours.");
       } else {
+        const updatedHours = userDetails.availableHours - +this.task.storyPoints;
+        this.accountService.updateAvailableHours(updatedHours);
+
         this.http.put(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`, this.task)
           .subscribe({
             next: value => {
