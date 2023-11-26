@@ -115,14 +115,14 @@ namespace BugTracker.Services
             quest.TaskStatus = dto.TaskStatus;
             quest.StoryPoints = dto.StoryPoints;
 
-            var assigner = _dbContext.Employees.FirstOrDefault(e => e.FirstName == dto.AssignerFirstName && e.LastName == dto.AssignerLastName);
+            var assigner = _dbContext.Employees.FirstOrDefault(e => e.Id == dto.AssignerId);
             if (assigner == null)
             {
                 throw new NotFoundException("Assigner not found");
             }
             quest.AssignerId = assigner.Id;
 
-            var assignee = _dbContext.Employees.FirstOrDefault(e => e.FirstName == dto.AssigneeFirstName && e.LastName == dto.AssigneeLastName);
+            var assignee = _dbContext.Employees.FirstOrDefault(e => e.Id == dto.AssigneeId);
             if (assignee == null)
             {
                 throw new NotFoundException("Assignee not found");
