@@ -36,6 +36,7 @@ builder.Services.AddScoped<IQuestService, QuestService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IMyTaskService, MyTaskService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IPasswordHasher<Employee>, PasswordHasher<Employee>>();
 builder.Services.AddScoped<IValidator<RegisterEmployeeDto>, RegisterEmployeeDtoValidator>();
 builder.Services.AddScoped<IValidator<PaginationQuery>, BoardPaginationQueryValidator>();

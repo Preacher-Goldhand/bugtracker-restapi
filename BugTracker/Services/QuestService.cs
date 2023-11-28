@@ -31,11 +31,15 @@ namespace BugTracker.Services
     {
         private readonly BugTrackerDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
+        private readonly IConfiguration _configuration;
 
-        public QuestService(BugTrackerDbContext dbContext, IMapper mapper)
+        public QuestService(BugTrackerDbContext dbContext, IMapper mapper, IEmailService emailService, IConfiguration configuration)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _emailService = emailService;
+            _configuration = configuration;
         }
 
         public int Create(int boardId, CreateQuestDto dto)
@@ -47,12 +51,38 @@ namespace BugTracker.Services
                 .Include(b => b.BoardTasks)
                 .FirstOrDefault(b => b.Id == boardId);
 
+
             if (board == null)
             {
                 throw new NotFoundException($"Board with id {boardId} not found.");
             }
 
             board.BoardTasks.Add(quest);
+
+            var smtpSettings = _configuration.GetSection("SmtpSettings");
+            var assigneeEmail = _dbContext.Employees
+                .Where(e => e.Id == dto.AssigneeId)
+                .Select(e => e.EmployeeEmail)
+                .FirstOrDefault();
+
+            if (assigneeEmail == null)
+            {
+                throw new NotFoundException($"Employee with id {dto.AssigneeId} not found.");
+            }
+
+            var emailDto = new EmailDto
+            {
+                ToEmail = assigneeEmail,
+                Subject = "New Task Assignment",
+                Body = $"You have been assigned a new task: {quest.Name}",
+                Host = smtpSettings["Host"],
+                Port = int.Parse(smtpSettings["Port"]),
+                UseSsl = bool.Parse(smtpSettings["UseSsl"]),
+                Username = smtpSettings["Username"],
+                Password = smtpSettings["Password"]
+            };
+
+            _emailService.SendEmail(emailDto);
 
             _dbContext.SaveChanges();
             return quest.Id;
