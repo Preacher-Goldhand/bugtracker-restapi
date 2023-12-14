@@ -14,10 +14,13 @@
         </div>
         <div class="task-comment-footer">
           <div>
-            <button class="btn btn-sm btn-outline-dark" (click)="editComment(comment.id)">Edit</button>
+            <button class="btn btn-primary btn-sm"  (click)="editComment(comment.id)">Edit</button>
           </div>
           <div>
             <app-task-image *ngIf="comment.fileName" [boardId]="boardId" [comment]="comment"></app-task-image>
+            <div *ngIf="comment.fileName">
+              <p>{{ comment.fileName }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -45,7 +48,7 @@
           <div class="col mb-3">
             <div class="input-group">
               <input class="form-control form-control-sm" type="file"
-              (change)="onFileSelected($event)" #fileUpload />
+                     (change)="onFileSelected($event)" #fileUpload />
             </div>
           </div>
         </div>
@@ -54,14 +57,18 @@
             <ng-template [ngIf]="editMode" [ngIfElse]="addMode">
               <div>
                 <button type="submit" class="btn btn-sm btn-success m-1"
-                        [disabled]="commentForm.invalid">Save</button>
+                        [disabled]="commentForm.invalid">
+                  Save
+                </button>
                 <button type="button" class="btn btn-sm btn-danger m-1" (click)="cancelEdit()">Cancel</button>
               </div>
             </ng-template>
             <ng-template #addMode>
               <div>
                 <button type="submit" class="btn btn-sm btn-success m-1"
-                        [disabled]="commentForm.invalid">Add</button>
+                        [disabled]="commentForm.invalid">
+                  Add
+                </button>
                 <button type="button" class="btn btn-sm btn-danger m-1" (click)="cancelComments()">Cancel</button>
               </div>
             </ng-template>

@@ -22,6 +22,7 @@ export class EmployeesComponent implements OnInit {
   totalPages: number = 0;
   private _employeeId: number | undefined;
   private availableHoursSubscription!: Subscription;
+  isUser: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +41,13 @@ export class EmployeesComponent implements OnInit {
           this.updateAvailableHoursInView(updatedHours);
         });
     });
+    const userRole = this.accountService.getUserDetails().role;
+    this.isUser = userRole === 'User';
+
+    if (this.isUser) {
+      alert('Welcome! You are in the User role.');
+    }
+
   }
 
   getData(): void {

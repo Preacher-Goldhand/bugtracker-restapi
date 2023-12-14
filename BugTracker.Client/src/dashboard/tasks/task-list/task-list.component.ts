@@ -22,6 +22,7 @@ export class TaskListComponent implements OnInit {
 
   pageNumber: number = 1;
   pageSize: number = 5;
+  tasksLoaded: boolean = false;
   private totalPages: number = 0;
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -35,6 +36,7 @@ export class TaskListComponent implements OnInit {
     this.http.get<PagedResult<MyTask>>(url)
       .subscribe((result: PagedResult<MyTask>) => {
         this.tasks = result.items;
+        this.tasksLoaded = true;
       });
   }
 

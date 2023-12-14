@@ -70,19 +70,7 @@ namespace BugTracker.Services
                 throw new NotFoundException($"Employee with id {dto.AssigneeId} not found.");
             }
 
-            var emailDto = new EmailDto
-            {
-                ToEmail = assigneeEmail,
-                Subject = "New Task Assignment",
-                Body = $"You have been assigned a new task: {quest.Name}",
-                Host = smtpSettings["Host"],
-                Port = int.Parse(smtpSettings["Port"]),
-                UseSsl = bool.Parse(smtpSettings["UseSsl"]),
-                Username = smtpSettings["Username"],
-                Password = smtpSettings["Password"]
-            };
-
-            _emailService.SendEmail(emailDto);
+            SendTaskAssignmentEmail(dto.AssigneeId, quest.Name);
 
             _dbContext.SaveChanges();
             return quest.Id;
@@ -159,6 +147,14 @@ namespace BugTracker.Services
             }
             quest.AssigneeId = assignee.Id;
 
+            var smtpSettings = _configuration.GetSection("SmtpSettings");
+            var assigneeEmail = _dbContext.Employees
+                .Where(e => e.Id == dto.AssigneeId)
+                .Select(e => e.EmployeeEmail)
+                .FirstOrDefault();
+
+            SendTaskAssignmentEmail(dto.AssigneeId, quest.Name);
+
             _dbContext.SaveChanges();
         }
 
@@ -203,6 +199,35 @@ namespace BugTracker.Services
             if (quest == null || quest.BoardId != boardId)
                 throw new NotFoundException("Task not found");
             return quest;
+        }
+
+        private void SendTaskAssignmentEmail(int assigneeId, string taskName)
+        {
+            var smtpSettings = _configuration.GetSection("SmtpSettings");
+
+            var assigneeEmail = _dbContext.Employees
+                .Where(e => e.Id == assigneeId)
+                .Select(e => e.EmployeeEmail)
+                .FirstOrDefault();
+
+            if (assigneeEmail == null)
+            {
+                throw new NotFoundException($"Employee with id {assigneeId} not found.");
+            }
+
+            var emailDto = new EmailDto
+            {
+                ToEmail = assigneeEmail,
+                Subject = "New Task Assignment",
+                Body = $"You have been assigned a new task: {taskName}",
+                Host = smtpSettings["Host"],
+                Port = int.Parse(smtpSettings["Port"]),
+                UseSsl = bool.Parse(smtpSettings["UseSsl"]),
+                Username = smtpSettings["Username"],
+                Password = smtpSettings["Password"]
+            };
+
+            _emailService.SendEmail(emailDto);
         }
     }
 }
