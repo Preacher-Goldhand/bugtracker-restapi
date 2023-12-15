@@ -68,14 +68,11 @@ export class MinimalQuestServiceComponent implements OnInit {
 
       this.noResultsMessage = this.filteredQuests.length === 0 ? 'No results found for the entered search phrase' : '';
     }
-
-    this.updatePagedQuests();
   }
 
   resetSearch() {
     this.searchPhrase = '';
     this.pageNumber = 1;
-    window.location.reload();
   }
 
   addQuest(): void {
@@ -112,29 +109,25 @@ export class MinimalQuestServiceComponent implements OnInit {
     }
   }
 
-  updatePage() {
-    this.pageNumber = 1;
-    this.searchQuest();
-  }
-
   previousPage() {
     if (this.pageNumber > 1) {
       this.pageNumber--;
-      this.searchQuest();
+      this.getData(this._boardId);
     }
   }
 
   nextPage() {
     if (this.pageNumber < this.totalPages) {
       this.pageNumber++;
-      this.searchQuest();
+      this.getData(this._boardId);
     }
   }
 
-  updatePagedQuests() {
-    const startIndex = (this.pageNumber - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.filteredQuests = this.filteredQuests.slice(startIndex, endIndex);
+  onPageSizeChange(event: Event) {
+    const pageSize = (event.target as HTMLSelectElement).value;
+    this.pageSize = + pageSize;
+    this.pageNumber = 1;
+    this.getData(this._boardId);
   }
 
   formatDateString(date: Date): string {

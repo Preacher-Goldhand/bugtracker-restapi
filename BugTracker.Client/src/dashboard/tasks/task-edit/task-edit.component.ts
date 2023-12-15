@@ -5,7 +5,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select2Group } from 'ng-select2-component';
 import { AccountService } from '../../../app/services/account.service';
+import { EmployeeHoursComponent } from '../../employee-hours/employee-hours.component';
 import { TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap } from '../../models/consts';
+import { EmployeeData } from '../../models/employee-model';
 import { EmployeeShortData } from '../../models/employee-short-data';
 import { TaskCategory } from '../../models/task-category';
 import { TaskPriority } from '../../models/task-priority';
@@ -33,6 +35,18 @@ export class TaskEditComponent implements OnInit {
     taskStatus: TaskStatus.TO_DO
   };
 
+  employee: EmployeeData = {
+    id: 0,
+    firstName: '',
+    lastName: '',
+    department: '',
+    employeeEmail: '',
+    employeePhoneNumber: '',
+    availableHours: 0,
+    employeeStatus: '',
+    roleId: 0,
+  };
+
   taskStatuses: TaskStatus[] = [TaskStatus.TO_DO, TaskStatus.IN_PROGRESS, TaskStatus.IN_TESTING, TaskStatus.DONE, TaskStatus.CLOSED];
   taskCategories: TaskCategory[] = [TaskCategory.ADMINISTRATIVE_TASK, TaskCategory.ANALYTIC_TASK, TaskCategory.BUGFIX_TASK,
   TaskCategory.DEVELOPMENT_TASK, TaskCategory.DEVOPS_TASK, TaskCategory.TESTING_TASK];
@@ -51,7 +65,8 @@ export class TaskEditComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    private availableHoursService: EmployeeHoursComponent) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -77,15 +92,20 @@ export class TaskEditComponent implements OnInit {
   }
 
   editTask(): void {
-    const userDetails = this.accountService.getUserDetails();
+    if (this.employee.availableHours !== undefined) {
+      const storyPoints = +this.task.storyPoints;
+      const availableHours = +this.employee.availableHours;
 
-    if (userDetails && userDetails.availableHours !== undefined) {
-      if (+this.task.storyPoints > +userDetails.availableHours) {
-        alert("Story Points exceed available hours.");
+      console.log('Story Points:', storyPoints);
+      console.log('Available Hours:', availableHours);
+
+      const updatedHours = availableHours - storyPoints;
+      this.availableHoursService.updateAvailableHours(updatedHours);
+      console.log('Updated Hours:', updatedHours);
+
+      if (storyPoints > availableHours) {
+        alert('Story Points exceed available hours.');
       } else {
-        const updatedHours = userDetails.availableHours - +this.task.storyPoints;
-        this.accountService.updateAvailableHours(updatedHours);
-
         this.http.put(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`, this.task)
           .subscribe({
             next: value => {

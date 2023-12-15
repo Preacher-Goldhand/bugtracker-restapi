@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EmployeeHoursComponent } from '../../employee-hours/employee-hours.component';
 import { EmployeeData } from '../../models/employee-model';
 
 @Component({
@@ -25,7 +26,8 @@ export class EmployeeEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router) { }
+    private router: Router,
+    private availableHoursService: EmployeeHoursComponent) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -35,6 +37,8 @@ export class EmployeeEditComponent implements OnInit {
         this.http.get<EmployeeData>(`https://localhost:7126/bugtracker/employee/${this._employeeId}`)
           .subscribe((data) => {
             this.employee = data;
+            this.availableHoursService.updateAvailableHours(data.availableHours);
+            console.log('Updated Hours:', data.availableHours);
           });
       }
     });

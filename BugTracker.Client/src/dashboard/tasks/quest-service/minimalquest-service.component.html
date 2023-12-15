@@ -1,17 +1,17 @@
 <div *ngIf="boardDetails">
   <h2>{{ boardDetails.name }}</h2>
   <div class="row align-items-center">
-    <div class="col-6">
+    <div *ngIf="boardDetails && (filteredQuests.length > 0 || boardDetails.boardTasks.length > 0)" class="col-6">
       <input type="text" class="form-control form-control-sm" [(ngModel)]="searchPhrase" />
     </div>
-    <div class="col-6">
+    <div *ngIf="boardDetails && (filteredQuests.length > 0 || boardDetails.boardTasks.length > 0)" class="col-6">
       <button class="btn btn-outline-primary btn-sm" (click)="searchQuest()">Search</button>
       <button class="btn btn-outline-secondary btn-sm" (click)="resetSearch()">Reset</button>
     </div>
   </div>
   <div class="row mt-2 mb-2">
     <div class="col">
-      <button type="button" class="btn btn-success btn-sm" *ngIf="!noResultsMessage" (click)="addQuest()">Add New Task</button>
+      <button type="button" class="btn btn-success btn-sm" *ngIf="!noResultsMessage" (click)="addQuest()">New Task</button>
     </div>
   </div>
   <table *ngIf="filteredQuests.length > 0" class="table table-sm">
@@ -67,7 +67,7 @@
     </tbody>
   </table>
   <table class="table table-sm" *ngIf="filteredQuests.length === 0">
-    <thead>
+    <thead *ngIf="boardDetails && (filteredQuests.length > 0 || boardDetails.boardTasks.length > 0)">
       <tr>
         <th scope="col">Name</th>
         <th scope="col">Category</th>
@@ -116,19 +116,22 @@
     </tbody>
   </table>
 </div>
-<div *ngIf="noResultsMessage" class="error-message">{{ noResultsMessage }}</div>
-<div *ngIf="!noResultsMessage" class="pagination">
-  <button class="previous-page" (click)="previousPage()">&#171;&#171;</button>
-  <div class="page-dropdown">
-    <button class="current-page">{{ pageNumber }}</button>
-  </div>
-  <button class="next-page" (click)="nextPage()">&#187;&#187;</button>
-  <div class="records-per-page">
-    <label for="recordsPerPage">Records per page:</label>
-    <select id="recordsPerPage" [(ngModel)]="pageSize" (change)="updatePage()">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="15">15</option>
-    </select>
+<div *ngIf="boardDetails && (filteredQuests.length > 0 || boardDetails.boardTasks.length > 0)">
+  <div *ngIf="noResultsMessage" class="error-message">{{ noResultsMessage }}</div>
+  <div *ngIf="!noResultsMessage" class="pagination">
+    <button class="previous-page" (click)="previousPage()">&#171;&#171;</button>
+    <div class="page-dropdown">
+      <button class="current-page">{{ pageNumber }}</button>
+    </div>
+    <button class="next-page" (click)="nextPage()">&#187;&#187;</button>
+    <div class="records-per-page">
+      <label for="recordsPerPage">Records per page:</label>
+      <select id="recordsPerPage" [(ngModel)]="pageSize" (change)="onPageSizeChange($event)">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
+    </div>
   </div>
 </div>
+
