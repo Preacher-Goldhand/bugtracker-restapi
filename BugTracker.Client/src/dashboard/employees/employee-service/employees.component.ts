@@ -57,6 +57,7 @@ export class EmployeesComponent implements OnInit {
         this.employeeDetails = result.items;
         this.totalPages = result.totalPages;
         this.accountService.setFilteredEmployees(this.employeeDetails);
+        this.filteredEmployees = this.employeeDetails;
       });
   }
 

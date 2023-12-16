@@ -64,6 +64,11 @@ export class TaskAddComponent implements OnInit {
 
     this.task.boardId = this._boardId ?? 0;
     this.task.assignerId = this.accountService.getUserDetails()?.id ?? 0;
+
+    this.http.get("https://localhost:7126/bugtracker/employee/availableHours/3")
+    .subscribe((result) => {
+        console.log("Result", result);
+    });
   }
 
   addTask(): void {

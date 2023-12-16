@@ -18,9 +18,11 @@ namespace BugTracker.Services
 
         EmployeeDto GetById(int id);
 
+        int GetAvailableHours(int id);
+
         void Update(int id, UpdateEmployeeDto dto);
 
-        public void Delete(int id);
+        void Delete(int id);
     }
 
     public class EmployeeService : IEmployeeService
@@ -120,6 +122,33 @@ namespace BugTracker.Services
 
             _dbContext.Employees.Remove(employee);
             _dbContext.SaveChanges();
+        }
+
+        public int GetAvailableHours(int id)
+        {
+            var statuses = new string[] { "TO_DO", "IN_PROGRESS" };
+
+            var storyPoints =
+                _dbContext
+                .Tasks
+                .Where(
+                    p => p.AssignerId == id &&
+                    statuses.Contains(p.TaskStatus)
+                 )
+                .Select(p => p.StoryPoints)
+                .Sum();
+
+            var employee =
+                _dbContext
+                .Employees
+                .FirstOrDefault(p => p.Id == id);
+
+            if (employee == null)
+                throw new NotFoundException("Employee not found");
+
+            var result = (employee.AvailableHours - storyPoints);
+
+            return result > 0 ? result : 0;
         }
     }
 }

@@ -58,5 +58,12 @@ namespace BugTracker.Controllers
             _employeeService.Delete(id);
             return Ok();
         }
+
+        [HttpGet("availableHours/{id}")]
+        public ActionResult<int> GetAvailableHours([FromRoute] int id)
+        {
+            var result = _employeeService.GetAvailableHours(id);
+            return Ok(result);
+        }
     }
 }

@@ -29,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let employee of employeeDetails">
+        <ng-container *ngFor="let employee of filteredEmployees">
           <tr>
             <td>{{ employee.firstName }}</td>
             <td>{{ employee.lastName }}</td>
@@ -47,58 +47,26 @@
         </ng-container>
       </tbody>
     </table>
-  </div>
-  <div *ngIf="searchPhrase === '' && employeeDetails.length === 0 && noResultsMessage !== undefined && noResultsMessage !== ''">
-    <table class="table table-sm">
-      <thead>
-        <tr>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Department</th>
-          <th scope="col">Email</th>
-          <th scope="col">Phone Number</th>
-          <th scope="col">Available Hours</th>
-          <th scope="col">Status</th>
-          <th scope="col">Role</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let employee of employeeDetails">
-          <tr>
-            <td>{{ employee.firstName }}</td>
-            <td>{{ employee.lastName }}</td>
-            <td>{{ employee.department }}</td>
-            <td>{{ employee.employeeEmail }}</td>
-            <td>{{ employee.employeePhoneNumber }}</td>
-            <td>{{ employee.availableHours }}</td>
-            <td>{{ employee.employeeStatus }}</td>
-            <td>{{ getRoleName(employee.roleId) }}</td>
-            <td class="actions">
-              <button type="button" class="btn btn-primary btn-sm" (click)="editEmployee(employee.id)">Edit</button>
-              <button type="button" class="btn btn-danger btn-sm m-1" (click)="removeEmployee(employee.id)">Remove</button>
-            </td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </table>
-  </div>
-  <div *ngIf="!isUser">
-    <div *ngIf="noResultsMessage !== undefined && noResultsMessage !== ''" class="error-message">{{ noResultsMessage }}</div>
-    <div *ngIf="(filteredEmployees.length > 0 || (searchPhrase !== '' && noResultsMessage === ''))" class="pagination">
-      <button class="previous-page" (click)="previousPage()">&#171;&#171;</button>
-      <div class="page-dropdown">
-        <button class="current-page">{{ pageNumber }}</button>
-      </div>
-      <button class="next-page" (click)="nextPage()">&#187;&#187;</button>
-      <div class="records-per-page">
-        <label for="recordsPerPage">Records per page:</label>
-        <select id="recordsPerPage" [(ngModel)]="pageSize" (change)="updatePage()">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-        </select>
-      </div>
+
+    <div *ngIf="!isUser">
+      <div *ngIf="noResultsMessage !== undefined && noResultsMessage !== ''" class="error-message">{{ noResultsMessage }}</div>
+      
+        <div class="pagination">
+          <button class="previous-page" (click)="previousPage()">&#171;&#171;</button>
+          <div class="page-dropdown">
+            <button class="current-page">{{ pageNumber }}</button>
+          </div>
+          <button class="next-page" (click)="nextPage()">&#187;&#187;</button>
+          <div class="records-per-page">
+            <label for="recordsPerPage">Records per page:</label>
+            <select id="recordsPerPage" [(ngModel)]="pageSize" (change)="updatePage()">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </div>
+        </div>
     </div>
+
   </div>
 </div>

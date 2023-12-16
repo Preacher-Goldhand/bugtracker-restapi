@@ -35,6 +35,7 @@ export class TaskListComponent implements OnInit {
     const url = `https://localhost:7126/bugtracker/mytasks?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`;
     this.http.get<PagedResult<MyTask>>(url)
       .subscribe((result: PagedResult<MyTask>) => {
+        this.totalPages = result.totalPages;
         this.tasks = result.items;
         this.tasksLoaded = true;
       });
