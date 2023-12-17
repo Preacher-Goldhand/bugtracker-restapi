@@ -10,11 +10,12 @@ import {AccountService} from "../../../app/services/account.service";
 import {TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap} from "../../models/consts";
 import {Select2Group} from 'ng-select2-component';
 import { UserDetails } from '../../../app/model/user-details';
+import { EmployeeData } from 'src/dashboard/models/employee-model';
 
 @Component({
   selector: 'app-task-add',
   templateUrl: './task-add.component.html',
-  styleUrls: ['./task-add.component.css']
+  styleUrls: ['./task-add.component.css'],
 })
 export class TaskAddComponent implements OnInit {
   task: Task = {
@@ -23,18 +24,41 @@ export class TaskAddComponent implements OnInit {
     assignerId: 0,
     category: TaskCategory.ADMINISTRATIVE_TASK,
     dateOfCreation: new Date(),
-    description: "",
+    description: '',
     loggedTime: 0,
     storyPoints: 4,
-    name: "",
+    name: '',
     priority: TaskPriority.LOW,
     proposalDate: new Date(),
-    taskStatus: TaskStatus.TO_DO
+    taskStatus: TaskStatus.TO_DO,
+  };
+  employee: EmployeeData = {
+    id: 0,
+    firstName: '',
+    lastName: '',
+    department: '',
+    employeeEmail: '',
+    employeePhoneNumber: '',
+    availableHours: 0,
+    employeeStatus: '',
+    roleId: 0,
   };
 
-  taskStatuses: TaskStatus[] = [TaskStatus.TO_DO, TaskStatus.IN_PROGRESS, TaskStatus.IN_TESTING, TaskStatus.DONE, TaskStatus.CLOSED];
-  taskCategories: TaskCategory[] = [TaskCategory.ADMINISTRATIVE_TASK, TaskCategory.ANALYTIC_TASK, TaskCategory.BUGFIX_TASK,
-                                    TaskCategory.DEVELOPMENT_TASK, TaskCategory.DEVOPS_TASK, TaskCategory.TESTING_TASK];
+  taskStatuses: TaskStatus[] = [
+    TaskStatus.TO_DO,
+    TaskStatus.IN_PROGRESS,
+    TaskStatus.IN_TESTING,
+    TaskStatus.DONE,
+    TaskStatus.CLOSED,
+  ];
+  taskCategories: TaskCategory[] = [
+    TaskCategory.ADMINISTRATIVE_TASK,
+    TaskCategory.ANALYTIC_TASK,
+    TaskCategory.BUGFIX_TASK,
+    TaskCategory.DEVELOPMENT_TASK,
+    TaskCategory.DEVOPS_TASK,
+    TaskCategory.TESTING_TASK,
+  ];
   taskPriorities: TaskPriority[] = [TaskPriority.LOW, TaskPriority.HIGH, TaskPriority.CRITICAL];
   taskStoryPoints: number[] = [4, 8, 10, 14, 20, 30, 40, 100];
 
@@ -46,24 +70,31 @@ export class TaskAddComponent implements OnInit {
 
   private _boardId: number | undefined;
 
-  constructor(private route: ActivatedRoute,
-              private http: HttpClient,
-              private router: Router,
-              private accountService: AccountService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router,
+    private accountService: AccountService,
+    //private availableHoursService: EmployeeHoursComponent
+  ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this._boardId = params['id'];
     });
 
     const url = `https://localhost:7126/bugtracker/employee/short`;
-    this.http.get<EmployeeShortData[]>(url)
-      .subscribe((result: EmployeeShortData[]) => {
-          this.selectGroupEmployeesData = this.mapToSelectGroup(result) as Select2Group[];
-      });
+    this.http.get<EmployeeShortData[]>(url).subscribe((result: EmployeeShortData[]) => {
+      this.selectGroupEmployeesData = this.mapToSelectGroup(result) as Select2Group[];
+    });
 
     this.task.boardId = this._boardId ?? 0;
     this.task.assignerId = this.accountService.getUserDetails()?.id ?? 0;
+
+    /*this.availableHoursService._availableHours$.subscribe((updatedHours) => {
+      this.employee.availableHours = updatedHours || 0;
+      console.log('Updated Hours:', updatedHours);
+    });*/
   }
 
   addTask(): void {
@@ -99,9 +130,9 @@ export class TaskAddComponent implements OnInit {
   }
 
   private mapToSelectGroup(data: EmployeeShortData[]): any {
-    return data.map(item => ({
+    return data.map((item) => ({
       value: item.id,
-      label: item.fullName
-    }))
+      label: item.fullName,
+    }));
   }
 }

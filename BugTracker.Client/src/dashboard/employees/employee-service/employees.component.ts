@@ -36,10 +36,6 @@ export class EmployeesComponent implements OnInit {
     this.route.params.subscribe(params => {
       this._employeeId = params['id'];
       this.getData();
-      this.availableHoursSubscription = this.accountService._availableHours$
-        .subscribe(updatedHours => {
-          this.updateAvailableHoursInView(updatedHours);
-        });
     });
     const userRole = this.accountService.getUserDetails().role;
     this.isUser = userRole === 'User';
@@ -62,34 +58,31 @@ export class EmployeesComponent implements OnInit {
   }
 
   searchEmployee() {
+    console.log('Search phrase:', this.searchPhrase);
+
     if (this.searchPhrase === '') {
-      this.filteredEmployees = [];
+      this.filteredEmployees = this.employeeDetails;
       this.noResultsMessage = '';
-      return;
-    }
-
-    this.filteredEmployees = this.employeeDetails.filter(employee =>
-      employee.firstName.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
-      employee.lastName.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
-      employee.department.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
-      employee.employeeEmail.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
-      employee.employeePhoneNumber.includes(this.searchPhrase) ||
-      employee.employeeStatus.toLowerCase().includes(this.searchPhrase.toLowerCase())
-    );
-
-    if (this.filteredEmployees.length === 0) {
-      this.noResultsMessage = 'No results found for the entered search phrase';
     } else {
-      this.noResultsMessage = '';
+      this.filteredEmployees = this.employeeDetails.filter(employee =>
+        employee.firstName.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
+        employee.lastName.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
+        employee.department.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
+        employee.employeeEmail.toLowerCase().includes(this.searchPhrase.toLowerCase()) ||
+        (employee.employeePhoneNumber && employee.employeePhoneNumber.toString().includes(this.searchPhrase)) ||
+        employee.employeeStatus.toLowerCase().includes(this.searchPhrase.toLowerCase())
+      );
+
+      console.log('Filtered employees:', this.filteredEmployees);
+
+      this.noResultsMessage = this.filteredEmployees.length === 0 ? 'No results found for the entered search phrase' : '';
     }
-    this.updatePagedEmployees();
   }
 
   resetSearch() {
     this.searchPhrase = '';
     this.pageNumber = 1;
     this.getData();
-    window.location.reload();
   }
 
   editEmployee(employeeId: number) {
@@ -126,39 +119,32 @@ export class EmployeesComponent implements OnInit {
 
   updatePage() {
     this.pageNumber = 1;
-    this.searchEmployee();
+    this.getData();
   }
 
   previousPage() {
     if (this.pageNumber > 1) {
       this.pageNumber--;
-      this.searchEmployee();
+      this.getData();
     }
   }
 
   nextPage() {
     if (this.pageNumber < this.totalPages) {
       this.pageNumber++;
-      this.searchEmployee();
+      this.getData();
     }
   }
 
-  updatePagedEmployees() {
-    const startIndex = (this.pageNumber - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.filteredEmployees = this.filteredEmployees.slice(startIndex, endIndex);
+  onPageSizeChange(event: Event) {
+    const pageSize = (event.target as HTMLSelectElement).value;
+    this.pageSize = + pageSize;
+    this.pageNumber = 1;
+    this.getData();
   }
 
   formatDateString(date: Date): string {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return this.datePipe.transform(date, 'shortDate')!;
-  }
-
-  private updateAvailableHoursInView(updatedHours: number): void {
-    const index = this.filteredEmployees.findIndex(employee => employee.id === this._employeeId);
-
-    if (index !== -1) {
-      this.filteredEmployees[index].availableHours = updatedHours;
-    }
   }
 }

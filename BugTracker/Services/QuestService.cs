@@ -59,16 +59,16 @@ namespace BugTracker.Services
 
             board.BoardTasks.Add(quest);
 
-            var smtpSettings = _configuration.GetSection("SmtpSettings");
-            var assigneeEmail = _dbContext.Employees
-                .Where(e => e.Id == dto.AssigneeId)
-                .Select(e => e.EmployeeEmail)
-                .FirstOrDefault();
+            //var smtpSettings = _configuration.GetSection("SmtpSettings");
+            //var assigneeEmail = _dbContext.Employees
+            //    .Where(e => e.Id == dto.AssigneeId)
+            //    .Select(e => e.EmployeeEmail)
+            //    .FirstOrDefault();
 
-            if (assigneeEmail == null)
-            {
-                throw new NotFoundException($"Employee with id {dto.AssigneeId} not found.");
-            }
+            //if (assigneeEmail == null)
+            //{
+            //    throw new NotFoundException($"Employee with id {dto.AssigneeId} not found.");
+            //}
 
             SendTaskAssignmentEmail(dto.AssigneeId, quest.Name);
 
@@ -147,11 +147,11 @@ namespace BugTracker.Services
             }
             quest.AssigneeId = assignee.Id;
 
-            var smtpSettings = _configuration.GetSection("SmtpSettings");
-            var assigneeEmail = _dbContext.Employees
-                .Where(e => e.Id == dto.AssigneeId)
-                .Select(e => e.EmployeeEmail)
-                .FirstOrDefault();
+            //var smtpSettings = _configuration.GetSection("SmtpSettings");
+            //var assigneeEmail = _dbContext.Employees
+            //    .Where(e => e.Id == dto.AssigneeId)
+            //    .Select(e => e.EmployeeEmail)
+            //    .FirstOrDefault();
 
             SendTaskAssignmentEmail(dto.AssigneeId, quest.Name);
 

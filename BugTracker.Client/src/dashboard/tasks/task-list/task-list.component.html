@@ -30,7 +30,6 @@
             <td>{{taskStatusesMap.get(task.status)}}</td>
             <td class="actions">
               <button type="button" class="btn btn-primary btn-sm" (click)="editQuest(task.boardId, task.id)">Edit</button>
-              <button type="button" class="btn btn-dark btn-sm m-1" (click)="goBoards()">Boards</button>
             </td>
           </tr>
           <tr class="collapse" [class.show]="indexDescription == task.id">

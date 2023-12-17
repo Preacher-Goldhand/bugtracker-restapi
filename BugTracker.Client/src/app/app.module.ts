@@ -26,6 +26,7 @@ import { TaskEditComponent } from '../dashboard/tasks/task-edit/task-edit.compon
 import { MinimalQuestServiceComponent } from '../dashboard/tasks/quest-service/minimalquest-service.component';
 import { EmployeesComponent } from '../dashboard/employees/employee-service/employees.component';
 import { EmployeeEditComponent } from '../dashboard/employees/employee-edit/employee-edit.component';
+import { EmployeeHoursComponent } from '../dashboard/employee-hours/employee-hours.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { EmployeeEditComponent } from '../dashboard/employees/employee-edit/empl
     TaskListComponent,
     TaskEditComponent,
     EmployeesComponent,
-    EmployeeEditComponent
+    EmployeeEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +60,8 @@ import { EmployeeEditComponent } from '../dashboard/employees/employee-edit/empl
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    DatePipe
+    DatePipe,
+    EmployeeHoursComponent
   ],
   bootstrap: [AppComponent]
 })
