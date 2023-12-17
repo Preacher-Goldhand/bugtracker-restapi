@@ -64,31 +64,32 @@ export class TaskAddComponent implements OnInit {
 
     this.task.boardId = this._boardId ?? 0;
     this.task.assignerId = this.accountService.getUserDetails()?.id ?? 0;
-
-    this.http.get("https://localhost:7126/bugtracker/employee/availableHours/3")
-    .subscribe((result) => {
-        console.log("Result", result);
-    });
   }
 
   addTask(): void {
     const userDetails: UserDetails | undefined = this.accountService.getUserDetails();
 
-    if (userDetails && userDetails.availableHours !== undefined) {
-      if (+this.task.storyPoints > +userDetails.availableHours) {
-        alert("Story Points exceed available hours.");
-      } else {
-        this.http.post(`https://localhost:7126/bugtracker/board/${this._boardId}/task`, this.task)
-          .subscribe({
-            next: value => {
-              this.router.navigate(['/board-details', this._boardId]);
-            },
-            error: err => { }
-          });
+    if (userDetails) {
+      this.http.get(`https://localhost:7126/bugtracker/employee/availableHours/${userDetails.id}`)
+        .subscribe((availableHours) => {
+          
+          if (+this.task.storyPoints > +availableHours) {
+            alert("Story Points exceed available hours.");
+          }
+          else {
+            this.http.post(`https://localhost:7126/bugtracker/board/${this._boardId}/task`, this.task)
+            .subscribe({
+              next: value => {
+                this.router.navigate(['/board-details', this._boardId]);
+              },
+              error: err => { }
+            });
 
-        this.accountService.getUserDetails();
-      }
-    } else {
+            this.accountService.getUserDetails();
+          }
+      });
+    } 
+    else {
       alert("User's available hours not defined.");
     }
   }
