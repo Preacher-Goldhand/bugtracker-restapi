@@ -132,7 +132,7 @@ namespace BugTracker.Services
                 _dbContext
                 .Tasks
                 .Where(
-                    p => p.AssignerId == id &&
+                    p => p.AssigneeId == id &&
                     statuses.Contains(p.TaskStatus)
                  )
                 .Select(p => p.StoryPoints)

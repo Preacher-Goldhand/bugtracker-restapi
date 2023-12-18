@@ -1,6 +1,6 @@
 <h3>My Tasks</h3>
 <div *ngIf="tasksLoaded">
-  <div *ngIf="tasks && tasks.length > 0">
+  <div *ngIf="tasks && tasks.length > 0; else noTasks">
     <table class="table table-sm">
       <thead>
         <tr>
@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let task of tasks">
+        <ng-container *ngFor="let task of tasks; let index = index">
           <tr (click)="showDescription(task.id)">
             <td>{{task.name}}</td>
             <td>{{taskCategoriesMap.get(task.category)}}</td>
@@ -67,4 +67,7 @@
       </div>
     </div>
   </div>
+  <ng-template #noTasks>
+    <div class="error-message">No tasks available</div>
+  </ng-template>
 </div>

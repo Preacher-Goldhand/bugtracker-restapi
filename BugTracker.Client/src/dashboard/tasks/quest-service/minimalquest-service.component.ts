@@ -73,6 +73,7 @@ export class MinimalQuestServiceComponent implements OnInit {
   resetSearch() {
     this.searchPhrase = '';
     this.pageNumber = 1;
+    this.getData(this._boardId);
   }
 
   addQuest(): void {
@@ -90,10 +91,10 @@ export class MinimalQuestServiceComponent implements OnInit {
     if (confirmDelete) {
       this.http.delete<DetailedBoardData>(url)
         .subscribe(() => {
-          window.location.reload();
+          this.getData(this._boardId);
         });
     } else {
-      window.location.reload();
+      this.getData(this._boardId);
     }
   }
 

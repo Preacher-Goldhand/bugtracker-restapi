@@ -58,6 +58,8 @@ export class BoardServiceComponent implements OnInit {
   resetSearch() {
     this.searchPhrase = '';
     this.pageNumber = 1;
+    this.router.navigate(['/boards']);
+    this.getData();
   }
 
   addBoard() {

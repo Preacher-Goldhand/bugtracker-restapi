@@ -75,7 +75,6 @@ export class TaskAddComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private accountService: AccountService,
-    //private availableHoursService: EmployeeHoursComponent
   ) { }
 
   ngOnInit(): void {
@@ -90,18 +89,13 @@ export class TaskAddComponent implements OnInit {
 
     this.task.boardId = this._boardId ?? 0;
     this.task.assignerId = this.accountService.getUserDetails()?.id ?? 0;
-
-    /*this.availableHoursService._availableHours$.subscribe((updatedHours) => {
-      this.employee.availableHours = updatedHours || 0;
-      console.log('Updated Hours:', updatedHours);
-    });*/
   }
 
   addTask(): void {
     const userDetails: UserDetails | undefined = this.accountService.getUserDetails();
 
     if (userDetails) {
-      this.http.get(`https://localhost:7126/bugtracker/employee/availableHours/${userDetails.id}`)
+      this.http.get(`https://localhost:7126/bugtracker/employee/availableHours/${this.task.assigneeId}`)
         .subscribe((availableHours) => {
           
           if (+this.task.storyPoints > +availableHours) {

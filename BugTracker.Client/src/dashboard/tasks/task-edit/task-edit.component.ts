@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select2Group } from 'ng-select2-component';
+import { UserDetails } from '../../../app/model/user-details';
 import { AccountService } from '../../../app/services/account.service';
 import { EmployeeHoursComponent } from '../../employee-hours/employee-hours.component';
 import { TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap } from '../../models/consts';
@@ -65,8 +66,8 @@ export class TaskEditComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private accountService: AccountService,
-    private availableHoursService: EmployeeHoursComponent) { }
+    private accountService: AccountService) { }
+  
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -92,31 +93,29 @@ export class TaskEditComponent implements OnInit {
   }
 
   editTask(): void {
-    if (this.employee.availableHours !== undefined) {
-      const storyPoints = +this.task.storyPoints;
-      const availableHours = +this.employee.availableHours;
+    const userDetails: UserDetails | undefined = this.accountService.getUserDetails();
 
-      console.log('Story Points:', storyPoints);
-      console.log('Available Hours:', availableHours);
+    if (userDetails) {
+      this.http.get(`https://localhost:7126/bugtracker/employee/availableHours/${this.task.assigneeId}`)
+        .subscribe((availableHours) => {
 
-      const updatedHours = availableHours - storyPoints;
-      this.availableHoursService.updateAvailableHours(updatedHours);
-      console.log('Updated Hours:', updatedHours);
-
-      if (storyPoints > availableHours) {
-        alert('Story Points exceed available hours.');
-      } else {
-        this.http.put(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`, this.task)
-          .subscribe({
-            next: value => {
-              this.router.navigate(['/board-details', this._boardId]);
-            },
-            error: err => { }
+          if (+this.task.storyPoints > +availableHours) {
+            alert("Story Points exceed available hours.");
+          }
+          else {
+            this.http.put(`https://localhost:7126/bugtracker/board/${this._boardId}/task/${this._taskId}`, this.task)
+              .subscribe({
+                next: value => {
+                  this.router.navigate(['/board-details', this._boardId]);
+                },
+                error: err => { }
           });
 
-        this.accountService.getUserDetails();
-      }
-    } else {
+          this.accountService.getUserDetails();
+          }
+        });
+    }
+    else {
       alert("User's available hours not defined.");
     }
   }

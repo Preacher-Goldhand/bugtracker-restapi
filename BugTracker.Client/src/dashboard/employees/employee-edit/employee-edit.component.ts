@@ -26,8 +26,8 @@ export class EmployeeEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router,
-    private availableHoursService: EmployeeHoursComponent) { }
+    private router: Router) { }
+    
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -37,8 +37,6 @@ export class EmployeeEditComponent implements OnInit {
         this.http.get<EmployeeData>(`https://localhost:7126/bugtracker/employee/${this._employeeId}`)
           .subscribe((data) => {
             this.employee = data;
-            this.availableHoursService.updateAvailableHours(data.availableHours);
-            console.log('Updated Hours:', data.availableHours);
           });
       }
     });
