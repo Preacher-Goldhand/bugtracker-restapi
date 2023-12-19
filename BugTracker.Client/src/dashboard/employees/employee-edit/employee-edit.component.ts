@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmployeeHoursComponent } from '../../employee-hours/employee-hours.component';
 import { EmployeeData } from '../../models/employee-model';
 
 @Component({

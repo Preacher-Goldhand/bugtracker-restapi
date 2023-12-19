@@ -32,6 +32,9 @@
       </tbody>
     </table>
   </div>
+  <div *ngIf="boards.length === 0" class="alert alert-info mt-2" role="alert">
+    No created tasks for the board yet
+  </div>
   <div *ngIf="noResultsMessage" class="error-message">{{ noResultsMessage }}</div>
   <div class="pagination" *ngIf="totalPages > 0">
     <button class="btn btn-sm previous-page" (click)="previousPage()">&#171;&#171;</button>

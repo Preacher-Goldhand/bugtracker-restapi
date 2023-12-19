@@ -1,4 +1,3 @@
-// task-edit.component.ts
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -6,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Select2Group } from 'ng-select2-component';
 import { UserDetails } from '../../../app/model/user-details';
 import { AccountService } from '../../../app/services/account.service';
-import { EmployeeHoursComponent } from '../../employee-hours/employee-hours.component';
 import { TaskCategoriesMap, TaskPrioritiesMap, TaskStatusesMap } from '../../models/consts';
 import { EmployeeData } from '../../models/employee-model';
 import { EmployeeShortData } from '../../models/employee-short-data';
