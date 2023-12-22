@@ -1,3 +1,7 @@
+.content {
+  margin-bottom: 2.5rem;
+} 
+
 .error-message {
   background-color: #f8d7da;
   color: #721c24;
@@ -10,7 +14,7 @@
   display: flex;
   justify-content: left;
   align-items: flex-end;
-  margin-top: 20px;
+  margin-top: 5rem;
 }
 
 .previous-page,

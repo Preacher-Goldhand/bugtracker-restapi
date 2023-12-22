@@ -44,9 +44,7 @@ export class BoardServiceComponent implements OnInit {
 
         if (this.boards.length === 0 && this.searchPhrase) {
           this.noResultsMessage = 'No results found for the entered search phrase';
-        } else {
-          this.noResultsMessage = '';
-        }
+        } 
       });
   }
 

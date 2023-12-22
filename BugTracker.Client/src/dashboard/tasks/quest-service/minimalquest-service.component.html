@@ -5,13 +5,13 @@
       <input type="text" class="form-control form-control-sm" [(ngModel)]="searchPhrase" />
     </div>
     <div *ngIf="boardDetails && (filteredQuests.length > 0 || boardDetails.boardTasks.length > 0)" class="col-6">
-      <button class="btn btn-outline-primary btn-sm" (click)="searchQuest()">Search</button>
-      <button class="btn btn-outline-secondary btn-sm" (click)="resetSearch()">Reset</button>
+      <button class="btn btn-outline-primary btn-sm search-button mt-2 mb-2" (click)="searchQuest()">Search</button>
+      <button class="btn btn-outline-secondary btn-sm reset-button mt-2 mb-2" (click)="resetSearch()">Reset</button>
     </div>
   </div>
   <div class="row mt-2 mb-2">
     <div class="col">
-      <button type="button" class="btn btn-success btn-sm" *ngIf="!noResultsMessage" (click)="addQuest()">New Task</button>
+      <button type="button" class="btn btn-success btn-sm add-task mb-5" *ngIf="!noResultsMessage" (click)="addQuest()">New Task</button>
     </div>
   </div>
   <table *ngIf="filteredQuests.length > 0" class="table table-sm">

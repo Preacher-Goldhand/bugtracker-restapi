@@ -5,12 +5,12 @@
 </div>
 <div *ngIf="!isUser">
   <div class="row align-items-center">
-    <div class="col-6">
+    <div class="col-6 mb-5">
       <input type="text" class="form-control form-control-sm" [(ngModel)]="searchPhrase" />
     </div>
-    <div class="col-6">
-      <button class="btn btn-outline-primary btn-sm" (click)="searchEmployee()">Search</button>
-      <button class="btn btn-outline-secondary btn-sm" (click)="resetSearch()">Reset</button>
+    <div class="col-6 mb-5">
+      <button class="btn btn-outline-primary btn-sm search-button mt-2 mb-2" (click)="searchEmployee()">Search</button>
+      <button class="btn btn-outline-secondary btn-sm reset-button mt-2 mb-2" (click)="resetSearch()">Reset</button>
     </div>
   </div>
   <div *ngIf="employeeDetails.length > 0 || (searchPhrase !== '' && noResultsMessage === '')">
@@ -47,10 +47,8 @@
         </ng-container>
       </tbody>
     </table>
-
     <div *ngIf="!isUser">
       <div *ngIf="noResultsMessage !== undefined && noResultsMessage !== ''" class="error-message">{{ noResultsMessage }}</div>
-      
         <div class="pagination">
           <button class="previous-page" (click)="previousPage()">&#171;&#171;</button>
           <div class="page-dropdown">
@@ -67,6 +65,5 @@
           </div>
         </div>
     </div>
-
   </div>
 </div>
