@@ -43,19 +43,19 @@ export class AccountService {
     return this.userDetails;
   }
 
-  public updateAvailableHours(hours: number): void {
-    this.userDetails.availableHours = hours;
-    this._availableHoursSubject.next(hours);
-  }
+  //public updateAvailableHours(hours: number): void {
+  //  this.userDetails.availableHours = hours;
+  //  this._availableHoursSubject.next(hours);
+  //}
 
   public setFilteredEmployees(employees: EmployeeData[]): void {
     this.filteredEmployees = employees;
   }
 
-  public updateAvailableHoursInView(updatedHours: number, employeeId: number): void {
-    const index = this.filteredEmployees.findIndex(employee => employee.id === employeeId);
-    if (index !== -1) {
-      this.filteredEmployees[index].availableHours = updatedHours;
-    }
-  }
+  //public updateAvailableHoursInView(updatedHours: number, employeeId: number): void {
+  //  const index = this.filteredEmployees.findIndex(employee => employee.id === employeeId);
+  //  if (index !== -1) {
+  //    this.filteredEmployees[index].availableHours = updatedHours;
+  //  }
+  //}
 }

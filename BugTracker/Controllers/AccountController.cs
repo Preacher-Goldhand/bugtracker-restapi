@@ -1,5 +1,6 @@
 ﻿using BugTracker.Models.AuthenticationDtos;
 using BugTracker.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BugTracker.Controllers
@@ -16,6 +17,7 @@ namespace BugTracker.Controllers
         }
 
         [HttpPost("register")]
+        [Authorize(Roles = "Admin")]
         public ActionResult RegisterEmployee([FromBody] RegisterEmployeeDto dto)
         {
             _accountService.RegisterEmployee(dto);
