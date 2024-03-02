@@ -24,6 +24,7 @@ namespace BugTracker.Entities
         [MaxLength(30)]
         public string EmployeeEmail { get; set; }
 
+        [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$")]
         public string EmployeePasswordHash { get; set; }
         public int AvailableHours { get; set; }
 

@@ -17,9 +17,11 @@ namespace BugTracker.Models.AuthenticationDtos
         public string EmployeeEmail { get; set; }
 
         [Required]
+        [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$")]
         public string EmployeePasswordHash { get; set; }
 
         [Required]
+        [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$")]
         public string ConfirmEmployeePasswordHash { get; set; }
 
         public int RoleId { get; set; } = 1;
