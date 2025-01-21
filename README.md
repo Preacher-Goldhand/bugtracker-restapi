@@ -1,6 +1,6 @@
 # Kanban Task Management Web Application
 
-This is a web-based application designed for managing Kanban boards and the tasks assigned to them. The system allows users to create boards, define columns (such as "To Do," "In Progress," "Completed"), and manage tasks with various statuses, priorities, and assignments.
+This is a web-based application designed for managing Kanban boards and the tasks assigned to them. The system allows users to create boards, define columns (such as "To Do," "In Progress," "Completed"), and manage tasks with various statuses, priorities, and assignments. The application allows to send a notification messeage via a built-in SMTP server.
 
 ## Features
 
@@ -79,6 +79,8 @@ This is a web-based application designed for managing Kanban boards and the task
 
 ## Database Schema
 
+Here UML database diagram of all entities in the DAL of this web application: 
+
 ![ERDiagram](https://github.com/user-attachments/assets/36d9e2d1-9a4f-4a55-a9aa-ae594e98793d)
 
 
@@ -89,12 +91,29 @@ The API requests are included in **BugTracker.postman_collection.json** file.
 
 ## UI Views
 
+This section represents UI views of the frontend:
+
 ![login_page](https://github.com/user-attachments/assets/db1e5f59-b703-4b71-aa09-ad7450625a06)
+Login screen
 
 ![boards_page](https://github.com/user-attachments/assets/5e8d899c-de8d-49dd-a196-3a5032edc256)
+Boards screen
 
 ![tasks_page_with_searching](https://github.com/user-attachments/assets/2d1de62c-5a5d-4d87-a573-abc2feb1bbd2)
-  
+Tasks screen
+
+![employees_page](https://github.com/user-attachments/assets/d590affd-a34b-4848-9fbd-8a37f53fd4af)
+Employees screen
+
+
+## Notifications
+
+Messeges sent from the SMTP server:
+
+![mailbox_part1](https://github.com/user-attachments/assets/0247b467-a891-40e7-a38c-e44678c52293)
+
+![mailbox_part2](https://github.com/user-attachments/assets/12d33c42-414e-46dc-9d9f-0cd84d961471)
+
 
 ## License
 
