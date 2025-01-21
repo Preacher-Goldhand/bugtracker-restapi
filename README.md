@@ -84,14 +84,7 @@ This is a web-based application designed for managing Kanban boards and the task
 
 ## API Endpoints
 
-The API exposes the following endpoints:
-
-- `GET /api/boards`: Retrieve all boards
-- `POST /api/boards`: Create a new board
-- `GET /api/boards/{id}/tasks`: Retrieve all tasks for a board
-- `POST /api/boards/{id}/tasks`: Create a new task for a board
-- `PUT /api/tasks/{id}`: Update task details (move task between columns, change priority, etc.)
-- `DELETE /api/tasks/{id}`: Delete a task
+The API requests are included in **BugTracker.postman_collection.json** file.
   
 
 ## UI Views
