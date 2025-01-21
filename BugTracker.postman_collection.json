@@ -1,0 +1,765 @@
+{
+	"info": {
+		"_postman_id": "61b19f38-9553-452f-bd53-b9b5d9484381",
+		"name": "BugTracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18321827"
+	},
+	"item": [
+		{
+			"name": "FileController",
+			"item": [
+				{
+					"name": "GetFile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkVsb24gQmVzb3NGcm9tRXNwYW5hIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTY3Mzk2ODMwNSwiaXNzIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIiwiYXVkIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIn0.lgVrisb9ZLE_xdXUtMLr7GAX6a-O514AkPZmEb7I85AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE1IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkNoYXJsZXMgRGFyd2luIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTY3NzgzNTQ3MywiaXNzIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIiwiYXVkIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIn0.QSMvXQ05hvbh-CznfbGpUffZ1zXj8vaDvXE8YMcuI7g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/file?fileName=uploadFile.txt",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "fileName",
+									"value": "uploadFile.txt"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UploadFile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkVsb24gQmVzb3NGcm9tRXNwYW5hIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTY3Mzk2ODMwNSwiaXNzIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIiwiYXVkIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIn0.lgVrisb9ZLE_xdXUtMLr7GAX6a-O514AkPZmEb7I85A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/rench/Desktop/uploadFile.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://localhost:7126/file",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteFile",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkRvbmFsZCBUcnVtcCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1hbmFnZXIiLCJleHAiOjE2OTE5MDg0ODcsImlzcyI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCIsImF1ZCI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCJ9.T1_tTIvS9EXJAWYoL1WWUP6MNg346NprLSE354EWu2U",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/file?fileName=uploadFile.txt",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "fileName",
+									"value": "uploadFile.txt"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "A controller for managemet of uploading, deleteing and getting files stores on a server."
+		},
+		{
+			"name": "BoardController",
+			"item": [
+				{
+					"name": "GetAllBoards",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkRvbmFsZCBUcnVtcCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1hbmFnZXIiLCJleHAiOjE2OTcyMTQyNjYsImlzcyI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCIsImF1ZCI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCJ9.S7drlYH4Yj7SmpuP-R7QrJ0stfz64Pks609g9pfPCEE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/board?pageSize=5&pageNumber=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"board"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "5"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateBoard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE1IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkNoYXJsZXMgRGFyd2luIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTY4NjA2MjE3MSwiaXNzIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIiwiYXVkIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIn0.a4GVxis5u6zQjdIBKoVXSH5NSkSTYb-oH1Z0eEf9Mgs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Deletable Board\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/board",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"board"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteBoard",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE1IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkNoYXJsZXMgRGFyd2luIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTY4NjA2MjE3MSwiaXNzIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIiwiYXVkIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIn0.a4GVxis5u6zQjdIBKoVXSH5NSkSTYb-oH1Z0eEf9Mgs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/board/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"board",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBoardById [deprecated]",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkRvbmFsZCBUcnVtcCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1hbmFnZXIiLCJleHAiOjE2OTUyMzE4NjYsImlzcyI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCIsImF1ZCI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCJ9.JgKuDbvr4bIikEL2Kn1F72EiugGzYHVtwX-L4CWD6kI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/board/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"board",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateBoard",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkRvbmFsZCBUcnVtcCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1hbmFnZXIiLCJleHAiOjE2OTgxNzk0OTgsImlzcyI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCIsImF1ZCI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCJ9.xmjrcsPAUToJF4KZVj1M0_Dt0CtOsXImOQTs-0y9ook",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"tablica 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/board/14",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"board",
+								"14"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "A controller for CRUD operations for Board entity."
+		},
+		{
+			"name": "EmployeeController",
+			"item": [
+				{
+					"name": "GetAllEmployees",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkRvbmFsZCBUcnVtcCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1hbmFnZXIiLCJleHAiOjE2OTgxNzk0OTgsImlzcyI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCIsImF1ZCI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCJ9.xmjrcsPAUToJF4KZVj1M0_Dt0CtOsXImOQTs-0y9ook",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/employee?pageNumber=1&pageSize=10",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"employee"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEzIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6Ikphcm9zbGF3IFR1c2siLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNjczNTI1MDExLCJpc3MiOiJodHRwOi8vYnVndHJhY2tlci1hcGkucGwiLCJhdWQiOiJodHRwOi8vYnVndHJhY2tlci1hcGkucGwifQ.YDt3hcuQzz5W0R4XLlgHLBM10eibtvD6ZVm0IXjLoSI",
+									"disabled": true
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateEmployee",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Johnnatan\",\r\n    \"lastName\": \"Snow\"\r\n \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/employee/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"employee",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteEmployee",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkRvbmFsZCBUcnVtcCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1hbmFnZXIiLCJleHAiOjE2OTE5MDg0ODcsImlzcyI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCIsImF1ZCI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCJ9.T1_tTIvS9EXJAWYoL1WWUP6MNg346NprLSE354EWu2U",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/employee/14",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"employee",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetEmployeeById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE1IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkNoYXJsZXMgRGFyd2luIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTY4NjA2MjE3MSwiaXNzIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIiwiYXVkIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIn0.a4GVxis5u6zQjdIBKoVXSH5NSkSTYb-oH1Z0eEf9Mgs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/employee/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"employee",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "A controller for CRUD operations for Employee entity, which stores information about Employees. Every employee can assign a task or be assigned to the one."
+		},
+		{
+			"name": "QuestController",
+			"item": [
+				{
+					"name": "GetQuestById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTGVvbmFyZG8gRGEgVmluY2kiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNjk5Mjg3NDY5LCJpc3MiOiJodHRwOi8vYnVndHJhY2tlci1hcGkucGwiLCJhdWQiOiJodHRwOi8vYnVndHJhY2tlci1hcGkucGwifQ._FYnTT0fi4TI35zpBQ3I7A1wl85OjnGIYiom0PkQCxY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/board/1/task/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"board",
+								"1",
+								"task",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateQuest",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkRvbmFsZCBUcnVtcCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1hbmFnZXIiLCJleHAiOjE2OTgyMTc5OTEsImlzcyI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCIsImF1ZCI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCJ9.1XLnXuapZLwm6PwL7la3H3hzzmwnmXD13SvBunMdri0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"React Develepment\",\r\n    \"description\": \"React validation description\",\r\n    \"category\": \"Develepment\",\r\n    \"taskStatus\": \"ToDo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/board/1/task",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"board",
+								"1",
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteQuest",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkRvbmFsZCBUcnVtcCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1hbmFnZXIiLCJleHAiOjE2OTE5MDg0ODcsImlzcyI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCIsImF1ZCI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCJ9.T1_tTIvS9EXJAWYoL1WWUP6MNg346NprLSE354EWu2U",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/board/2/task/8",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"board",
+								"2",
+								"task",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateQuest",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE1IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkNoYXJsZXMgRGFyd2luIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTY4NjA2MjE3MSwiaXNzIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIiwiYXVkIjoiaHR0cDovL2J1Z3RyYWNrZXItYXBpLnBsIn0.a4GVxis5u6zQjdIBKoVXSH5NSkSTYb-oH1Z0eEf9Mgs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Renemaed UnitTests\",\r\n    \"description\": \"UnitTests new description\",\r\n    \"category\": \"Testing\",\r\n    \"taskStatus\": \"Done\",\r\n    \"assignerFirstName\": \"John\",\r\n    \"assignerLastName\": \"Snow\",\r\n    \"assigneeFirstName\": \"Don\",\r\n    \"assigneeLastName\": \"Orleone\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/board/1/task/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"board",
+								"1",
+								"task",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllQuests [deprecated]",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTGVvbmFyZG8gRGEgVmluY2kiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNjk5Mjg3NDY5LCJpc3MiOiJodHRwOi8vYnVndHJhY2tlci1hcGkucGwiLCJhdWQiOiJodHRwOi8vYnVndHJhY2tlci1hcGkucGwifQ._FYnTT0fi4TI35zpBQ3I7A1wl85OjnGIYiom0PkQCxY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/board/1/task?pageSize=5&pageNumber=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"board",
+								"1",
+								"task"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "5"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MyTaskController",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTGVvbmFyZG8gRGEgVmluY2kiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNjk5Mjg3NDY5LCJpc3MiOiJodHRwOi8vYnVndHJhY2tlci1hcGkucGwiLCJhdWQiOiJodHRwOi8vYnVndHJhY2tlci1hcGkucGwifQ._FYnTT0fi4TI35zpBQ3I7A1wl85OjnGIYiom0PkQCxY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/mytasks?pageSize=5&pageNumber=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"mytasks"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "5"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "A main controller with CRUD operations. It stores information about tasks and references to Boards and Employees entities."
+		},
+		{
+			"name": "AccountController",
+			"item": [
+				{
+					"name": "ChangePassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkRvbmFsZCBUcnVtcCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1hbmFnZXIiLCJleHAiOjE2OTUyMjY3NjYsImlzcyI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCIsImF1ZCI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCJ9.hwL1n4RCna43dzD8sECO13ODq0nMfvb9zo4bXtgCDvE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employeeEmail\": \"dtrump@test.com\",\r\n    \"currentPasswordHash\": \"donaldtrump123\",\r\n    \"newPasswordHash\": \"trump123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/account/changePassword",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"account",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Donald\",\r\n    \"lastName\": \"Trump\",\r\n    \"department\": \"Managament\",\r\n    \"employeeEmail\": \"dtrump@test.com\",\r\n    \"employeePasswordHash\": \"trump123\",\r\n    \"confirmEmployeePasswordHash\": \"trump123\",\r\n    \"roleId\": 2,\r\n    \"employeePhoneNumber\": \"741852962\",\r\n    \"employeeStatus\": \"Active\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/account/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employeeEmail\": \"dtrump@test.com\",\r\n    \"employeePasswordHash\": \"trump123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/account/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkRvbmFsZCBUcnVtcCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6Ik1hbmFnZXIiLCJleHAiOjE2OTMwNzQ3MTYsImlzcyI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCIsImF1ZCI6Imh0dHA6Ly9idWd0cmFja2VyLWFwaS5wbCJ9.7EIXQJGSazKRFVBEsOoFZTH53SRlrDyinaoHPc1MSes",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7126/bugtracker/account/logout",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7126",
+							"path": [
+								"bugtracker",
+								"account",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "A controller that allows to authenticate a new user by asking him for his login and password."
+		}
+	]
+}
