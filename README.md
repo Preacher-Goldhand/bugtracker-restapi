@@ -17,7 +17,7 @@ This is a web-based application designed for managing Kanban boards and the task
 - **Frontend**: Angular
   - TypeScript, HTML, CSS
   - Angular Material for UI components
-- **Backend**: .NET 6/7
+- **Backend**: .NET 6
   - ASP.NET Core Web API for the backend services
   - Entity Framework Core for database access
   - JWT Authentication for secure login
@@ -28,33 +28,20 @@ This is a web-based application designed for managing Kanban boards and the task
 
 ### Prerequisites
 
-- .NET SDK (6/7)
-- Node.js
-- SQL Server (local or remote)
+- .NET SDK (6)
+- Node.js (^15.2.2)
+- SQL Server (Express 2019)
 - Angular CLI
 
 ### Steps to set up the application
 
 1. Clone the repository:
     ```bash
-    git clone <repository_url>
-    cd kanban-task-manager
+    git clone https://github.com/Preacher-Goldhand/bugtracker-restapi.git
+    cd bugtracker-restapi
     ```
 
 2. Set up the backend:
-    - Navigate to the backend folder and restore dependencies:
-        ```bash
-        cd KanbanApi
-        dotnet restore
-        ```
-
-    - Configure your SQL Server connection string in the `appsettings.json` file:
-        ```json
-        "ConnectionStrings": {
-            "DefaultConnection": "Server=your_server;Database=KanbanDB;User Id=your_user;Password=your_password;"
-        }
-        ```
-
     - Run the migrations to set up the database schema:
         ```bash
         dotnet ef database update
@@ -68,7 +55,7 @@ This is a web-based application designed for managing Kanban boards and the task
 3. Set up the frontend:
     - Navigate to the frontend folder:
         ```bash
-        cd frontend
+        cd Bugtracker.Client
         ```
 
     - Install dependencies using npm:
@@ -92,13 +79,8 @@ This is a web-based application designed for managing Kanban boards and the task
 
 ## Database Schema
 
-The database consists of the following main tables:
+![ERDiagram](https://github.com/user-attachments/assets/36d9e2d1-9a4f-4a55-a9aa-ae594e98793d)
 
-1. **Users**: Stores user information (id, username, password hash, etc.)
-2. **Boards**: Stores board details (id, name, user_id, etc.)
-3. **Columns**: Stores the columns for each board (id, board_id, name)
-4. **Tasks**: Stores task details (id, board_id, column_id, title, description, assigned_user_id, due_date, etc.)
-5. **TaskComments**: Stores comments on tasks (id, task_id, user_id, content, date)
 
 ## API Endpoints
 
@@ -110,17 +92,16 @@ The API exposes the following endpoints:
 - `POST /api/boards/{id}/tasks`: Create a new task for a board
 - `PUT /api/tasks/{id}`: Update task details (move task between columns, change priority, etc.)
 - `DELETE /api/tasks/{id}`: Delete a task
+  
 
-## Contributing
+## UI Views
 
-If you would like to contribute to this project, please follow these steps:
+![login_page](https://github.com/user-attachments/assets/db1e5f59-b703-4b71-aa09-ad7450625a06)
 
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature/your-feature`)
-3. Make your changes
-4. Commit your changes (`git commit -am 'Add new feature'`)
-5. Push to the branch (`git push origin feature/your-feature`)
-6. Create a new pull request
+![boards_page](https://github.com/user-attachments/assets/5e8d899c-de8d-49dd-a196-3a5032edc256)
+
+![tasks_page_with_searching](https://github.com/user-attachments/assets/2d1de62c-5a5d-4d87-a573-abc2feb1bbd2)
+  
 
 ## License
 
